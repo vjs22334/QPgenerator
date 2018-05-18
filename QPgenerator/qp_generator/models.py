@@ -39,6 +39,8 @@ class Question(models.Model):
     difficulty = models.CharField(max_length=10, choices=difficulty_choices)
     question_type = models.CharField(max_length=50, choices=type_choices)
     chapter = models.ForeignKey(Chapter,on_delete = models.CASCADE)
+    answer = models.TextField(default="no answer")
+    image = models.ImageField(upload_to="question",null=True)
     created_date = models.DateTimeField("created date")
 
     def __str__(self):

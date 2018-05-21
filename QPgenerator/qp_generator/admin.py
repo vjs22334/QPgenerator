@@ -1,7 +1,13 @@
 import os
 from django.contrib import admin
-from .models import Question,Subject,Grade,Chapter,Choice,Match
+from django.contrib.auth.admin import UserAdmin
+from .models import Question,Subject,Grade,Chapter,Choice,Match,School,Profile
+from django.contrib.auth.models import User
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+
+class ProfileInline(admin.StackedInline):
+    model=Profile
+
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
@@ -20,7 +26,8 @@ class QuestionAdmin(admin.ModelAdmin):
     class Media:
         js = ('js/toggle.js',)
     
-
+class ModUserAdmin(UserAdmin):
+    inlines=[ProfileInline]
 
 
 admin.site.register(Question,QuestionAdmin)
@@ -29,6 +36,8 @@ admin.site.register(Grade)
 admin.site.register(Chapter)
 admin.site.register(Choice)
 admin.site.register(Match)
+admin.site.register(School)
+admin.site.register(Profile)
 
 
 # Register your models here.

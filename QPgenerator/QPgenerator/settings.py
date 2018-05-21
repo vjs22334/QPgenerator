@@ -128,4 +128,5 @@ STATICFILES_DIRS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-
+LOGIN_REDIRECT_URL = '/app'
+LOGOUT_REDIRECT_URL = '/app'

@@ -1,4 +1,29 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+class School(models.Model):
+    school_name = models.CharField(max_length=200,unique=True)
+    address = models.TextField()
+
+    def __str__(self):
+        return self.school_name
+class Profile(models.Model):
+    roles = (
+        ("admin","admin"),
+        ("teacher","teacher")
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    school = models.ForeignKey(School,on_delete=models.CASCADE)
+    role = models.CharField(max_length=50,choices=roles)
+
+    def __str__(self):
+        return self.user.username'
+@receiver(post_save,sender=User)
+def update_user_profile(sender,instance,created,**kwargs):
+    if created:
+        Profile.objects.create(user=instance,school=School.objects.get(id=1))
+    instance.profile.save()
 
 
 class Grade(models.Model):
@@ -43,7 +68,6 @@ class Question(models.Model):
     answer = models.TextField(null=True)
     image = models.ImageField(upload_to="question",null=True)
     created_date = models.DateTimeField("created date")
-
     def __str__(self):
         return self.question_text
 

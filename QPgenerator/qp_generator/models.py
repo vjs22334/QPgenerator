@@ -18,7 +18,7 @@ class Profile(models.Model):
     role = models.CharField(max_length=50,choices=roles)
 
     def __str__(self):
-        return self.user.username'
+        return self.user.username
 @receiver(post_save,sender=User)
 def update_user_profile(sender,instance,created,**kwargs):
     if created:

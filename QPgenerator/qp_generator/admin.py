@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
 class ProfileInline(admin.StackedInline):
-    model=Profile
-
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'Profile'
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
@@ -28,6 +29,14 @@ class QuestionAdmin(admin.ModelAdmin):
     
 class ModUserAdmin(UserAdmin):
     inlines=[ProfileInline]
+
+    def get_inline_instances(self,request,obj=None):
+        if not obj:
+            return list()
+        return super(ModUserAdmin,self).get_inline_instances(request,obj)
+
+admin.site.unregister(User)
+admin.site.register(User,ModUserAdmin)
 
 
 admin.site.register(Question,QuestionAdmin)

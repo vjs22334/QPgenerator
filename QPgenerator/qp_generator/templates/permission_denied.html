@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}denied{% endblock %}
+{% block heading %}denied{% endblock %}
+{% block content %}
+    <p>permission denied for your accont</p>
+    <a href={% url 'login' %}>login to another account?</a>
+{% endblock %}

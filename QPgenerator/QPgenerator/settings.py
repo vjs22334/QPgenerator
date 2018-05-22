@@ -130,3 +130,4 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = '/app'
 LOGOUT_REDIRECT_URL = '/app'
+LOGIN_URL = '/app/accounts/login'

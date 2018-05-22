@@ -1,7 +1,9 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from . import forms
+from .decorator import user_passes_test_message,login_required_message
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -28,5 +30,15 @@ def signup(request):
             'profile_form' : profile_form
         }
         return render(request,'signup.html',context)
-            
-        
+
+@login_required_message
+def menu(request):
+    return render(request,'menu.html')
+
+@login_required_message
+@user_passes_test_message(lambda u : u.profile.role == 'admin',message="not authorized")
+def add_questions(request):
+    return HttpResponse("under construction")
+
+def permission_denied(request):
+    return render(request,'permission_denied.html')        

@@ -52,3 +52,6 @@ def login_required_message(function=None, redirect_field_name=REDIRECT_FIELD_NAM
     if function:
         return actual_decorator(function)
     return actual_decorator
+def user_is_admin(view_func):
+    dec=user_passes_test_message(lambda u : u.profile.role == 'admin',message="not authorized")
+    return dec(view_func)

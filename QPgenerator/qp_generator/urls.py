@@ -7,8 +7,10 @@ urlpatterns=[
     path('',views.home,name="home"),
     path('accounts/login/',auth_views.login,name="login"),
     path('accounts/logout/',auth_views.logout,name="logout"),
-    path('accounts/register/',views.signup,name="signup"),
+    path('accounts/register/',views.signup,name = "signup"),
     path('menu/',views.menu,name="menu"),
-    path('Q-add/',views.add_questions,name="add_questions"),
-    path('denied/',views.permission_denied,name="permission_denied")
+    path('manage_questions/',views.manage_questions,name="manage_questions"),
+    path('<int:question_id>/manage_choices/', views.manage_choices, name='manage_choices'),
+    path('<int:question_id>/manage_matches/', views.manage_matches, name='manage_matches'),
+    path('view_questions/', views.view_questions, name='view_questions')
 ]

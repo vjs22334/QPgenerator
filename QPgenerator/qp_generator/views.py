@@ -1,10 +1,11 @@
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from . import forms
 from . import models
-from .decorator import user_passes_test_message,login_required_message
+from .decorator import user_passes_test_message,login_required_message,user_is_admin
 from django.forms import modelformset_factory,inlineformset_factory
 # Create your views here.
 def home(request):
@@ -38,34 +39,64 @@ def menu(request):
     return render(request,'menu.html')
 
 @login_required_message
-@user_passes_test_message(lambda u : u.profile.role == 'admin',message="not authorized")
-def add_questions(request):
+@user_is_admin
+def manage_questions(request):
     if request.method == 'POST':
-        question_form = forms.QuestionForm(request.POST)
+        question_form = forms.QuestionForm(request.POST,request.FILES)
+       # import pdb; pdb.set_trace()
         if question_form.is_valid():
-            question_form.save()
-            question_type = question_form.cleaned_data.get('question_type')
-            question_id = question_form.cleaned_data.get('id')
-            if question_type == 'mcq' or question_type == 'fb':
-                return redirect('add_choices',question_id=question_id)
+            question = question_form.save(commit=False)
+            question.save()
+            if question.question_type == 'mcq' or question.question_type == 'fb':
+                return redirect('manage_choices',question_id=question.id)
+            elif question.question_type == 'Match':
+                return redirect('manage_matches',question_id=question.id)
             else:
                 return redirect('menu')
     else:
         question_form = forms.QuestionForm()
-        return render(request,'add_question.html',{
+        return render(request,'manage_question.html',{
             "question_form" : question_form
         })
-def add_choices(request,question_id):
+
+@login_required_message
+@user_is_admin
+def manage_choices(request, question_id):
     question = models.Question.objects.get(id=question_id)
-    ChoiceFormset = inlineformset_factory(models.Question,models.Choice,fields=("choice_text",))
-    formset = ChoiceFormset(instance=question)
+    max=2
+    if question.question_type == 'mcq':
+        max=4
+    ChoiceFormset = inlineformset_factory(models.Question,models.Choice,fields=("choice_text",),max_num=max,extra=max)
     if request.method == 'POST':
-        formset = ChoiceFormset(request.Post,request.FILES,instance=question)
+        formset = ChoiceFormset(request.POST,request.FILES,instance=question)
         if formset.is_valid():
             formset.save()
             return redirect('menu')
     else:
         formset = ChoiceFormset(instance=question)
-        return redirect(request,'add_choices.html',{
-            "formset" : formset
-        })
+        return render(request,'manage_choices.html',{
+                "formset" : formset
+            })
+
+@login_required_message
+@user_is_admin
+def manage_matches(request, question_id):
+    question = models.Question.objects.get(id=question_id)
+    MatchFormset = inlineformset_factory(models.Question,models.Match,fields=("question_text","answer_text","image",),max_num=4,extra=4)
+    if request.method == 'POST':
+        formset = MatchFormset(request.POST,request.FILES,instance=question)
+        if formset.is_valid():
+            formset.save()
+            return redirect('menu')
+    else:
+        formset = MatchFormset(instance=question)
+        return render(request,'manage_choices.html',{
+                "formset" : formset
+            })
+
+@login_required_message
+def view_questions(request):
+    if request.method == 'POST':
+        Question.objects.filter('chapter'=request.POST.chapter)
+        pass
+

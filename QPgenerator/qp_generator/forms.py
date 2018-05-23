@@ -19,5 +19,5 @@ class ProfileForm(forms.ModelForm):
 
 class QuestionForm(forms.ModelForm):
     class Meta:
-        models = models.Question
+        model = models.Question
         exclude = ('created_date',)

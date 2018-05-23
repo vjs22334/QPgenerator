@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 class School(models.Model):
     school_name = models.CharField(max_length=200,unique=True)
     address = models.TextField()
@@ -66,10 +67,14 @@ class Question(models.Model):
     question_type = models.CharField(max_length=50, choices=type_choices,default="match the following")
     chapter = models.ForeignKey(Chapter,on_delete = models.CASCADE)
     answer = models.TextField(null=True)
-    image = models.ImageField(upload_to="question",null=True)
+    image = models.ImageField(upload_to="question",null=True,blank=True)
     created_date = models.DateTimeField("created date")
     def __str__(self):
         return self.question_text
+    def save(self,*args,**kwargs):
+        if not self.id:
+            self.created_date = timezone.now()
+        return super(Question,self).save(*args, **kwargs)
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length = 100)
@@ -80,8 +85,8 @@ class Choice(models.Model):
 class Match(models.Model):
     question_text = models.CharField(max_length=100)
     answer_text = models.CharField(max_length=100)
-    question=models.ForeignKey(Question,on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="match",null=True)
+    question = models.ForeignKey(Question,on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="match",null=True,blank=True)
 
     def __str__(self):
         return self.question_text    

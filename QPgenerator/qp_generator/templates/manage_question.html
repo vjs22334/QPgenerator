@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Add questions{% endblock %}
+{% block heading %}Add questions{% endblock %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ question_form.as_p }}
+        <button type=submit>save</button>
+    </form>
+
+{% endblock %}

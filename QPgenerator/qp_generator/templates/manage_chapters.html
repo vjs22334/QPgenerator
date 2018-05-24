@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Add questions{% endblock %}
-{% block heading %}Add questions{% endblock %}
+{% block title %}Add chapters{% endblock %}
+{% block heading %}Add chapters{% endblock %}
 {% block content %}
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ question_form.as_p }}
-        {{ chapter_form.as_p}}
+        {{ ch_form.as_p}}
         <button type=submit>save</button>
     </form>
 

@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}Add questions{% endblock %}
-{% block heading %}Add questions{% endblock %}
+{% block title %}search questions{% endblock %}
+{% block heading %}search questions{% endblock %}
 {% block content %}
-    <form method="POST" action="{{ action }}" enctype="multipart/form-data">
+    <form method="POST" id="searchform" load-sub-url={% url 'load_subjects' %}>
         {% csrf_token %}
-        {{ question_form.as_p }}
-        {{ chapter_form.as_p}}
-        <button type=submit>save</button>
+        {{ form.as_p }}
+        <button type=submit>submit</button>
     </form>
-
 {% endblock %}
 {% block scripts %}
 <script>
@@ -45,3 +43,4 @@
     });
 </script>
 {% endblock %}
+

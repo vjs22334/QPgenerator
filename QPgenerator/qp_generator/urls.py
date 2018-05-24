@@ -1,6 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from . import views
+from . import views,ajax_views
 
 
 urlpatterns=[
@@ -12,5 +12,10 @@ urlpatterns=[
     path('manage_questions/',views.manage_questions,name="manage_questions"),
     path('<int:question_id>/manage_choices/', views.manage_choices, name='manage_choices'),
     path('<int:question_id>/manage_matches/', views.manage_matches, name='manage_matches'),
-    path('view_questions/', views.view_questions, name='view_questions')
+    path('view_questions/', views.view_questions, name='view_questions'),
+    path('load_subjects/', ajax_views.load_subjects, name='load_subjects'),
+    path('load_chapters/', ajax_views.load_chapters, name='load_chapters'),
+    path('<int:question_id>/update_question/', views.manage_questions, name='update_questions'),
+    path('<int:ch_id>/update_chapter/', views.manage_chapters, name='update_chapters'),
+    path('manage_chapters/',views.manage_chapters,name="manage_chapters"),
 ]

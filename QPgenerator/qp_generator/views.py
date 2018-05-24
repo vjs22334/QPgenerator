@@ -1,7 +1,7 @@
-
+from django.urls import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from . import forms
 from . import models
@@ -32,7 +32,7 @@ def signup(request):
             'user_form' : user_form,
             'profile_form' : profile_form
         }
-        return render(request,'signup.html',context)
+    return render(request,'signup.html',context)
 
 @login_required_message
 def menu(request):
@@ -40,12 +40,19 @@ def menu(request):
 
 @login_required_message
 @user_is_admin
-def manage_questions(request):
+def manage_questions(request,question_id=None):
+    if question_id:
+        q = get_object_or_404(models.Question,pk=question_id)  
+    else:
+        q = None
     if request.method == 'POST':
-        question_form = forms.QuestionForm(request.POST,request.FILES)
-       # import pdb; pdb.set_trace()
-        if question_form.is_valid():
+        question_form = forms.QuestionForm(request.POST,request.FILES,instance=q)
+        chapter_form = forms.QuestionListForm(request.POST)
+        if question_form.is_valid() and chapter_form.is_valid():
             question = question_form.save(commit=False)
+            question.school = request.user.profile.school
+            chapter = chapter_form.cleaned_data.get('chapter').id
+            question.chapter_id = chapter
             question.save()
             if question.question_type == 'mcq' or question.question_type == 'fb':
                 return redirect('manage_choices',question_id=question.id)
@@ -54,10 +61,24 @@ def manage_questions(request):
             else:
                 return redirect('menu')
     else:
-        question_form = forms.QuestionForm()
-        return render(request,'manage_question.html',{
-            "question_form" : question_form
-        })
+        question_form = forms.QuestionForm(instance=q)
+        if not q:
+            chapter_form = forms.QuestionListForm()
+        else:
+            chapter_form = forms.QuestionListForm({
+                "grade" : q.chapter.grade_id,
+                "subject" : q.chapter.subject_id,
+                "chapter" : q.chapter_id
+            })
+    if question_id:
+        action = reverse('update_questions',args=[question_id])
+    else:
+        action = reverse('manage_questions')
+    return render(request,'manage_question.html',{
+            "question_form" : question_form,
+            "chapter_form" : chapter_form,
+            "action" : action
+    })
 
 @login_required_message
 @user_is_admin
@@ -74,9 +95,9 @@ def manage_choices(request, question_id):
             return redirect('menu')
     else:
         formset = ChoiceFormset(instance=question)
-        return render(request,'manage_choices.html',{
-                "formset" : formset
-            })
+    return render(request,'manage_choices.html',{
+            "formset" : formset
+        })
 
 @login_required_message
 @user_is_admin
@@ -90,13 +111,38 @@ def manage_matches(request, question_id):
             return redirect('menu')
     else:
         formset = MatchFormset(instance=question)
-        return render(request,'manage_choices.html',{
-                "formset" : formset
-            })
+    return render(request,'manage_choices.html',{
+            "formset" : formset
+        })
 
 @login_required_message
 def view_questions(request):
-    if request.method == 'POST':
-        Question.objects.filter('chapter'=request.POST.chapter)
-        pass
+    form = forms.QuestionListForm()
+    return render(request,'qlist.html',{
+        "form" : form 
+    })
 
+@login_required_message
+@user_is_admin
+def manage_chapters(request,ch_id=None):
+    if ch_id:
+        c=get_object_or_404(models.Chapter,pk=ch_id)
+    else:
+        c=None
+    if request.method == 'POST':
+        ch_form = forms.ChapterForm(request.POST,instance=c)
+        if ch_form.is_valid():
+            ch = ch_form.save(commit=False)
+            ch.school = request.user.profile.school
+            ch.save()
+            return redirect('menu')
+    else:
+        if c:
+            action = reverse('update_chapters',args=[ch_id])
+        else:
+            action = reverse('manage_chapters')
+        ch_form = forms.ChapterForm(instance=c)
+        #import pdb; pdb.set_trace()
+    return render(request,'manage_chapters.html',{
+        'ch_form' : ch_form
+    })

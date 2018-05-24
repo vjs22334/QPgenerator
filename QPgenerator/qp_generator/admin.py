@@ -20,7 +20,8 @@ class MatchInline(admin.StackedInline):
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets=[
         ("Question details",{'fields':["chapter","question_text","difficulty","question_type"]}),
-        ("Optional",{"fields":["answer","image"]})
+        ("Optional",{"fields":["answer","image"]}),
+        ("school",{"fields":["school",]})
     ]
     inlines=[ChoiceInline,MatchInline]
     class Media:

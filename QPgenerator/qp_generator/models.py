@@ -6,6 +6,7 @@ from django.utils import timezone
 class School(models.Model):
     school_name = models.CharField(max_length=200,unique=True)
     address = models.TextField()
+    max_grade = models.IntegerField()
 
     def __str__(self):
         return self.school_name
@@ -44,7 +45,7 @@ class Chapter(models.Model):
     ch_name = models.CharField(max_length=500)
     subject = models.ForeignKey(Subject,on_delete = models.CASCADE)
     grade = models.ForeignKey(Grade,on_delete = models.CASCADE)
-
+    school = models.ForeignKey(School,on_delete=models.CASCADE)
     def __str__(self):
         return self.ch_name
 
@@ -69,6 +70,7 @@ class Question(models.Model):
     answer = models.TextField(null=True)
     image = models.ImageField(upload_to="question",null=True,blank=True)
     created_date = models.DateTimeField("created date")
+    school = models.ForeignKey(School,on_delete=models.CASCADE)
     def __str__(self):
         return self.question_text
     def save(self,*args,**kwargs):

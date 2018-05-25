@@ -2,11 +2,12 @@
 {% block title %}search questions{% endblock %}
 {% block heading %}search questions{% endblock %}
 {% block content %}
-    <form method="POST" id="searchform" load-sub-url={% url 'load_subjects' %}>
+    <div class="form" id="search_form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type=submit>submit</button>
-    </form>
+        <button id = "fetch" >submit</button>
+    </div>
+    <div id="list"></div>
 {% endblock %}
 {% block scripts %}
 <script>
@@ -41,6 +42,19 @@
     });
 
     });
+
+    $("#fetch").click(function(){
+        $.ajax({
+            url: '/app/load_questions',
+            data: {
+                'chapter' : $('#id_chapter').val()
+            },
+            success: function(data){
+                $("#list").html(data)
+            }
+        });
+    });
+
 </script>
 {% endblock %}
 

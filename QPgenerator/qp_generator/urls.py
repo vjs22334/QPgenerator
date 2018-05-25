@@ -15,6 +15,7 @@ urlpatterns=[
     path('view_questions/', views.view_questions, name='view_questions'),
     path('load_subjects/', ajax_views.load_subjects, name='load_subjects'),
     path('load_chapters/', ajax_views.load_chapters, name='load_chapters'),
+    path('load_questions/', ajax_views.load_questions, name='load_questions'),
     path('<int:question_id>/update_question/', views.manage_questions, name='update_questions'),
     path('<int:ch_id>/update_chapter/', views.manage_chapters, name='update_chapters'),
     path('manage_chapters/',views.manage_chapters,name="manage_chapters"),

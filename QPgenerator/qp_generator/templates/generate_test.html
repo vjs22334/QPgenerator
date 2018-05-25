@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}generate test{% endblock %}
+{% block heading %}generate test{% endblock %}
+{% block content %}
+    <div class="form" id="test_details_form">
+        {% csrf_token %}
+        {{ test_details_form.as_p }}
+        <button id = "fetch" >submit</button>
+    </div>
+    <div id="paper"></div>
+{% endblock %}
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/chained_dropdown.js' %}"></script>
+<script>
+    
+    $("#fetch").click(function(){
+        
+    });
+
+</script>
+{% endblock %}

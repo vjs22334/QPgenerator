@@ -65,3 +65,21 @@ class ChapterForm(forms.ModelForm):
             self.fields['subject'].queryset = self.instance.grade.subject_set.all()
             self.fields['subject'].initial = self.instance.subject.id
         
+class TestForm(forms.Form):
+    heading = forms.CharField(max_length=200,required=True,help_text='heading')
+    instructions = forms.CharField(max_length=2000,widget=forms.Textarea,required=True,help_text="instructions for the examinees")
+    date = forms.DateField()
+    duration = forms.IntegerField(widget=forms.NumberInput,required=True,help_text="durations in hrs")
+    grade=forms.ModelChoiceField(queryset=models.Grade.objects.all())
+    subject=forms.ModelChoiceField(queryset=models.Subject.objects.none())
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if 'grade' in self.data:
+            try:
+                grade_id = int(self.data.get('grade'))
+                self.fields['subject'].queryset = models.Subject.objects.filter(grade_id=grade_id)
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset

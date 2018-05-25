@@ -6,8 +6,8 @@ from .decorator import user_passes_test_message,login_required_message,user_is_a
 from django.forms import modelformset_factory,inlineformset_factory
 from .decorator import user_passes_test_message,login_required_message,user_is_admin
 
-@login_required_message
-@user_is_admin
+#@login_required_message
+#@user_is_admin
 def load_subjects(request):
     grade_id = request.GET.get('grade')
     grade = models.Grade.objects.get(id=grade_id)
@@ -22,8 +22,8 @@ def load_subjects(request):
         
     })
 
-@login_required_message
-@user_is_admin
+#@login_required_message
+#@user_is_admin
 def load_chapters(request):
     grade_id = request.GET.get('grade')
     subject_id = request.GET.get('subject')
@@ -40,8 +40,8 @@ def load_chapters(request):
         'list' : zip(values,names)
     })
 
-@login_required_message
-@user_is_admin
+#@login_required_message
+#@user_is_admin
 def load_questions(request):
     chapter_id = request.GET.get('chapter')
     chapter = models.Chapter.objects.get(id=chapter_id)

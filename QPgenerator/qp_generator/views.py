@@ -146,3 +146,9 @@ def manage_chapters(request,ch_id=None):
     return render(request,'manage_chapters.html',{
         'ch_form' : ch_form
     })
+
+def generate_test(request):
+    test_details_form = forms.TestForm()
+    return render(request,'generate_test.html',{
+        'test_details_form' : test_details_form 
+    })

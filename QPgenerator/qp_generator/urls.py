@@ -20,4 +20,6 @@ urlpatterns=[
     path('<int:ch_id>/update_chapter/', views.manage_chapters, name='update_chapters'),
     path('manage_chapters/',views.manage_chapters,name="manage_chapters"),
     path('generate_test/',views.generate_test,name="generate_test"),
+    path('generate_test/',views.generate_test,name="generate_test"),
+    path('load_chapters_test/',ajax_views.load_chapters_test,name="load_chapters_test")
 ]

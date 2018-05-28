@@ -15,7 +15,18 @@
 <script>
     
     $("#fetch").click(function(){
-        
+        grade_id = $("#id_grade").val()
+        subject_id = $("#id_subject").val()
+        $.ajax({
+            url: "/app/load_chapters_test",
+            data: {
+                "grade" : grade_id,
+                "subject" : subject_id
+            },
+            success: function(data){
+                console.log(data);
+            }
+        });
     });
 
 </script>

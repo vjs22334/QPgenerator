@@ -62,18 +62,21 @@ def load_chapters_test(request):
     chapter_list = chapter_list.filter(grade=grade)
     ids = []
     names = []
-    no_of_questions = []
+    easy = []
+    medium = []
+    hard = []
     for chapter in chapter_list:
         ids.append(chapter.id)
         names.append(chapter.ch_name)
-        easy = chapter.question_set.filter(school = school,difficulty='easy',type=q_type).count()
-        medium = chapter.question_set.filter(school = school,difficulty='medium',type=q_type).count()
-        hard = chapter.question_set.filter(school = school,difficulty='hard',type=q_type).count()
-        no_of_questions.append([easy,medium,hard])
+        easy.append(chapter.question_set.filter(school = school,difficulty='easy',question_type=q_type).count())
+        medium.append(chapter.question_set.filter(school = school,difficulty='medium',question_type=q_type).count())
+        hard.append(chapter.question_set.filter(school = school,difficulty='hard',question_type=q_type).count())
     data = {
         "ids" : ids,
         "names" : names,
-        "no_of_questions" : no_of_questions
+        "easy" : easy,
+        "medium": medium,
+        "hard": hard
     }
     return JsonResponse(data)
 def random_questions(request):

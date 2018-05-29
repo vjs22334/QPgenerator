@@ -80,14 +80,20 @@ def load_chapters_test(request):
     }
     return JsonResponse(data)
 def random_questions(request):
-    c_list = request.GET.getlist("questions_list[]",[])
+    c_list = request.GET.getlist("chapters_list[]",[])
     c_list = [json.loads(q) for q in c_list]
+    id_list = [c["id"] for c in c_list]
+    q_type = request.GET.get("type")
+    school = request.user.profile.school
+    chapters = models.Chapter.objects.filter(id__in = id_list).prefetch_related("question_set")
+    chapters = dict([(obj.id, obj) for obj in chapters])
     for c in c_list:
-        chapter = models.Chapter.objects.get(id=c['ch_id'])
+        chapter = chapters[c['ch_id']]
         q_list = {}
-        q_list['easy'] = chapter.question_set.filter(difficulty='easy')
-        q_list['hard'] = chapter.question_set.filter(difficulty='hard')
-        q_list['medium'] = chapter.question_set.filter(difficulty='meduim')
+        q_set = [ q for q in chapter.question_set if q.question_type==q_type and q.school==school] 
+        q_list['easy'] = [ q for q in q_set if q.difficulty=="easy" ]
+        q_list['hard'] = [ q for q in q_set if q.difficulty=="hard"]
+        q_list['medium'] = [ q for q in q_set if q.difficulty=="medium"]
         rand_q_list = []
         rand_q_list.append(randList(q_list["easy"],c['easy']))
         rand_q_list.append(randList(q_list["medium"],c['medium']))

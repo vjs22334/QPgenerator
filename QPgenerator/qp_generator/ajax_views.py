@@ -60,6 +60,7 @@ def load_chapters_test(request):
     subject = models.Subject.objects.get(id=subject_id)
     chapter_list = subject.chapter_set.all()
     chapter_list = chapter_list.filter(grade=grade)
+   # import pdb; pdb.set_trace()
     ids = []
     names = []
     easy = []

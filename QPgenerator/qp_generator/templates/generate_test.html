@@ -2,11 +2,45 @@
 {% block title %}generate test{% endblock %}
 {% block heading %}generate test{% endblock %}
 {% block content %}
+
+
+
+
     <div class="form" id="test_details_form">
         {% csrf_token %}
         {{ test_details_form.as_p }}
         <button id = "fetch" >submit</button>
     </div>
+
+
+<div id = "dialog-1" 
+         title = "Dialog Title goes here...">This my first jQuery UI Dialog!i am using jqueryui in this html pge
+          <table style="width:100%" id= "table1">
+  <tr >
+    <th>Chapter name</th>
+    <th>total questions</th>
+    <th>easy questions</th>
+    <th>medium questions</th>
+    <th>tough questions</th>
+  </tr>
+  <tr>
+    <td>khan</td>
+    <td>Sth</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+</table> 
+
+   </div>
+      <button id = "opener">Open Dialog</button>
+            <button id = "add">ADD</button>
+
+</div>
+
     <div id="paper"></div>
 {% endblock %}
 {% block scripts %}
@@ -14,20 +48,42 @@
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
 <script>
     
-    $("#fetch").click(function(){
+    
+
+     $(function() {
+         $("#fetch").click(function(){
         grade_id = $("#id_grade").val()
         subject_id = $("#id_subject").val()
+        q_type = "mcq"
         $.ajax({
             url: "/app/load_chapters_test",
             data: {
                 "grade" : grade_id,
-                "subject" : subject_id
+                "subject" : subject_id,
+                "type"  : q_type
             },
             success: function(data){
                 console.log(data);
             }
         });
     });
+            $( "#dialog-1" ).dialog({
+               autoOpen: false, height:1000,width:1000 
+            });
+            $( "#opener" ).click(function() {
+               $( "#dialog-1" ).dialog( "open" );
+            });
+        
+
+          $("#add").click(function(){
+          	console.log("hello");
+    $("#table1").append(` <tr>
+    <td>khan</td>
+    <td>Sth</td>
+    <td>50</td>
+  </tr>`);
+});
+});
     
 
 </script>

@@ -67,7 +67,7 @@ class Question(models.Model):
     difficulty = models.CharField(max_length=10, choices=difficulty_choices)
     question_type = models.CharField(max_length=50, choices=type_choices,default="match the following")
     chapter = models.ForeignKey(Chapter,on_delete = models.CASCADE)
-    answer = models.TextField(null=True)
+    answer = models.TextField(null=True,blank = True)
     image = models.ImageField(upload_to="question",null=True,blank=True)
     created_date = models.DateTimeField("created date")
     school = models.ForeignKey(School,on_delete=models.CASCADE)

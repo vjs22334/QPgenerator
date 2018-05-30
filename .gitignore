@@ -1,2 +1,4 @@
 # ignore coverage files
 **/htmlcov
+# ignore pyc files
+*.pyc

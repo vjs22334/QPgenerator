@@ -1,6 +1,7 @@
 <ul>
     {% for q in list %}
-    <li>{{q.question_text}}
+    <li><p>{{ q.question_text }}</p>
         <img src="{{ q.image.url }}"/>
     </li>
+    {% endfor %}
 </ul>

@@ -6,6 +6,7 @@ from .decorator import user_passes_test_message,login_required_message,user_is_a
 from django.forms import modelformset_factory,inlineformset_factory
 from .decorator import user_passes_test_message,login_required_message,user_is_admin
 from random import randrange,shuffle
+import json
 #@login_required_message
 #@user_is_admin
 def load_subjects(request):
@@ -82,6 +83,7 @@ def load_chapters_test(request):
     return JsonResponse(data)
 def random_questions(request):
     c_list = request.GET.getlist("chapters_list[]",[])
+    import pdb;pdb.set_trace()
     c_list = [json.loads(q) for q in c_list]
     id_list = [c["id"] for c in c_list]
     q_type = request.GET.get("type")
@@ -89,9 +91,9 @@ def random_questions(request):
     chapters = models.Chapter.objects.filter(id__in = id_list).prefetch_related("question_set")
     chapters = dict([(obj.id, obj) for obj in chapters])
     for c in c_list:
-        chapter = chapters[c['ch_id']]
+        chapter = chapters[c['id']]
         q_list = {}
-        q_set = [ q for q in chapter.question_set if q.question_type==q_type and q.school==school] 
+        q_set = [ q for q in chapter.question_set.all() if q.question_type==q_type and q.school==school] 
         q_list['easy'] = [ q for q in q_set if q.difficulty=="easy" ]
         q_list['hard'] = [ q for q in q_set if q.difficulty=="hard"]
         q_list['medium'] = [ q for q in q_set if q.difficulty=="medium"]
@@ -100,9 +102,9 @@ def random_questions(request):
         rand_q_list.append(randList(q_list["medium"],c['medium']))
         rand_q_list.append(randList(q_list["hard"],c['hard']))
         shuffle(rand_q_list)
-        return render(request,"ajax/questions_for_paper.html",{
+    return render(request,"ajax/questions_for_paper.html",{
             "list":rand_q_list
-        })
+    })
 def randList(sample,k):
     result = []
     while len(result)<k:

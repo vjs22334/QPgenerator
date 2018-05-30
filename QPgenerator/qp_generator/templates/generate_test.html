@@ -6,6 +6,8 @@
 
 
 
+
+
     <div class="form" id="test_details_form">
         {% csrf_token %}
         {{ test_details_form.as_p }}
@@ -18,7 +20,6 @@
           <table style="width:100%" id= "table1">
   <tr >
     <th>Chapter name</th>
-    <th>total questions</th>
     <th>easy questions</th>
     <th>medium questions</th>
     <th>tough questions</th>
@@ -34,6 +35,7 @@
     <td>94</td>
   </tr>
 </table> 
+  <button id = "submit">Submit</button>
 
    </div>
       <button id = "opener">Open Dialog</button>
@@ -47,15 +49,18 @@
 {% load static %}
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
 <script>
-    
-    
+var newdata    
+var q_type
 
      $(function() {
          $("#fetch").click(function(){
+             q_type="mcq";
+             fetch_chapters("mcq")
+             });
+    function fetch_chapters(q_type){
         grade_id = $("#id_grade").val()
         subject_id = $("#id_subject").val()
-        q_type = "mcq"
-        $.ajax({
+              $.ajax({
             url: "/app/load_chapters_test",
             data: {
                 "grade" : grade_id,
@@ -64,9 +69,71 @@
             },
             success: function(data){
                 console.log(data);
+                newdata=data
+                for (i = 0; i < data.ids.length; i++) {
+                    
+
+                  $("#table1").append(` <tr>
+                    <td>${data.names[i]}</td>
+                    <td>${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
+                    <td>${data.medium[i]} <input type="text" default=0 id="medium${i}"></td>
+                    <td>${data.hard[i]} <input type="text" default=0 id="hard${i}"></td>
+                    </tr>`);
+                    
+                    }                        
+                    $( "#dialog-1" ).dialog( "open" );
+
+
+
             }
         });
-    });
+    }
+      
+      $("#submit").click(function(){
+          var a=[];
+          for (j=0;j<newdata.ids.length;j++){
+              var easy = $("#easy"+j).val();
+              console.log("#easy"+j);
+              var medium = $("#medium"+j).val();
+              var hard = $("#hard"+j).val();
+              if(isNaN(easy) && easy>0 && easy<=newdata.easy[j]){
+              alert("Enter proper data");
+              return;
+              }
+              if(isNaN(medium)&& medium>0 && medium<=newdata.medium[j]){
+              alert("Enter proper data");
+              return;
+              }
+              
+              if(isNaN(hard) && hard>0 && hard<=newdata.hard[j]){
+              alert("Enter proper data");
+              return;
+              }
+              var obj={
+                  "id":newdata.ids[j],
+                  "easy":newdata.easy[j],
+                  "medium":newdata.medium[j],
+                  "hard":newdata.hard[j]
+              };
+              a.push(JSON.stringify(obj));
+
+          }
+           $.ajax({
+            url: "/app/random_questions",
+            data: {
+                "chapters_list":a,
+                "type":q_type
+            },
+            success: function(data){
+                console.log(data);
+
+            }
+        });
+
+
+      });
+
+
             $( "#dialog-1" ).dialog({
                autoOpen: false, height:1000,width:1000 
             });

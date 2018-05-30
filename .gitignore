@@ -1,1 +1,5 @@
 QPgenerator/qp_generator/__pycache__/ajax_views.cpython-35.pyc
+# ignore coverage files
+**/htmlcov  
+# ignore pyc files
+*.pyc

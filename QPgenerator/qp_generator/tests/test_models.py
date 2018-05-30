@@ -33,15 +33,3 @@ class School_test(TestCase):
         s = self.create_subject()
         self.assertTrue(isinstance(s,Subject))
         self.assertEqual(s.__str__(),s.subject_name
-
-class School_test(TestCase):
-
-    def create_subject(self,name="test_sub"):
-        grade=Grade.objects.create(grade_name="1")
-        return Subject.objects.create(grade=grade,subject_name=name)
-    
-    def test_subject_creation(self):
-        s = self.create_subject()
-        self.assertTrue(isinstance(s,Subject))
-        self.assertEqual(s.__str__(),s.subject_name)
-    

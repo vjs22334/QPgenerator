@@ -6,7 +6,6 @@
         </li>
     {% endfor %}
 </ul>
-
 {% else %}
 <ul>
     {% for q in list %}
@@ -14,12 +13,13 @@
             {% if q.image %}
                 <img src="{{ q.image.url }}"/>
             {% endif %}
-            {% if q_type == "mcq" or q_type == "fb"}
+            {% if q_type == "mcq" or q_type == "fb" %}
             <ul>
-                {% for c in q.choice_set %}
+                {% for c in q.choice_set.all %}
                     <li>
                         {{c.choice_text}}
                     </li>
+                {% endfor %}
             </ul>
             {% endif %}
         </li>

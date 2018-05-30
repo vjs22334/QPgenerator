@@ -6,7 +6,7 @@ $(document).ready(function(){
     function toggleInline(selected){
         $("#choice_set-group").hide();
         $("#match_set-group").hide();
-        if(selected === "mcq")
+        if(selected === "mcq" || selected == "fb")
             $("#choice_set-group").show();
         else if(selected === "Match")
             $("#match_set-group").show();

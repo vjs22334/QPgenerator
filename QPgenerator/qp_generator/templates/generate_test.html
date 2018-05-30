@@ -16,34 +16,19 @@
 
 
 <div id = "dialog-1" 
-         title = "Dialog Title goes here...">This my first jQuery UI Dialog!i am using jqueryui in this html pge
-          <table style="width:100%" id= "table1">
-  <tr >
+         title = "Dialog Title goes here...">add questions
+    <table style="width:100%" id= "table1">
+     <tr >
     <th>Chapter name</th>
     <th>easy questions</th>
     <th>medium questions</th>
     <th>tough questions</th>
   </tr>
-  <tr>
-    <td>khan</td>
-    <td>Sth</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
+  
+ <div id="content"></div>
 </table> 
   <button id = "submit">Submit</button>
 
-   </div>
-      <button id = "opener">Open Dialog</button>
-            <button id = "add">ADD</button>
-
-</div>
-
-    <div id="paper"></div>
 {% endblock %}
 {% block scripts %}
 {% load static %}
@@ -70,6 +55,14 @@ var q_type
             success: function(data){
                 console.log(data);
                 newdata=data
+                $("#table1").html(
+                    `<tr >
+                        <th>Chapter name</th>
+                        <th>easy questions</th>
+                        <th>medium questions</th>
+                        <th>tough questions</th>
+                    </tr>`
+                )
                 for (i = 0; i < data.ids.length; i++) {
                     
 
@@ -96,24 +89,31 @@ var q_type
               console.log("#easy"+j);
               var medium = $("#medium"+j).val();
               var hard = $("#hard"+j).val();
-              if(isNaN(easy) && easy>0 && easy<=newdata.easy[j]){
-              alert("Enter proper data");
+
+             if (easy==null || easy=="" || medium==null || medium==""|| hard==null || hard=="")
+        {
+            alert("Please Fill All Required Field");
+            return false;
+        }
+
+              if(easy%1!=0 ||  easy<0 || easy>newdata.easy[j]){
+              alert("Enter proper data in 1");
               return;
               }
-              if(isNaN(medium)&& medium>0 && medium<=newdata.medium[j]){
-              alert("Enter proper data");
+              if(medium%1!=0|| medium<0 || medium>newdata.medium[j]){
+              alert("Enter proper data in 2");
               return;
               }
               
-              if(isNaN(hard) && hard>0 && hard<=newdata.hard[j]){
-              alert("Enter proper data");
+              if(hard%1!=0 || hard<0 || hard>newdata.hard[j]){
+              alert("Enter proper data in 3");
               return;
               }
               var obj={
                   "id":newdata.ids[j],
-                  "easy":newdata.easy[j],
-                  "medium":newdata.medium[j],
-                  "hard":newdata.hard[j]
+                  "easy":easy,
+                  "medium":medium,
+                  "hard":hard
               };
               a.push(JSON.stringify(obj));
 

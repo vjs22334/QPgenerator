@@ -120,7 +120,7 @@ def random_questions(request):
         })
 def randList(sample,k):
     result = []
-    while len(result)<k:
+    while len(result)<int(k):
         n=randrange(len(sample))
         result.append(sample[n])
         sample[n]=sample[-1]

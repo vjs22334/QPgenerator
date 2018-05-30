@@ -22,7 +22,7 @@ def load_subjects(request):
         
     })
 
-#@login_required_message
+@login_required_message
 #@user_is_admin
 def load_chapters(request):
     grade_id = request.GET.get('grade')
@@ -40,7 +40,7 @@ def load_chapters(request):
         'list' : zip(values,names)
     })
 
-#@login_required_message
+@login_required_message
 #@user_is_admin
 def load_questions(request):
     chapter_id = request.GET.get('chapter')
@@ -51,6 +51,7 @@ def load_questions(request):
         'questions' : questions
     })
 
+@login_required_message
 def load_chapters_test(request):
     school = request.user.profile.school
     grade_id = request.GET.get('grade')
@@ -60,7 +61,6 @@ def load_chapters_test(request):
     subject = models.Subject.objects.get(id=subject_id)
     chapter_list = subject.chapter_set.all()
     chapter_list = chapter_list.filter(grade=grade)
-   # import pdb; pdb.set_trace()
     ids = []
     names = []
     easy = []
@@ -80,6 +80,8 @@ def load_chapters_test(request):
         "hard": hard
     }
     return JsonResponse(data)
+
+@login_required_message
 def random_questions(request):
     c_list = request.GET.getlist("chapters_list[]",[])
     c_list = [json.loads(q) for q in c_list]
@@ -92,16 +94,27 @@ def random_questions(request):
         chapter = chapters[c['ch_id']]
         q_list = {}
         q_set = [ q for q in chapter.question_set if q.question_type==q_type and q.school==school] 
-        q_list['easy'] = [ q for q in q_set if q.difficulty=="easy" ]
-        q_list['hard'] = [ q for q in q_set if q.difficulty=="hard"]
-        q_list['medium'] = [ q for q in q_set if q.difficulty=="medium"]
+        q_list['easy'] = [ q.id for q in q_set if q.difficulty=="easy" ]
+        q_list['hard'] = [ q.id for q in q_set if q.difficulty=="hard"]
+        q_list['medium'] = [ q.id for q in q_set if q.difficulty=="medium"]
         rand_q_list = []
         rand_q_list.append(randList(q_list["easy"],c['easy']))
         rand_q_list.append(randList(q_list["medium"],c['medium']))
         rand_q_list.append(randList(q_list["hard"],c['hard']))
         shuffle(rand_q_list)
+        if q_type == "mcq" or q_type == "fb":
+            final_q_list=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("choice_set")
+        elif q_type == "Match":
+            final_q_list=[]
+            q_set=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("match")
+            for q in q_set:
+                final_q_list.extend(q.match_set.all())
+            shuffle(final_q_list)
+        else:
+            final_q_list=models.Question.objects.filter(id__in = rand_q_list)
         return render(request,"ajax/questions_for_paper.html",{
-            "list":rand_q_list
+            "list":final_q_list,
+            "q_type":q_type
         })
 def randList(sample,k):
     result = []

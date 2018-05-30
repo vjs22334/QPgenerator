@@ -1,6 +1,28 @@
+{% if q_type == "Match" %}
 <ul>
     {% for q in list %}
-    <li>{{q.question_text}}
-        <img src="{{ q.image.url }}"/>
-    </li>
+        <li>
+            {{q.question_text}}  ---  {{q.answer_text}}
+        </li>
+    {% endfor %}
 </ul>
+
+{% else %}
+<ul>
+    {% for q in list %}
+        <li>{{q.question_text}}
+            {% if q.image %}
+                <img src="{{ q.image.url }}"/>
+            {% endif %}
+            {% if q_type == "mcq" or q_type == "fb"}
+            <ul>
+                {% for c in q.choice_set %}
+                    <li>
+                        {{c.choice_text}}
+                    </li>
+            </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}

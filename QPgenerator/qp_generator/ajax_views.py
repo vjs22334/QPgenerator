@@ -7,7 +7,9 @@ from django.forms import modelformset_factory,inlineformset_factory
 from .decorator import user_passes_test_message,login_required_message,user_is_admin
 from random import randrange,shuffle
 import json
-#@login_required_message
+from django.core.files.storage import FileSystemStorage
+from weasyprint import HTML
+@login_required_message
 #@user_is_admin
 def load_subjects(request):
     grade_id = request.GET.get('grade')
@@ -92,6 +94,7 @@ def random_questions(request):
     school = request.user.profile.school
     chapters = models.Chapter.objects.filter(id__in = id_list).prefetch_related("question_set")
     chapters = dict([(obj.id, obj) for obj in chapters])
+    rand_q_list = []
     for c in c_list:
         chapter = chapters[c['id']]
         q_list = {}
@@ -99,7 +102,6 @@ def random_questions(request):
         q_list['easy'] = [ q.id for q in q_set if q.difficulty=="easy" ]
         q_list['hard'] = [ q.id for q in q_set if q.difficulty=="hard"]
         q_list['medium'] = [ q.id for q in q_set if q.difficulty=="medium"]
-        rand_q_list = []
         rand_q_list.extend(randList(q_list["easy"],c['easy']))
         rand_q_list.extend(randList(q_list["medium"],c['medium']))
         rand_q_list.extend(randList(q_list["hard"],c['hard']))
@@ -126,3 +128,16 @@ def randList(sample,k):
         sample[n]=sample[-1]
         del sample[-1]
     return result
+
+def to_pdf(request):
+    html_string = request.GET.get("html_data")
+    html = HTML(string=html_string,base_url=request.build_absolute_uri())
+    html.write_pdf(target='/tmp/mypdf.pdf');
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open('mypdf.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        return response
+
+    return response

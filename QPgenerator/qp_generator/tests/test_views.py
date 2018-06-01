@@ -36,3 +36,5 @@ class sign_up_view_tests(TestCase):
         resp=self.client.get(reverse('signup'))
         self.assertContains(resp,empty_user_form)
         self.assertContains(resp,empty_profile_form)
+    def test_valid_input(self):
+        pass

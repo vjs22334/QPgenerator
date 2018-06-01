@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 {% block title %}Add questions{% endblock %}
-{% block heading %}Add questions{% endblock %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/manage_questions.css' %}">
+{% endblock %}
 {% block content %}
+<div class = "container form_container">
+    <h2>Add Questions</h2>
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ question_form.as_p }}
-        {{ chapter_form.as_p}}
-        <button type=submit>save</button>
+            {% csrf_token %}
+            {% include 'include/render_forms.html' with form=question_form %}
+            {% include 'include/render_forms.html' with form=chapter_form %}
+
+            <button type=submit class="btn btn-primary">save</button>
     </form>
+</div>
 
 {% endblock %}
 {% block scripts %}

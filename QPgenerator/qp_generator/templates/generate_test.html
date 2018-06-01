@@ -156,7 +156,7 @@ var q_type
                     console.log(blob.size);
                     var link=document.createElement('a');
                     link.href=window.URL.createObjectURL(blob);
-                    link.download="Dossier_" + new Date() + ".pdf";
+                    link.download="question_paper_" + new Date() + ".pdf";
                     document.body.appendChild(link);
                     link.click();
                 }

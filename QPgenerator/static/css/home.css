@@ -1,0 +1,19 @@
+.jumbotron {
+    background-color: #7bce2e;
+    color: #130707;
+    height: 500px;
+    padding: 100px 25px;
+}
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+.bg-grey{
+    background-color: rgb(132, 139, 139)
+}
+.container-fluid{
+    padding: 60px 50px;
+}
+.logo {
+    font-size: 200px;
+}

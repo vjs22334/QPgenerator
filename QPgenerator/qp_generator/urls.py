@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from . import views,ajax_views
+from QPgenerator import settings
+
 
 
 urlpatterns=[
@@ -23,4 +25,5 @@ urlpatterns=[
     path('generate_test/',views.generate_test,name="generate_test"),
     path('load_chapters_test/',ajax_views.load_chapters_test,name="load_chapters_test"),
     path('random_questions/',ajax_views.random_questions,name="random_questions"),
+    path('to_pdf/',ajax_views.to_pdf,name="to_pdf"),
 ]

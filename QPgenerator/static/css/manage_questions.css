@@ -1,0 +1,9 @@
+.form_container{
+    padding: 100px 50px;
+}
+select{
+    width: 200px !important;
+}
+#id_image{
+    height: auto !important;
+}

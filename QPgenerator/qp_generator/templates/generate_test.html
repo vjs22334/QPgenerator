@@ -11,7 +11,7 @@
     <div class="form" id="test_details_form">
         {% csrf_token %}
         {{ test_details_form.as_p }}
-        <button id = "fetch" >submit</button>
+        <button id = "mcq-button" >mcq</button>
     </div>
 
 
@@ -25,20 +25,26 @@
     <th>tough questions</th>
   </tr>
   
- <div id="content"></div>
 </table> 
-  <button id = "submit">Submit</button>
+  <button id = "add">add</button>
+</div>
+  <div id="paper">
+      <div id="mcq">
+      </div>
+  </div>
+  <button id="pdf">export to pdf</button>
 
 {% endblock %}
 {% block scripts %}
 {% load static %}
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
+<script src="{% static 'js/jquery-ajax-native.js' %}"></script>
 <script>
 var newdata    
 var q_type
 
      $(function() {
-         $("#fetch").click(function(){
+         $("#mcq-button").click(function(){
              q_type="mcq";
              fetch_chapters("mcq")
              });
@@ -82,18 +88,17 @@ var q_type
         });
     }
       
-      $("#submit").click(function(){
+      $("#add").click(function(){
           var a=[];
           for (j=0;j<newdata.ids.length;j++){
               var easy = $("#easy"+j).val();
-              console.log("#easy"+j);
               var medium = $("#medium"+j).val();
               var hard = $("#hard"+j).val();
 
              if (easy==null || easy=="" || medium==null || medium==""|| hard==null || hard=="")
         {
             alert("Please Fill All Required Field");
-            return false;
+            return;
         }
 
               if(easy%1!=0 ||  easy<0 || easy>newdata.easy[j]){
@@ -126,30 +131,42 @@ var q_type
             },
             success: function(data){
                 console.log(data);
+                $("#"+q_type).html(data)
+                $("#dialog-1").dialog("close");
 
             }
         });
 
 
       });
-
+      
+      $("#pdf").click(function(){
+          console.log($("#mcq").html());
+          console.log($("#paper").html());
+          $.ajax({
+                dataType: 'native',
+                url : "/app/to_pdf",
+                data : {
+                  "html_data" : $("#mcq").html()
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(blob){
+                    console.log(blob.size);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    link.download="question_paper_" + new Date() + ".pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                }
+          });
+      });
 
             $( "#dialog-1" ).dialog({
                autoOpen: false, height:1000,width:1000 
             });
-            $( "#opener" ).click(function() {
-               $( "#dialog-1" ).dialog( "open" );
-            });
-        
-
-          $("#add").click(function(){
-          	console.log("hello");
-    $("#table1").append(` <tr>
-    <td>khan</td>
-    <td>Sth</td>
-    <td>50</td>
-  </tr>`);
-});
+   
 });
     
 

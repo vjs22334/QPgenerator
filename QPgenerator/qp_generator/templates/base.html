@@ -5,10 +5,18 @@
         {% endblock %}
     </title>
     <head>
-    <style>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            {% block css %}
+            {% endblock %}
+            <style>
    .ui-widget-header,.ui-state-default, ui-button {
-            background:#b9cd2d;
-            border: 10px solid #a9cd6d;
+            background:#942b71;
+            border: 10px solid hsl(83, 49%, 62%);
             color: #F22FFF;
             font-weight: bold;
             width: 800px;
@@ -17,6 +25,71 @@
 
     </head>
     <body>
+        <header>
+         <!--Navbar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+            <!-- Navbar Container -->
+            <div class="container">
+        
+                <!-- Navbar Header [contains both toggle button and navbar brand] -->
+                <div class="navbar-header">
+                    <!-- Toggle Button [handles opening navbar components on mobile screens]-->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
+                        <i class="glyphicon glyphicon-align-center"></i>
+                    </button>
+        
+                    <!-- Navbar Brand -->
+                    <a href="#" class="navbar-brand">
+                        Bootstrap Navbar
+                    </a>
+                </div>
+        
+        
+                <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
+                <div class="collapse navbar-collapse" id="exampleNavComponents">
+        
+                    <!-- Navbar Menu -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                        <!-- Navbar link with a dropdown menu -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- Navbar Button -->
+                    
+        
+                    <!-- Navbar Text -->
+                    {% if user.is_authenticated %}
+        <p class="navbar-text">welcome {{ user.username }}</p>
+        <a href = {% url 'logout' %}><button type="button" class="btn btn-default navbar-btn">Logout</button></a>
+    {% else %}
+        <p class = "navbar-text">not logged in</p>
+        <a href = {% url 'login' %}><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
+    {% endif %}
+        
+                </div>
+            </div>
+        </nav>
+        
+</header>
         <h2>{% block heading %}
             {% endblock %}
         </h2>
@@ -24,8 +97,6 @@
             {% block content %}
             {% endblock %}
         </main>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
             {% block scripts %}
             {% endblock %}
     </body>

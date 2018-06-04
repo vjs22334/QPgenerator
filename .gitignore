@@ -1,6 +1,8 @@
 # ignore coverage files
 **/htmlcov
+QPgenerator/.coverage
 # ignore pyc files
 *.pyc
 # ignore media files
 **/media
+

@@ -9,6 +9,9 @@ from random import randrange,shuffle
 import json
 from django.core.files.storage import FileSystemStorage
 from weasyprint import HTML
+from QPgenerator.settings import MEDIA_ROOT
+from os import path
+from django.utils import timezone
 @login_required_message
 #@user_is_admin
 def load_subjects(request):
@@ -132,10 +135,13 @@ def randList(sample,k):
 def to_pdf(request):
     html_string = request.GET.get("html_data")
     html = HTML(string=html_string,base_url=request.build_absolute_uri())
-    html.write_pdf(target='/tmp/mypdf.pdf');
+    filename = 'Qpaper'+str(timezone.now())+'.pdf'
+    absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
+    html.write_pdf(target=absolute_path)
 
-    fs = FileSystemStorage('/tmp')
-    with fs.open('mypdf.pdf') as pdf:
+    fs = FileSystemStorage(path.join(MEDIA_ROOT,'tmp/'))
+    with fs.open(filename) as pdf:
+        models.Paper.objects.create(heading=heading,year=year,academic_year=year,grade=grade,subject=subject,school=school,file_path=absolute_path)
         response = HttpResponse(pdf, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
         return response

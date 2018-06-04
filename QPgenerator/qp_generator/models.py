@@ -92,3 +92,14 @@ class Match(models.Model):
 
     def __str__(self):
         return self.question_text    
+
+class Paper(models.Model):
+    heading = models.CharField(max_length=100)
+    academic_year = models.CharField(max_length=100)
+    grade = models.ForeignKey(Grade,on_delete=models.CASCADE)
+    school = models.ForeignKey(School,on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
+    file_path = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.heading+"\n"+self.academic_year

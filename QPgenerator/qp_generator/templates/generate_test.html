@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}generate test{% endblock %}
-{% block heading %}generate test{% endblock %}
 {% block content %}
-
-
-
-
-
-
+<div class="container form_container">
+    <h2>Test Details</h2>
     <div class="form" id="test_details_form">
         {% csrf_token %}
-        {{ test_details_form.as_p }}
+        {% include 'include/render_forms.html' with form=test_details_form %}
         <button id = "mcq-button" >mcq</button>
     </div>
+</div>
 
 
 <div id = "dialog-1" 

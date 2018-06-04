@@ -1,7 +1,7 @@
-    <ul>
+    <ul class="list-group">
         {% if questions %}
         {% for question in questions %}
-            <li>
+            <li class="list-group-item">
                 <a href = "{% url 'update_questions' question.id %}">{{ question.question_text }}</a>
             </li>
         {% endfor %}

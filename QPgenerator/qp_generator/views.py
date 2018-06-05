@@ -38,9 +38,10 @@ def signup(request):
 def menu(request):
     return render(request,'menu.html')
 
+
 @login_required_message
 @user_is_admin
-def manage_questions(request,question_id=None):
+def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chapter_id=None):
     if question_id:
         q = get_object_or_404(models.Question,pk=question_id)  
     else:
@@ -63,7 +64,14 @@ def manage_questions(request,question_id=None):
     else:
         question_form = forms.QuestionForm(instance=q)
         if not q:
-            chapter_form = forms.QuestionListForm()
+            if grade_id and chapter_id and subject_id:
+                chapter_form = forms.QuestionListForm({
+                    "grade" : grade_id,
+                    "subject" : subject_id,
+                    "chapter" : chapter_id
+                })
+            else:
+                chapter_form = forms.QuestionListForm()
         else:
             chapter_form = forms.QuestionListForm({
                 "grade" : q.chapter.grade_id,

@@ -87,6 +87,31 @@ def load_chapters_test(request):
     }
     return JsonResponse(data)
 
+class MatchQuestion():
+    def __init__(self,list):
+        self.a_list = []
+        self.key_list = []
+        self.q_list = []
+        i = 0
+        for l in list:
+            self.a_list.append((l.answer_text,i))
+            i+=1
+        self.q_list=list
+
+    def generate_key(self):
+        for i in range(len(self.a_list)):
+            self.key_list.append((self.a_list[i][1]+1,i+1))
+        self.key_list=sorted(self.key_list,key=lambda x:x[0])
+    
+    def shuffle_ans(self):
+        shuffle(self.a_list)
+    
+    def merge(self):
+        self.q_and_a_list = []
+        for i in range(len(self.q_list)):
+            self.q_and_a_list.append((self.q_list[i].question_text,self.a_list[i][0]))
+
+
 @login_required_message
 def random_questions(request):
     c_list = request.GET.getlist("chapters_list[]",[])
@@ -109,19 +134,29 @@ def random_questions(request):
         rand_q_list.extend(randList(q_list["medium"],c['medium']))
         rand_q_list.extend(randList(q_list["hard"],c['hard']))
     shuffle(rand_q_list)
+    match_list = []
     if q_type == "mcq" or q_type == "fb":
         final_q_list=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("choice_set")
     elif q_type == "Match":
         final_q_list=[]
-        q_set=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("match")
+        q_set=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("match_set")
+        #import pdb; pdb.set_trace()
         for q in q_set:
             final_q_list.extend(q.match_set.all())
-        shuffle(final_q_list)
+        #shuffle(final_q_list)
+        for i in range(int(len(final_q_list)/4)):
+            match_question = MatchQuestion(final_q_list[i*4:(i+1)*4])
+            match_question.shuffle_ans()
+            match_question.generate_key()
+            match_question.merge()
+            match_list.append(match_question)                
     else:
         final_q_list=models.Question.objects.filter(id__in = rand_q_list)
     return render(request,"ajax/questions_for_paper.html",{
-            "list":final_q_list,
-            "q_type":q_type
+            "list": final_q_list,
+            "q_type": q_type,
+            "match_list" : match_list
+
         })
 def randList(sample,k):
     result = []
@@ -132,6 +167,7 @@ def randList(sample,k):
         del sample[-1]
     return result
 
+@login_required_message
 def to_pdf(request):
     html_string = request.GET.get("html_data")
     html = HTML(string=html_string,base_url=request.build_absolute_uri())
@@ -141,7 +177,7 @@ def to_pdf(request):
 
     fs = FileSystemStorage(path.join(MEDIA_ROOT,'tmp/'))
     with fs.open(filename) as pdf:
-        models.Paper.objects.create(heading=heading,year=year,academic_year=year,grade=grade,subject=subject,school=school,file_path=absolute_path)
+        #models.Paper.objects.create(heading=heading,year=year,academic_year=year,grade=grade,subject=subject,school=school,file_path=absolute_path)
         response = HttpResponse(pdf, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
         return response

@@ -1,8 +1,15 @@
 {% if q_type == "Match" %}
 <ul>
-    {% for q in list %}
-        <li>
-            {{q.question_text}}  ---  {{q.answer_text}}
+    {% for match in match_list %}
+        {% for m in match.q_and_a_list %}
+            <li>
+                {{m.0}}  ---  {{m.1}}
+            </li>
+        {% endfor %}
+        <li>ans:
+            {% for k in match.key_list %}
+            {{k.0}} - {{k.1}},
+            {% endfor %}
         </li>
     {% endfor %}
 </ul>

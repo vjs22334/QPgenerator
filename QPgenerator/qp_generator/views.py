@@ -28,7 +28,7 @@ def signup(request):
     else:
         user_form = forms.SignupForm()
         profile_form = forms.ProfileForm()
-        context = {
+    context = {
             'user_form' : user_form,
             'profile_form' : profile_form
         }

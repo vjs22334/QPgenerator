@@ -1,13 +1,113 @@
 {% extends 'base.html' %}
 {% block title %}generate test{% endblock %}
+
+{% block css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css".3.0/j />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1s/bootstrap-datepicker.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/generate_test.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<div class="container form_container">
-    <h2>Test Details</h2>
-    <div class="form" id="test_details_form">
-        {% csrf_token %}
-        {% include 'include/render_forms.html' with form=test_details_form %}
-        <button id = "mcq-button" >mcq</button>
+<div class="container_fluid form_container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="school">School</p>
+        </div>
     </div>
+
+
+    <div class="row">
+       <div class="col-md-12">
+            <div class="heading">
+                <div> 
+                <input type="Text" id="Heading" placeholder="Enter Your Exam Name" style="width: 300px; height: 50px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4 col-md-push-4 ">
+            <div class="class">  
+                <div class="form-horizontal">
+                    <div class="form-group">
+                    <label for="sel1" class="col-md-4 label-name" >class:</label>
+                        <div class="col-md-6">
+                                    <select class="form-control " id="sel1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+             
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="time">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                    <span class="col-md-1 visible"></span>
+                    <label for="inputEmail3" class="col-md-2 control-label">Time</label>
+                        <div class="col-md-6">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+                                               
+        
+        <div class="col-md-4">
+            <div class="Subject"> 
+               <div class="form-horizontal">
+                    <div class="form-group">
+                    <label for="sel1" class="col-md-4 label-name" >Subject:</label>
+                        <div class="col-md-6">
+                            <select class="form-control " id="sel1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+
+        <div class="col-md-4">
+            <div class="date">
+                <div class="form-group">
+                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                    <input class="form-control" type="text" readonly />
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <script type="text/javascript">
+            $(function () {
+            $("#datepicker").datepicker({ 
+            autoclose: true, 
+            todayHighlight: true}).datepicker('update', new Date());
+            });
+         </script>
+
+          
+
 </div>
 
 
@@ -31,6 +131,10 @@
   <button id="pdf">export to pdf</button>
 
 {% endblock %}
+
+
+
+
 {% block scripts %}
 {% load static %}
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
@@ -41,8 +145,8 @@ var q_type
 
      $(function() {
          $("#mcq-button").click(function(){
-             q_type="Match";
-             fetch_chapters("Match")
+             q_type="mcq";
+             fetch_chapters("mcq")
              });
     function fetch_chapters(q_type){
         grade_id = $("#id_grade").val()

@@ -1,0 +1,75 @@
+.row{
+	background-color: lavender}
+.school{
+	margin:3px;
+    min-height: 50px;
+    color: brown;
+	text-align:center;
+}	
+.heading{
+	margin:3px;
+	min-height: 50px;
+	text-align:center;
+}	
+.subject{
+	background-color: red;
+	margin:3px;
+	min-height: 50px;
+	text-align:center;
+	padding-left: 10px;
+}	
+.time{
+	margin:3px;
+	min-height: 30px;
+	text-align:center;
+}	
+.class{
+	margin:3px;
+	min-height: 30px;
+	text-align:center;
+}	
+.date{
+	margin:3px;
+	min-height: 30px;
+	text-align:center;
+}	
+.subject1{
+	font-family: Algerian;
+	font-size: 28px;
+	color: white;
+}
+
+.label-name{
+	size:10px;
+	color: red;
+}
+
+.container_fluid{
+    padding: 100px 50px;
+}
+
+
+
+::-webkit-input-placeholder {
+
+   text-align: center;
+
+}
+
+::-moz-placeholder { /* Firefox 18- */
+
+   text-align: center;
+
+}
+
+::-mozplaceholder {  /* Firefox 19+ */
+
+   text-align: center;
+
+}
+
+::-ms-input-placeholder {  
+
+   text-align: center;
+
+}

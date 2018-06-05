@@ -183,3 +183,51 @@ def to_pdf(request):
         return response
 
     return response
+
+@login_required_message
+@user_is_admin
+def create_chapter(request):
+    subject_id = request.GET.get("subject")
+    grade_id = request.GET.get("grade")
+    ch_name = request.GET.get("ch_name")
+    subject = models.Subject.get(id=subject_id)
+    grade = models.Grade.objects.get(id=grade_id)
+    if subject in grade.subject_set.all():
+        chapter = models.Chapter.objects.create(ch_name=ch_name,school=request.user.profile.school,grade=grade,subject=subject)
+        if chapter:
+            data={
+                "success" : True,
+                "status_code" : 200,
+            }
+        else:
+            data={
+                "success" : False,
+                "status_code" : 500,
+            }
+    else:
+        data={
+            "sucess" : False,
+            "status_code" : 422,
+        }
+
+    return JsonResponse(data)
+
+@login_required_message
+def get_grades_and_subjects(request):
+    school = request.user.profile.school
+    grade_list = list(range(1,school.max_grade))
+    grades = models.Grade.objects.filter(grade_name__in = grade_list).prefetch_related("subject_set")
+    data = []
+    #import pdb;pdb.set_trace()
+    for grade in grades:
+        subjects = []
+        for subject in grade.subject_set.all():
+            subjects.append({
+                "id":subject.id,
+                "name":subject.subject_name
+            })
+        data.append({
+            "grade" : grade.grade_name,
+            "subjects" : subjects
+        })
+    return JsonResponse(data,safe=False)

@@ -1,2 +1,2 @@
 # QPgenerator
-generates a random qustion paper from a database of questions
+generates a random question paper from a database of questions

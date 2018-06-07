@@ -160,10 +160,25 @@ def random_questions(request):
             match_list.append(match_question)                
     else:
         final_q_list=models.Question.objects.filter(id__in = rand_q_list)
+    
+    if q_type=="Match":
+        type_name="Match the following"
+    elif q_type=="mcq":
+        type_name="Multiple Choice Questions"
+    elif q_type=="Tf":
+        type_name="True or False"
+    elif q_type=="short":
+        type_name="Short Answers"
+    else:
+        type_name="Long Answers"
+
+
+
     return render(request,"ajax/questions_for_paper.html",{
             "list": final_q_list,
             "q_type": q_type,
-            "match_list" : match_list
+            "match_list" : match_list,
+            "type_name":type_name
 
         })
 def randList(sample,k):

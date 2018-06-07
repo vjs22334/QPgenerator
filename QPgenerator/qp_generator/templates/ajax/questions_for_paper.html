@@ -1,35 +1,79 @@
 {% if q_type == "Match" %}
-<ul>
-    {% for match in match_list %}
-        {% for m in match.q_and_a_list %}
-            <li>
-                {{m.0}}  ---  {{m.1}}
-            </li>
-        {% endfor %}
-        <li>ans:
-            {% for k in match.key_list %}
-            {{k.0}} - {{k.1}},
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="text centre"><h2><b>{{type_name}}</b>
+        </h2></div>
+    </div>
+
+<div class="row justify-content-start">
+    <div class="col-md-8">
+        <ol>
+               {% for match in match_list %}
+                <li>
+    
+                <h5>{{match.question_text}}</h5>
+            
+            
+                    <ol type="a">
+                    {% for m in match.q_and_a_list %}
+            
+                        <li>
+                            {{m.0}}  ---  {{m.1}}
+                        </li>
+                    {% endfor %}
+                    </ol>
+                    
+                    <br>
+                    <p class="answer">ans:
+                        {% for k in match.key_list %}
+                        {{k.0}} - {{k.1}},
+                        {% endfor %}
+                    </p>
+                    
+                    </li>
             {% endfor %}
-        </li>
-    {% endfor %}
-</ul>
+
+
+        </ol>
+    </div>
+</div></div>
+
 {% else %}
-<ul>
+
+<div class="container">
+        <div class="row justify-content-center">
+            <div class="text centre"><h2><b>{{type_name}}</b>
+            </h2></div>
+        </div>
+<div class="row justify-content-start">
+    <div class="col-md-8">
+        <ol>
+
     {% for q in list %}
         <li>{{q.question_text}}
             {% if q.image %}
                 <img src="/{{ q.image.url }}"/>
             {% endif %}
             {% if q_type == "mcq" or q_type == "fb" %}
-            <ul>
+            <ol type="a">
                 {% for c in q.choice_set.all %}
                     <li>
                         {{c.choice_text}}
                     </li>
                 {% endfor %}
-            </ul>
+            </ol>
             {% endif %}
+            <br>
+            <p class="answer">ans:
+                {{q.answer}}
+            </p>
+
         </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ol>
+    </div>
+</div>
+   
+
+</div>
 {% endif %}

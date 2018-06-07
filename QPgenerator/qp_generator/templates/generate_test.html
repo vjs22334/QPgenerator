@@ -3,7 +3,8 @@
 
 {% block css %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css".3.0/j />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1s/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/generate_test.css' %}">
 {% endblock %}
@@ -13,122 +14,262 @@
 <div class="container_fluid form_container">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <p class="school">School</p>
         </div>
+        <di class="col-md-2"
+        <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" id="hide_ans" class="form-check-input" value="">Hide Answers
+                </label>
+              </div></div>
     </div>
 
 
-    <div class="row">
-       <div class="col-md-12">
-            <div class="heading">
-                <div> 
-                <input type="Text" id="Heading" placeholder="Enter Your Exam Name" style="width: 300px; height: 50px">
-                </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="input-group">                
+                <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
             </div>
+    
         </div>
     </div>
-
-
-    <div class="row">
-        <div class="col-md-4 col-md-push-4 ">
+    
+            
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-3 ">
             <div class="class">  
-                <div class="form-horizontal">
-                    <div class="form-group">
-                    <label for="sel1" class="col-md-4 label-name" >class:</label>
-                        <div class="col-md-6">
-                                    <select class="form-control " id="sel1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    </select>
+                <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Grade</label>
                         </div>
-                    </div>
-                </div>
+                        <select class="custom-select" id="class-sel"></select>
+                </div> 
             </div>
         </div>
     </div>
              
 
 
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-md-4">
-            <div class="time">
-                <div class="form-horizontal">
-                    <div class="form-group">
-                    <span class="col-md-1 visible"></span>
-                    <label for="inputEmail3" class="col-md-2 control-label">Time</label>
-                        <div class="col-md-6">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                
+                <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">Time</span>
                         </div>
-                    </div>
-                </div>
-             </div>
+                        <input type="text" class="form-control" placeholder="eg:3hrs" aria-label="Username" aria-describedby="basic-addon1" >
+                      </div>  
+                        
+                        
+                    
         </div>
                                                
         
         <div class="col-md-4">
-            <div class="Subject"> 
-               <div class="form-horizontal">
-                    <div class="form-group">
-                    <label for="sel1" class="col-md-4 label-name" >Subject:</label>
-                        <div class="col-md-6">
-                            <select class="form-control " id="sel1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <div class="input-group mb-3 ">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="subject-sel">Subject</label>
+                            </div>
+                            <select class="custom-select" id="subject-sel"></select>
+                    </div> 
         </div>
      
 
         <div class="col-md-4">
-            <div class="date">
-                <div class="form-group">
-                    <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                    <input class="form-control" type="text" readonly />
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
-            </div>
+                <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">date</span>
+                        </div>
+                        <input type="text" id="date_ex" class="form-control" placeholder="dd/mm/yyyy" aria-label="Username" aria-describedby="basic-addon1">
+                      </div> 
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+                <div class="input-group">
+                    
+                        <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                      </div>
+
         </div>
 
     </div>
-        <script type="text/javascript">
-            $(function () {
-            $("#datepicker").datepicker({ 
-            autoclose: true, 
-            todayHighlight: true}).datepicker('update', new Date());
-            });
-         </script>
+        
 
           
 
 </div>
 
+<div class="d-none popover" id="popover_content">
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Type</label>
+                </div>
+                <select class="custom-select" id="type_select">
+                    <option value="mcq">Multiple choice questions</option>
+                    <option value="short">Short Answers</option>
+                    <option value="long">Long</option>
+                    <option value="Tf">True or False</option>
+                    <option value="Match">Match the following</option>
+                </select>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" id="modal_trigger" data-toggle="modal" data-target="#exampleModal">
+                Add
+                </button>
+        
+        </div> 
+</div>
+
+
+<div class= "container-fluid">
+    <div class="row justify-content-start ">
+
+        <div class="col-md-1">
+            Section
+        </div>
+
+        <div class="col-md-6 offset-md-2">
+            <div class="input-group mb-3 ">
+                <input type="text" class="form-control" placeholder="Section-Heading">
+            </div>
+        </div>
+
+        <div class="col-md-2 offset-md-1">
+            <button type="button" class="btn btn-outline-secondary" data-placement="bottom" data-toggle="popover" data-container="body" data-placement="left" data-html="true"  id="add_popover">Add Questions</button> 
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center ">
+        <div class="col-md-8">
+            <div class="input-group">
+                <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <div class="questions">
+                </div>
+            </div>
+        </div>
+
+</div>
+
+      
+<div class= "container-fluid">
+        <div class="row justify-content-start ">
+    
+            <div class="col-md-1">
+                Section
+            </div>
+    
+            <div class="col-md-6 offset-md-2">
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control" placeholder="Section-Heading">
+                </div>
+            </div>
+    
+            <div class="col-md-2 offset-md-1">
+                <button type="button" class="btn btn-outline-secondary" data-placement="bottom" data-toggle="popover" data-container="body" data-placement="left" data-html="true"  id="add_popover">Add Questions</button> 
+            </div>
+    
+        </div>
+    
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                </div>
+            </div>
+        </div>
+    
+</div>
+
+<div class= "container-fluid">
+        <div class="row justify-content-start ">
+    
+            <div class="col-md-1">
+                Section
+            </div>
+    
+            <div class="col-md-6 offset-md-2">
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control" placeholder="Section-Heading">
+                </div>
+            </div>
+    
+            <div class="col-md-2 offset-md-1">
+                <button type="button" class="btn btn-outline-secondary" data-placement="bottom" data-toggle="popover" data-container="body" data-placement="left" data-html="true"  id="add_popover">Add Questions</button> 
+            </div>
+    
+        </div>
+    
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                </div>
+            </div>
+        </div>
+    
+</div>
+    
+
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+                <div class="modal-body container" id="modal-content">
+                    <div class="row justify-content-center">
+                        <div class="fa-3x">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                            <i class="fas fa-sync fa-spin"></i>
+                            <i class="fas fa-cog fa-spin"></i>
+                            <i class="fas fa-spinner fa-pulse"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"id="add">Add</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
 
 <div id = "dialog-1" 
-         title = "Dialog Title goes here...">add questions
-    <table style="width:100%" id= "table1">
-     <tr >
-    <th>Chapter name</th>
-    <th>easy questions</th>
-    <th>medium questions</th>
-    <th>tough questions</th>
-  </tr>
-  
-</table> 
-  <button id = "add">add</button>
+ title = "Dialog Title goes here...">add questions
+    <button id = "add">add</button>
 </div>
-  <div id="paper">
-      <div id="mcq">
-      </div>
-  </div>
-  <button id="pdf">export to pdf</button>
+
+<div id="paper">
+    <div id="mcq">
+    </div>
+</div>
+<button id="pdf">export to pdf</button>
 
 {% endblock %}
 
@@ -140,115 +281,189 @@
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
 <script src="{% static 'js/jquery-ajax-native.js' %}"></script>
 <script>
-var newdata    
-var q_type
+ var newdata    
+ var q_type
+ var grades
 
-     $(function() {
-         $("#mcq-button").click(function(){
-             q_type="mcq";
-             fetch_chapters("mcq")
-             });
-    function fetch_chapters(q_type){
-        grade_id = $("#id_grade").val()
-        subject_id = $("#id_subject").val()
-              $.ajax({
-            url: "/app/load_chapters_test",
-            data: {
-                "grade" : grade_id,
-                "subject" : subject_id,
-                "type"  : q_type
-            },
-            success: function(data){
+     
+    $(function() {
+        $.ajax({
+            url:"/app/get_all_subjects",
+            success:function(data){
                 console.log(data);
-                newdata=data
-                $("#table1").html(
-                    `<tr >
-                        <th>Chapter name</th>
-                        <th>easy questions</th>
-                        <th>medium questions</th>
-                        <th>tough questions</th>
-                    </tr>`
-                )
-                for (i = 0; i < data.ids.length; i++) {
-                    
+                grades=data;
 
-                  $("#table1").append(` <tr>
-                    <td>${data.names[i]}</td>
-                    <td>${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
-                    <td>${data.medium[i]} <input type="text" default=0 id="medium${i}"></td>
-                    <td>${data.hard[i]} <input type="text" default=0 id="hard${i}"></td>
-                    </tr>`);
-                    
-                    }                        
-                    $( "#dialog-1" ).dialog( "open" );
-
-
+                for(i=0;i<grades.length;i++)
+                {
+                   $("#class-sel").append('<option value="'+grades[i]['id']+'">'+grades[i]['grade']+'</option>')
+                }
+                for(i=0;i<grades[0]['subjects'].length;i++)
+                {
+                   $("#subject-sel").append('<option value="'+grades[0]['subjects'][i]["id"]+'">'+grades[0]['subjects'][i]["name"]+'</option>')
+                }
 
             }
-        });
-    }
-      
-      $("#add").click(function(){
-          var a=[];
-          for (j=0;j<newdata.ids.length;j++){
-              var easy = $("#easy"+j).val();
-              var medium = $("#medium"+j).val();
-              var hard = $("#hard"+j).val();
 
-             if (easy==null || easy=="" || medium==null || medium==""|| hard==null || hard=="")
-        {
-            alert("Please Fill All Required Field");
-            return;
+        })
+
+
+        $("#class-sel").change(function(){
+            var grade = grades.filter(function( obj ) {
+                return obj['grade'] == $("#class-sel").val();
+            })[0];
+            console.log(grade);
+            $("#subject-sel").html('');
+            for(i=0;i<grade['subjects'].length;i++)
+            {
+                $("#subject-sel").append('<option value="'+grade['subjects'][i]["id"]+'">'+grade['subjects'][i]["name"]+'</option>')
+            }
+
+        })
+
+
+                  $( "#date_ex" ).datepicker({
+                    dateFormat:"yy-mm-dd"
+                  });
+
+                  $("#add_popover").popover({
+                    html: true, 
+                    content: function() {
+                            console.log($('#popover_content').html())
+                            return $('#popover_content').html();
+                        }
+                });
+
+                $("#hide_ans").click(function(){
+                    if($(this).is(':checked'))
+                    {
+                        $(".answer").hide()
+                    }
+                    else
+                    {
+                        $(".answer").show()
+                    }
+                })
+                
+
+
+
+        $(document).on("click", "#modal_trigger", function(event){
+            q_type=$(".popover-body").find("select").val();
+            console.log(q_type);
+            fetch_chapters()
+            $(this).parents(".popover").popover('hide');
+            });
+            function fetch_chapters(){
+                grade_id = $("#class-sel").val()
+                
+                subject_id = $("#subject-sel").val()
+                console.log(grade_id)
+                console.log(subject_id)
+                console.log(q_type)
+                $.ajax({
+                    url: "/app/load_chapters_test",
+                    data: {
+                        "grade" : grade_id,
+                        "subject" : subject_id,
+                        "type"  : q_type
+                    },
+                    success: function(data){
+                        console.log(data);
+                        newdata=data
+                        $("#modal-content").html(
+                            `<div class="container table-responsive">
+                            <table  id= "table1" class="table table-sm">
+                                    <tr >
+                                        <th>Chapter name</th>
+                                        <th>easy questions</th>
+                                        <th>medium questions</th>
+                                        <th>tough questions</th>
+                                    </tr>
+                                
+                                </table> 
+                            </div>
+                            `
+                        )
+                        for (i = 0; i < data.ids.length; i++) {                        
+                            $("#table1").append(` <tr>
+                                <td>${data.names[i]}</td>
+                                <td>${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
+                                <td>${data.medium[i]} <input type="text" default=0 id="medium${i}"></td>
+                                <td>${data.hard[i]} <input type="text" default=0 id="hard${i}"></td>
+                                </tr>`);
+                            
+                        }                        
+    
+
+
+
+                    }
+                });
+                
         }
+      
+        $(document).on("click", "#add", function(event){
+            var a=[];
+            for (j=0;j<newdata.ids.length;j++){
+                var easy = $("#easy"+j).val();
+                var medium = $("#medium"+j).val();
+                var hard = $("#hard"+j).val();
 
-              if(easy%1!=0 ||  easy<0 || easy>newdata.easy[j]){
-              alert("Enter proper data in 1");
-              return;
-              }
-              if(medium%1!=0|| medium<0 || medium>newdata.medium[j]){
-              alert("Enter proper data in 2");
-              return;
-              }
-              
-              if(hard%1!=0 || hard<0 || hard>newdata.hard[j]){
-              alert("Enter proper data in 3");
-              return;
-              }
-              var obj={
-                  "id":newdata.ids[j],
-                  "easy":easy,
-                  "medium":medium,
-                  "hard":hard
-              };
-              a.push(JSON.stringify(obj));
+                if (easy==null || easy=="" || medium==null || medium==""|| hard==null || hard=="")
+                {
+                    alert("Please Fill All Required Field");
+                    return;
+                }
 
-          }
-           $.ajax({
-            url: "/app/random_questions",
-            data: {
-                "chapters_list":a,
-                "type":q_type
-            },
-            success: function(data){
-                console.log(data);
-                $("#"+q_type).html(data)
-                $("#dialog-1").dialog("close");
+                if(easy%1!=0 ||  easy<0 || easy>newdata.easy[j])
+                {
+                alert("Enter proper data in 1");
+                return;
+                }
+
+                if(medium%1!=0|| medium<0 || medium>newdata.medium[j])
+                {
+                alert("Enter proper data in 2");
+                return;
+                }
+                
+                if(hard%1!=0 || hard<0 || hard>newdata.hard[j])
+                {
+                alert("Enter proper data in 3");
+                return;
+                }
+
+                var obj={
+                    "id":newdata.ids[j],
+                    "easy":easy,
+                    "medium":medium,
+                    "hard":hard
+                };
+                a.push(JSON.stringify(obj));
 
             }
+            $('#exampleModal').modal('hide');
+            $.ajax({
+                url: "/app/random_questions",
+                data: {
+                    "chapters_list":a,
+                    "type":q_type},
+                    
+                success: function(data){
+                    console.log(data);
+                    $(".questions").html(data)
+
+                }   
+            });
         });
-
-
-      });
       
-      $("#pdf").click(function(){
-          console.log($("#mcq").html());
-          console.log($("#paper").html());
-          $.ajax({
+        $("#pdf").click(function(){
+            console.log($("#mcq").html());
+            console.log($("#paper").html());
+            $.ajax({
                 dataType: 'native',
                 url : "/app/to_pdf",
-                data : {
-                  "html_data" : $("#mcq").html()
-                },
+                data : {"html_data" : $("#mcq").html()},
                 xhrFields: {
                     responseType: 'blob'
                 },
@@ -260,14 +475,14 @@ var q_type
                     document.body.appendChild(link);
                     link.click();
                 }
-          });
-      });
-
-            $( "#dialog-1" ).dialog({
-               autoOpen: false, height:1000,width:1000 
             });
+        });
+
+        $( "#dialog-1" ).dialog({
+               autoOpen: false, height:1000,width:1000 
+        });
    
-});
+    });
     
 
 </script>

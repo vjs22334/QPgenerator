@@ -227,6 +227,7 @@ def get_grades_and_subjects(request):
                 "name":subject.subject_name
             })
         data.append({
+            "id"    : grade.id,
             "grade" : grade.grade_name,
             "subjects" : subjects
         })

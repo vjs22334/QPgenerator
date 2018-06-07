@@ -1,5 +1,5 @@
 .row{
-	background-color: lavender}
+	}
 .school{
 	margin:3px;
     min-height: 50px;
@@ -7,48 +7,41 @@
 	text-align:center;
 }	
 .heading{
+    background-color:teal;
 	margin:3px;
 	min-height: 50px;
 	text-align:center;
 }	
-.subject{
-	background-color: red;
-	margin:3px;
-	min-height: 50px;
-	text-align:center;
-	padding-left: 10px;
-}	
+
 .time{
-	margin:3px;
+    margin:3px;
+    background-color:rosybrown;
+
 	min-height: 30px;
 	text-align:center;
 }	
 .class{
+    background-color: blueviolet;
 	margin:3px;
 	min-height: 30px;
 	text-align:center;
 }	
 .date{
+    background-color: aqua;
 	margin:3px;
 	min-height: 30px;
 	text-align:center;
 }	
-.subject1{
-	font-family: Algerian;
-	font-size: 28px;
-	color: white;
-}
 
-.label-name{
-	size:10px;
-	color: red;
-}
 
 .container_fluid{
     padding: 100px 50px;
 }
 
-
+.instruction{
+    min-height: 100px;
+    background-color: aqua;
+}
 
 ::-webkit-input-placeholder {
 
@@ -73,3 +66,47 @@
    text-align: center;
 
 }
+.popover{
+    max-width: 100%;
+}
+
+
+.ui-datepicker {
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+    background:#2F99B4;  
+}
+.ui-datepicker .ui-datepicker-title {
+	margin: 0 2.3em;
+	line-height: 1.8em;
+	text-align: center;
+    color:#FFFFFF;
+    background:#2F99B4;  
+}
+.ui-datepicker table {
+	width: 100%;
+	font-size: .7em;
+	border-collapse: collapse;
+    font-family:verdana;
+	margin: 0 0 .4em;
+    color:#000000;
+    background:#9EEFEE;    
+}
+/*This is date TD */
+.ui-datepicker td {
+
+	border: 0;
+	padding: 1px;
+
+    
+}
+.ui-datepicker td span,
+.ui-datepicker td a {
+	display: block;
+	padding: .8em;
+	text-align: right;
+	text-decoration: underline;
+}
+
+  

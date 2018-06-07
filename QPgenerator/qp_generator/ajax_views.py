@@ -88,7 +88,8 @@ def load_chapters_test(request):
     return JsonResponse(data)
 
 class MatchQuestion():
-    def __init__(self,list):
+    def __init__(self,list,question_text):
+        self.question_text=question_text
         self.a_list = []
         self.key_list = []
         self.q_list = []
@@ -98,13 +99,20 @@ class MatchQuestion():
             i+=1
         self.q_list=list
 
+    def shuffle_check(self):
+        for i in range(len(self.a_list)):
+            if self.a_list[i][1] == i:
+                return False
+        return True
+
     def generate_key(self):
         for i in range(len(self.a_list)):
             self.key_list.append((self.a_list[i][1]+1,i+1))
         self.key_list=sorted(self.key_list,key=lambda x:x[0])
     
     def shuffle_ans(self):
-        shuffle(self.a_list)
+        while not self.shuffle_check():
+            shuffle(self.a_list)
     
     def merge(self):
         self.q_and_a_list = []
@@ -145,7 +153,7 @@ def random_questions(request):
             final_q_list.extend(q.match_set.all())
         #shuffle(final_q_list)
         for i in range(int(len(final_q_list)/4)):
-            match_question = MatchQuestion(final_q_list[i*4:(i+1)*4])
+            match_question = MatchQuestion(final_q_list[i*4:(i+1)*4],q_set[i].question_text)
             match_question.shuffle_ans()
             match_question.generate_key()
             match_question.merge()

@@ -11,18 +11,20 @@
 
 
 {% block content %}
+<div class="main">
 <div class="container_fluid form_container">
 
     <div class="row">
         <div class="col-md-10">
             <p class="school">School</p>
         </div>
-        <di class="col-md-2"
-        <div class="form-check">
+        <div class="col-md-2">
+            <div class="form-check">
                 <label class="form-check-label">
                   <input type="checkbox" id="hide_ans" class="form-check-input" value="">Hide Answers
                 </label>
-              </div></div>
+              </div>
+        </div>
     </div>
 
 
@@ -123,7 +125,7 @@
 </div>
 
 
-<div class= "container-fluid">
+<div class= "container-fluid section">
     <div class="row justify-content-start ">
 
         <div class="col-md-1">
@@ -137,8 +139,7 @@
         </div>
 
         <div class="col-md-2 offset-md-1">
-            <button type="button" class="btn btn-outline-secondary" data-placement="bottom" data-toggle="popover" data-container="body" data-placement="left" data-html="true"  id="add_popover">Add Questions</button> 
-        </div>
+                <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>        </div>
 
     </div>
 
@@ -159,7 +160,7 @@
 </div>
 
       
-<div class= "container-fluid">
+<div class= "container-fluid section">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
@@ -173,8 +174,7 @@
             </div>
     
             <div class="col-md-2 offset-md-1">
-                <button type="button" class="btn btn-outline-secondary" data-placement="bottom" data-toggle="popover" data-container="body" data-placement="left" data-html="true"  id="add_popover">Add Questions</button> 
-            </div>
+                    <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
     
@@ -185,10 +185,16 @@
                 </div>
             </div>
         </div>
-    
+        <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <div class="questions">
+                </div>
+            </div>
+        </div>
+
 </div>
 
-<div class= "container-fluid">
+<div class= "container-fluid section">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
@@ -202,8 +208,7 @@
             </div>
     
             <div class="col-md-2 offset-md-1">
-                <button type="button" class="btn btn-outline-secondary" data-placement="bottom" data-toggle="popover" data-container="body" data-placement="left" data-html="true"  id="add_popover">Add Questions</button> 
-            </div>
+                    <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
     
@@ -214,6 +219,13 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <div class="questions">
+                </div>
+            </div>
+        </div>
+
     
 </div>
     
@@ -251,24 +263,16 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-<div id = "dialog-1" 
- title = "Dialog Title goes here...">add questions
-    <button id = "add">add</button>
 </div>
 
-<div id="paper">
-    <div id="mcq">
-    </div>
-</div>
+<button type="button" class = "btn btn-primary" id="add_section">Add Section</button>
+
+
+
+
+
+
+
 <button id="pdf">export to pdf</button>
 
 {% endblock %}
@@ -284,6 +288,7 @@
  var newdata    
  var q_type
  var grades
+ var section_context
 
      
     $(function() {
@@ -325,12 +330,56 @@
                     dateFormat:"yy-mm-dd"
                   });
 
-                  $("#add_popover").popover({
+                  $("body").popover({
                     html: true, 
                     content: function() {
-                            console.log($('#popover_content').html())
+                            console.log($('#popover_content').html());
+                            section_context = $(this);
                             return $('#popover_content').html();
-                        }
+                        },
+                    selector: ".add_popover"
+                });
+
+                $("#add_section").click(function(){
+                    $(".main").append(`
+                    <div class= "container-fluid section">
+        <div class="row justify-content-start ">
+    
+            <div class="col-md-1">
+                Section
+            </div>
+    
+            <div class="col-md-6 offset-md-2">
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control" placeholder="Section-Heading">
+                </div>
+            </div>
+    
+            <div class="col-md-2 offset-md-1">
+                <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a> 
+            </div>
+    
+        </div>
+    
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-md-12">
+                <div class="questions">
+                </div>
+            </div>
+        </div>
+
+    
+</div>
+
+                    `)
+
                 });
 
                 $("#hide_ans").click(function(){
@@ -451,7 +500,7 @@
                     
                 success: function(data){
                     console.log(data);
-                    $(".questions").html(data)
+                    section_context.parents(".section").find(".questions").html(data)
 
                 }   
             });
@@ -478,9 +527,6 @@
             });
         });
 
-        $( "#dialog-1" ).dialog({
-               autoOpen: false, height:1000,width:1000 
-        });
    
     });
     

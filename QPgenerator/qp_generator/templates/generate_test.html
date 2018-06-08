@@ -13,10 +13,10 @@
 {% block content %}
 <div class="main">
 <div class="container_fluid form_container my-5 mx-lg-5 px-5 py-3 ">
-
+<!--School Name-->
     <div class="row">
         <div class="col-md-10">
-            <h3 id="school_name"class="school" >{{school.school_name}}</h3>
+            <h3 style id="school_name"class="school" >{{school.school_name}}</h3>
         </div>
         <div class="col-md-2">
             <div class="form-check">
@@ -26,18 +26,19 @@
               </div>
         </div>
     </div>
-
+<!--Heading exam name-->
 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="input-group">                
-                <textarea class="form-control" id="instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
+                <textarea class="form-control" id="heading" aria-label="With textarea" placeholder="Heading"></textarea>
             </div>
     
         </div>
     </div>
     
-            
+    
+   <!--Grade--> 
     <div class="row justify-content-center mt-2">
         <div class="col-md-3 ">
             <div class="class">  
@@ -92,7 +93,7 @@
         <div class="col-md-8">
                 <div class="input-group">
                     
-                        <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                        <textarea class="form-control" id="instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
                       </div>
 
         </div>
@@ -537,10 +538,11 @@
             var questions;
             school_name=$("#school_name").html()
             heading=$("#heading").val()
-            grade=$("#class-sel").val()
-            subject=$("#subject-sel").val()
+            grade=$("#class-sel option:selected").text()
+            subject=$("#subject-sel option:selected").text()
             time=$("#time").val()
-            date=$("#ex_date").val()
+            date=$("#date_ex").val()
+            instruction=$("#instruction").val()
             var htmlString=`
             <!DOCTYPE html>
 <html>
@@ -565,7 +567,12 @@
 <br>`
 $(".section").each(function(){
 questions=$(this).find(".questions").html();
-heading1==$(this).find(".section_heading").val();
+if(questions=="No Questions Added")
+{
+    console.log(questions);
+    return;
+}
+heading1=$(this).find(".section_heading").val();
 instruction1=$(this).find(".section_instruction").val()
 htmlString = htmlString+`
 <h3 style="text-align:center;">${heading1}</h3>
@@ -575,6 +582,7 @@ htmlString = htmlString+`
 
 htmlString=htmlString+`</body>
 </html>`;
+console.log(htmlString);
             $.ajax({
                 dataType: 'native',
                 url : "/app/to_pdf",

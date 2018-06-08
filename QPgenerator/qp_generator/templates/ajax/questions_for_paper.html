@@ -56,7 +56,7 @@
     {% for q in list %}
         <li>{{q.question_text}}
             {% if q.image %}
-                <img src="/{{ q.image.url }}"/>
+                <img class="img-fluid mx-auto d-block" src="/{{ q.image.url }}"/>
             {% endif %}
             {% if q_type == "mcq" or q_type == "fb" %}
             <ol type="a">

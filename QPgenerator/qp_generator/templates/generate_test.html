@@ -12,7 +12,7 @@
 
 {% block content %}
 <div class="main">
-<div class="container_fluid form_container">
+<div class="container_fluid form_container my-5 mx-lg-5 px-5 py-3 ">
 
     <div class="row">
         <div class="col-md-10">
@@ -125,7 +125,7 @@
 </div>
 
 
-<div class= "container-fluid section">
+<div class= "container-fluid section my-5 px-5 py-3" id="section1">
     <div class="row justify-content-start ">
 
         <div class="col-md-1">
@@ -139,7 +139,8 @@
         </div>
 
         <div class="col-md-2 offset-md-1">
-                <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>        </div>
+                <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>   
+        </div>
 
     </div>
 
@@ -152,7 +153,10 @@
     </div>
     <div class="row justify-content-center ">
             <div class="col-md-12">
-                <div class="questions">
+                <div class="questions border border-primary">
+                <br><br>
+                <h6 class="text-center">No Questions Added</h6>
+                <br><br><br>
                 </div>
             </div>
         </div>
@@ -160,7 +164,7 @@
 </div>
 
       
-<div class= "container-fluid section">
+<div class= "container-fluid section  my-5 px-5 py-3">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
@@ -186,15 +190,18 @@
             </div>
         </div>
         <div class="row justify-content-center ">
-            <div class="col-md-12">
-                <div class="questions">
+                <div class="col-md-12">
+                    <div class="questions border border-primary">
+                    <br><br>
+                    <h6 class="text-center">No Questions Added</h6>
+                    <br><br><br>
+                    </div>
                 </div>
             </div>
-        </div>
-
+    
 </div>
 
-<div class= "container-fluid section">
+<div class= "container-fluid section my-5 px-5 py-3">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
@@ -220,12 +227,14 @@
             </div>
         </div>
         <div class="row justify-content-center ">
-            <div class="col-md-12">
-                <div class="questions">
+                <div class="col-md-12">
+                    <div class="questions border border-primary">
+                    <br><br>
+                    <h6 class="text-center">No Questions Added</h6>
+                    <br><br><br>
+                    </div>
                 </div>
             </div>
-        </div>
-
     
 </div>
     
@@ -342,7 +351,7 @@
 
                 $("#add_section").click(function(){
                     $(".main").append(`
-                    <div class= "container-fluid section">
+                    <div class= "container-fluid section my-5 px-5">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
@@ -369,11 +378,15 @@
             </div>
         </div>
         <div class="row justify-content-center ">
-            <div class="col-md-12">
-                <div class="questions">
+                <div class="col-md-12">
+                    <div class="questions border border-primary">
+                    <br><br>
+                    <h6 class="text-center">No Questions Added</h6>
+                    <br><br><br>
+                    </div>
                 </div>
             </div>
-        </div>
+    
 
     
 </div>
@@ -509,10 +522,45 @@
         $("#pdf").click(function(){
             console.log($("#mcq").html());
             console.log($("#paper").html());
+            var questions=$("#section1").find(".questions").html();
+            var htmlString=`
+            <!DOCTYPE html>
+<html>
+<head>
+	<title>queation paper
+	</title>
+</head>
+<body>
+	<div style="border-style:solid;border-color:red;">
+	<h2 style="text-align:center;">St.Vincents High and Technical School</h2>
+	<h4 style="text-align:center;">id-term Examination</h4>
+	<h4 style="text-align:center;">Class-11</h4>
+	<div style="text-align:center;"> Physics </div>
+		<div style="float:left;  "> Time-3hrs</div>
+		<div style="float:right; "> Date :- 25/6/2018</div>
+		<br>
+		<br>
+	<p style="text-align: center;"> Answer any 5 questions from part 1 and 3 questions from part 2 . Please dont cheat in the exam and try to maintain silence in the hall.Thank you for cooperating with us.Hope u do well in the examination.</p>
+</div>
+<br>
+<br>
+<br>
+
+		<h3 style="text-align:center;">Section A</h3>
+		<p style="text-align: center;"> Answer any 5 questions from part 1 and 3 questions from part 2 . Please dont cheat in the exam and try to maintain silence in the hall.Thank you for cooperating with us.Hope u do well in the examination.</p>
+        ${questions}
+
+
+
+
+
+</body>
+</html>
+            `;
             $.ajax({
                 dataType: 'native',
                 url : "/app/to_pdf",
-                data : {"html_data" : $("#mcq").html()},
+                data : {"html_data" : htmlString},
                 xhrFields: {
                     responseType: 'blob'
                 },

@@ -33,10 +33,6 @@
 }	
 
 
-.container_fluid{
-    padding: 100px 50px;
-}
-
 .instruction{
     min-height: 100px;
     background-color: aqua;

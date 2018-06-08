@@ -11,7 +11,11 @@
                {% for match in match_list %}
                 <li>
     
-                <h5>{{match.question_text}}</h5>
+                <h5>{{match.question.question_text}}</h5>
+
+                {% if match.question.image %}
+                <img class="img-fluid mx-auto d-block" src="/{{ match.question.image.url }}"/>
+                {% endif %}
             
             
                     <ol type="a">

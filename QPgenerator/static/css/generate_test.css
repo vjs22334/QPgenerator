@@ -1,5 +1,4 @@
-.row{
-	}
+
 .school{
 	margin:3px;
     min-height: 50px;
@@ -33,10 +32,6 @@
 	text-align:center;
 }	
 
-
-.container_fluid{
-    padding: 100px 50px;
-}
 
 .instruction{
     min-height: 100px;

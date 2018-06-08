@@ -157,6 +157,8 @@ def manage_chapters(request,ch_id=None):
 
 def generate_test(request):
     test_details_form = forms.TestForm()
+    school = request.user.profile.school
     return render(request,'generate_test.html',{
-        'test_details_form' : test_details_form 
+        'test_details_form' : test_details_form,
+        'school' : school,
     })

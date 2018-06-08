@@ -567,9 +567,9 @@
 <br>`
 $(".section").each(function(){
 questions=$(this).find(".questions").html();
-if(questions=="No Questions Added")
-{
-    console.log(questions);
+console.log($(this).find(".questions").find('.text-center').html());
+if($(this).find(".questions").find('.text-center').html()=="No Questions Added")
+{   console.log("returned");
     return;
 }
 heading1=$(this).find(".section_heading").val();

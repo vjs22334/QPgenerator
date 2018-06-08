@@ -31,13 +31,6 @@ class sign_up_view_tests(TestCase):
         resp=self.client.get(reverse('signup'))
         self.assertTemplateUsed(resp,'signup.html')
 
-    def test_response_empty_form(self):
-        empty_user_form = SignupForm()
-        empty_profile_form = ProfileForm()
-        resp=self.client.get(reverse('signup'))
-        self.assertContains(resp,empty_user_form)
-        self.assertContains(resp,empty_profile_form)
-    
     def test_valid_input(self):
         user_count=User.objects.count()
         response = self.client.post(reverse('signup'),{
@@ -65,4 +58,47 @@ class sign_up_view_tests(TestCase):
             "school":1,
             })
         self.assertContains(response,'"errorlist')
-        
+
+class test_manage_questions_view(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        School.objects.create(id=1,school_name="abc",address="def",max_grade=1)
+        user = User.objects.create_user(username='testuser1', password='12345')
+        user.profile.role="admin"
+        user.save()
+        user = User.objects.create_user(username='testuser2', password='12345')
+        user.profile.role="teacher"
+        user.save()
+
+    def test_redirect_to_login_if_loggedout(self):
+        resp = self.client.get(reverse('manage_questions'),follow=True)
+        self.assertRedirects(resp, expected_url=reverse('login')+"?next=%2Fapp%2Fmanage_questions%2F", status_code=302, target_status_code=200)
+    
+    def test_accessible_by_admin(self):    
+        login = self.client.login(username='testuser1', password='12345')
+        print(login)
+        resp = self.client.get(reverse('manage_questions'),follow=True)
+        self.client.logout()
+        self.assertEqual(resp.status_code,200)
+    
+    def test_redirect_to_login_for_non_admin(self):
+        login = self.client.login(username='testuser2', password="12345")
+        print(login)
+        resp = self.client.get(reverse('manage_questions'),follow=True)
+        self.client.logout()
+        self.assertRedirects(resp, expected_url=reverse('login')+"?next=%2Fapp%2Fmanage_questions%2F", status_code=302, target_status_code=200)
+
+    def test_valid_data(self):
+        login = self.client.login(username='testuser1', password='12345')
+        print(login)
+        resp = self.client.post(reverse('manage_questions'),{
+            "question_text" : "abcd testing",
+            "question_type" : "short",
+            "difficulty" : "easy",
+            "answer" : "abcdef",
+            "grade" : 1,
+            "subject" : 1,
+            "chapter" : 2
+        },follow=True)
+        print(resp.content)
+        self.assertRedirects(resp,expected_url=reverse('menu'),status_code=302,target_status_code=200)

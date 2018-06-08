@@ -14,7 +14,7 @@
                 <h5>{{match.question.question_text}}</h5>
 
                 {% if match.question.image %}
-                <img class="img-fluid mx-auto d-block" src="/{{ match.question.image.url }}"/>
+                <img class="img-fluid" style="object-fit:contain; width:600px; height:400px;" src="/{{ match.question.image.url }}"/>
                 {% endif %}
             
             

@@ -9,12 +9,12 @@
     <div class="col-md-8">
         <ol>
                {% for match in match_list %}
-                <li>
+                <li style="margin:10px 0;">
     
                 <h5>{{match.question.question_text}}</h5>
 
                 {% if match.question.image %}
-                <img class="img-fluid" style="object-fit:contain; width:600px; height:400px;" src="/{{ match.question.image.url }}"/>
+                <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{ match.question.image.url }}"/>
                 {% endif %}
             
             
@@ -53,11 +53,14 @@
     <div class="col-md-8">
         <ol>
 
-    {% for q in list %}
-        <li>{{q.question_text}}
+            {% for q in list %}
+            <li style="margin:10px 0">
+            <h5>{{q.question_text}}</h5>
+
             {% if q.image %}
-                <img class="img-fluid" style="object-fit:contain; width:600px; height:400px;" src="/{{ q.image.url }}"/>
+                <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{ q.image.url }}"/>
             {% endif %}
+
             {% if q_type == "mcq" or q_type == "fb" %}
             <ol type="a">
                 {% for c in q.choice_set.all %}

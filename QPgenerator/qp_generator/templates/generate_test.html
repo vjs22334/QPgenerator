@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <p class="school">{{school.school_name}}</p>
+            <h3 id="school_name"class="school" >{{school.school_name}}</h3>
         </div>
         <div class="col-md-2">
             <div class="form-check">
@@ -31,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="input-group">                
-                <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                <textarea class="form-control" id="instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
             </div>
     
         </div>
@@ -60,7 +60,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="basic-addon1">Time</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="eg:3hrs" aria-label="Username" aria-describedby="basic-addon1" >
+                        <input type="text" id="time" class="form-control" placeholder="eg:3hrs" aria-label="Username" aria-describedby="basic-addon1" >
                       </div>  
                         
                         
@@ -124,6 +124,8 @@
         </div> 
 </div>
 
+<!--All Sections-->
+
 
 <div class= "container-fluid section my-5 px-5 py-3" id="section1">
     <div class="row justify-content-start ">
@@ -134,7 +136,7 @@
 
         <div class="col-md-6 offset-md-2">
             <div class="input-group mb-3 ">
-                <input type="text" class="form-control" placeholder="Section-Heading">
+                <input type="text" class="form-control section_heading" placeholder="Section-Heading">
             </div>
         </div>
 
@@ -147,7 +149,7 @@
     <div class="row justify-content-center ">
         <div class="col-md-8">
             <div class="input-group">
-                <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
             </div>
         </div>
     </div>
@@ -173,7 +175,7 @@
     
             <div class="col-md-6 offset-md-2">
                 <div class="input-group mb-3 ">
-                    <input type="text" class="form-control" placeholder="Section-Heading">
+                    <input type="text" class="form-control section_heading" placeholder="Section-Heading">
                 </div>
             </div>
     
@@ -185,7 +187,7 @@
         <div class="row justify-content-center ">
             <div class="col-md-8">
                 <div class="input-group">
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                    <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
                 </div>
             </div>
         </div>
@@ -210,7 +212,7 @@
     
             <div class="col-md-6 offset-md-2">
                 <div class="input-group mb-3 ">
-                    <input type="text" class="form-control" placeholder="Section-Heading">
+                    <input type="text" class="form-control section_heading" placeholder="Section-Heading">
                 </div>
             </div>
     
@@ -222,7 +224,7 @@
         <div class="row justify-content-center ">
             <div class="col-md-8">
                 <div class="input-group">
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                    <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
                 </div>
             </div>
         </div>
@@ -298,6 +300,16 @@
  var q_type
  var grades
  var section_context
+ var school_name
+ var instruction
+ var instruction1
+ var time
+ var date
+ var heading
+ var heading1
+ var subject
+ var grade
+
 
      
     $(function() {
@@ -360,7 +372,7 @@
     
             <div class="col-md-6 offset-md-2">
                 <div class="input-group mb-3 ">
-                    <input type="text" class="form-control" placeholder="Section-Heading">
+                    <input type="text" class="form-control section_heading" placeholder="Section-Heading">
                 </div>
             </div>
     
@@ -372,8 +384,8 @@
     
         <div class="row justify-content-center ">
             <div class="col-md-8">
-                <div class="input-group">
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Instruction"></textarea>
+                <div class="input-group ">
+                    <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
                 </div>
             </div>
         </div>
@@ -522,7 +534,13 @@
         $("#pdf").click(function(){
             console.log($("#mcq").html());
             console.log($("#paper").html());
-            var questions=$("#section1").find(".questions").html();
+            var questions;
+            school_name=$("#school_name").html()
+            heading=$("#heading").val()
+            grade=$("#class-sel").val()
+            subject=$("#subject-sel").val()
+            time=$("#time").val()
+            date=$("#ex_date").val()
             var htmlString=`
             <!DOCTYPE html>
 <html>
@@ -532,31 +550,31 @@
 </head>
 <body>
 	<div style="border-style:solid;border-color:red;">
-	<h2 style="text-align:center;">St.Vincents High and Technical School</h2>
-	<h4 style="text-align:center;">id-term Examination</h4>
-	<h4 style="text-align:center;">Class-11</h4>
-	<div style="text-align:center;"> Physics </div>
-		<div style="float:left;  "> Time-3hrs</div>
-		<div style="float:right; "> Date :- 25/6/2018</div>
+	<h2 style="text-align:center;">${school_name}</h2>
+	<h4 style="text-align:center;">${heading}</h4>
+	<h4 style="text-align:center;">class-${grade} </h4>
+	<div style="text-align:center;">${subject} </div>
+		<div style="float:left;  "> Time-${time}hrs</div>
+		<div style="float:right; "> Date:${date}</div>
 		<br>
 		<br>
-	<p style="text-align: center;"> Answer any 5 questions from part 1 and 3 questions from part 2 . Please dont cheat in the exam and try to maintain silence in the hall.Thank you for cooperating with us.Hope u do well in the examination.</p>
-</div>
+    <p style="text-align: center;">${instruction} </p>
+    </div>
 <br>
 <br>
-<br>
+<br>`
+$(".section").each(function(){
+questions=$(this).find(".questions").html();
+heading1==$(this).find(".section_heading").val();
+instruction1=$(this).find(".section_instruction").val()
+htmlString = htmlString+`
+<h3 style="text-align:center;">${heading1}</h3>
+		<p style="text-align: center;"> ${instruction1}</p>
+            ${questions}`;
+});
 
-		<h3 style="text-align:center;">Section A</h3>
-		<p style="text-align: center;"> Answer any 5 questions from part 1 and 3 questions from part 2 . Please dont cheat in the exam and try to maintain silence in the hall.Thank you for cooperating with us.Hope u do well in the examination.</p>
-        ${questions}
-
-
-
-
-
-</body>
-</html>
-            `;
+htmlString=htmlString+`</body>
+</html>`;
             $.ajax({
                 dataType: 'native',
                 url : "/app/to_pdf",

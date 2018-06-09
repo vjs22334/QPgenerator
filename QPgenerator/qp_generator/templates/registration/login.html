@@ -1,17 +1,37 @@
 {% extends 'base.html' %}
+{%load static%}
     {% block title %}Login{% endblock %}
-    {% block heading %}LOGIN{% endblock %}
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+    {%endblock%}
     {% block content %}
     {% if messages %}
-        <ul class="messages">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <div class="alert alert-info">
+             <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}
+                 </span>
+            </div>
             {% endfor %}
-        </ul>
+
         {% endif %}
-        <form method="POST">
-            {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container form_container ">
+             <div class="row px-2 my-4">
+                 
+           <img src="{% static 'images/logo.jpeg'%} " class=" img-fluid mx-auto d-block" alt="Logo">
+           </div>
+            <div class="row ">
+                <div class="col-md-6 offset-md-3">    
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% include 'include/render_forms.html' with form=form %}
+                        <button type="Submit" class="btn btn-outline-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     {% endblock %}

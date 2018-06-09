@@ -30,12 +30,12 @@
         {% endfor %}
         {% else %}
             {% if field|widget_type == "select" %}
-                {%render_field field class="is-valid" %}
+                {%render_field field class="is-valid custom-select" %}
             {% else %}
         {% if field|widget_type == "select" %}
-            {% render_field field %}
+            {% render_field field class="custom-select" %}
         {% else %}
-            {% render_field field class="form-control is-valid" %}
+            {% render_field field class="form-control is-valid" placeholder=field.label %}
         {% endif %}
 
     {% endif %}
@@ -43,7 +43,7 @@
     {% endif %}
     {% else %}
         {% if field|widget_type == "select" %}
-            {%render_field field %}
+            {%render_field field  class="custom-select"%}
         {% else %}
             {% render_field field class="form-control" %}
     {% endif %}

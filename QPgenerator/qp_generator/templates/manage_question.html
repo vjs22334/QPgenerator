@@ -9,8 +9,9 @@
     <h2>Add Questions</h2>
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
             {% csrf_token %}
-            {% include 'include/render_forms.html' with form=question_form %}
             {% include 'include/render_forms.html' with form=chapter_form %}
+            {% include 'include/render_forms.html' with form=question_form %}
+            
 
             <button type=submit class="btn btn-primary">save</button>
     </form>

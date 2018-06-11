@@ -14,7 +14,7 @@
 <div class="main">
 <div class="container_fluid form_container my-5 mx-lg-5 px-5 py-3 ">
 <!--School Name-->
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-10">
             <h3 style id="school_name"class="school" >{{school.school_name}}</h3>
         </div>
@@ -52,7 +52,7 @@
         </div>
     </div>
              
-
+<!--Time Subject date-->
 
     <div class="row align-items-center">
         <div class="col-md-4">
@@ -89,6 +89,8 @@
         </div>
     </div>
 
+
+    <!--Instruction-->
     <div class="row justify-content-center">
         <div class="col-md-8">
                 <div class="input-group">
@@ -105,6 +107,9 @@
 
 </div>
 
+
+
+<!--popover content-->
 <div class="d-none popover" id="popover_content">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -294,8 +299,9 @@
 
 {% block scripts %}
 {% load static %}
-<script src="{% static 'js/chained_dropdown.js' %}"></script>
 <script src="{% static 'js/jquery-ajax-native.js' %}"></script>
+<script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
+
 <script>
  var newdata    
  var q_type
@@ -314,39 +320,7 @@
 
      
     $(function() {
-        $.ajax({
-            url:"/app/get_all_subjects",
-            success:function(data){
-                console.log(data);
-                grades=data;
-
-                for(i=0;i<grades.length;i++)
-                {
-                   $("#class-sel").append('<option value="'+grades[i]['id']+'">'+grades[i]['grade']+'</option>')
-                }
-                for(i=0;i<grades[0]['subjects'].length;i++)
-                {
-                   $("#subject-sel").append('<option value="'+grades[0]['subjects'][i]["id"]+'">'+grades[0]['subjects'][i]["name"]+'</option>')
-                }
-
-            }
-
-        })
-
-
-        $("#class-sel").change(function(){
-            var grade = grades.filter(function( obj ) {
-                return obj['grade'] == $("#class-sel").val();
-            })[0];
-            console.log(grade);
-            $("#subject-sel").html('');
-            for(i=0;i<grade['subjects'].length;i++)
-            {
-                $("#subject-sel").append('<option value="'+grade['subjects'][i]["id"]+'">'+grade['subjects'][i]["name"]+'</option>')
-            }
-
-        })
-
+      
 
                   $( "#date_ex" ).datepicker({
                     dateFormat:"yy-mm-dd"

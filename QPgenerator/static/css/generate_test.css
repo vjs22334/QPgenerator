@@ -1,4 +1,14 @@
 
+body{
+	background-image: linear-gradient(blue, white);
+
+}
+select option {
+    margin: 40px;
+    background: rgba(52, 194, 175, 0.3);
+    color: rgb(32, 29, 187);
+    text-shadow: 0 1px 0 rgba(39, 49, 82, 0.4);
+}
 .school{
 	margin:3px;
     min-height: 50px;

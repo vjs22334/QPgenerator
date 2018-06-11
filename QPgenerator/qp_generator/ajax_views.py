@@ -53,6 +53,7 @@ def load_questions(request):
     chapter = models.Chapter.objects.get(id=chapter_id)
     questions = models.Question.objects.filter(chapter=chapter)
     questions = questions.filter(school=request.user.profile.school)
+<<<<<<< HEAD
     new_questions=[]
     for question in questions:
         new_questions.append({
@@ -64,6 +65,8 @@ def load_questions(request):
         })
 
 
+=======
+>>>>>>> e536dafe9e15597517ba75e3a5c76ff27e125213
     return render(request,'ajax/list.html',{
         'questions' : new_questions
     })

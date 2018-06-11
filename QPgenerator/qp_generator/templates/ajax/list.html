@@ -1,11 +1,16 @@
-    <ul class="list-group">
-        {% if questions %}
-        {% for question in questions %}
-            <li class="list-group-item">
-                <a href = "{% url 'update_questions' question.id %}">{{ question.question_text }}</a>
-            </li>
-        {% endfor %}
+
+        {% if questions %}        
+                {% for question in questions %}
+                <tr>
+                    <td><a href = "{% url 'update_questions' question.question_id %}">{{ question.question_text }}</a>
+                    </td>
+                    <td> {{question.question_type}}</td>
+                    <td>{{question.question_diff}}</td>
+                    
+                </tr>
+                {% endfor %}
+        
         {% else %}
         <p>there no questions in this chapter yet</p>
         {% endif %}
-    </ul>
+    

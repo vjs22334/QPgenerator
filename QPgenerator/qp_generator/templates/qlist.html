@@ -1,31 +1,196 @@
 {% extends 'base.html' %}
 {% block title %}search questions{% endblock %}
-{% block heading %}search questions{% endblock %}
-{% block content %}
-    <div class="form" id="search_form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button id = "fetch" >submit</button>
-    </div>
-    <div id="list"></div>
+{% block css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css".3.0/j />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    {% load static %}
 {% endblock %}
+
+
+
+
+{% block content %}
+    <div class="container my-4">
+
+        <div class="row justify-content-center my-4">
+            <h2>Search Questions</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                    </div>
+                    <select class="custom-select" id="class-sel"></select>
+                </div> 
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                    </div>
+                    <select class="custom-select" id="subject-sel"></select>
+                </div> 
+            </div>
+
+            <div class="col-md-4">
+
+                <button type="button" id="show_chapter" class="btn btn-primary">Show Chapters</button>
+            </div>
+
+
+        
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                    <ul class="list-group list1 ">
+                    </ul>     
+            </div>
+            <div class="col-md-6">
+                    <ul class="list-group list2">
+                    </ul>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <div class="container" >
+            <table id="example" class="display">
+                    <thead>
+                    <tr>
+                      <th>Questions</th>
+                      <th>Type</th> 
+                      <th>Difficulty</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+                    </tbody>
+                    <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                     </tfoot>
+            </table>
+
+    </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
 {% block scripts %}
 {% load static %}
-<script src="{% static 'js/chained_dropdown.js' %}"></script>
-<script>
-    
-    $("#fetch").click(function(){
-        $.ajax({
-            url: '/app/load_questions',
-            data: {
-                'chapter' : $('#id_chapter').val()
-            },
-            success: function(data){
-                $("#list").html(data)
-            }
-        });
-    });
 
+<script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
+<script>
+
+    var chapter_names
+    var chapter_ids
+
+    $(function(){
+        $("#example").hide()
+
+
+
+        $("#show_chapter").click(function(){
+            console.log($('#class-sel').val());
+            $.ajax({
+                url: '/app/load_chapters_test',
+                data:{
+                    'grade':$('#class-sel').val(),
+                    'subject':$('#subject-sel').val(),
+                    'type': "mcq",
+                },
+
+                success:function(data){
+                    console.log(data);
+                    chapter_names=data.names;
+                    chapter_ids=data.ids
+                    $('.list1').html('');
+                    $('.list2').html('');
+                    for(i=0;i<chapter_names.length;i++)
+                    {
+                        if(i%2==0)
+                        $('.list1').append(`<a href="#questions" class='list-group-item list-group-item-primary list-group-item-action show_questions' id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
+                        else
+                        $('.list2').append(`<a href="#questions" class='list-group-item list-group-item-secondary list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
+
+                    }
+
+
+
+                }
+            })
+        })
+
+        $(document).on("click", ".show_questions", function(event){
+            console.log($(this).attr('id'));
+
+            $.ajax({
+                url:'/app/load_questions',
+                data:{
+                    'chapter':$(this).attr('id')
+                },
+                success:function(data){
+                    $("#example").show()
+                    console.log(data);
+                    $("#tbody").html(data);
+                    if ( $.fn.dataTable.isDataTable( '#example' ) ) {
+                        $("#example").DataTable().destroy();
+                    }
+                    $('#example').DataTable( {
+                        initComplete: function () {
+                            this.api().columns([1,2]).every( function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                    .appendTo( $(column.footer()).empty() )
+                                    .on( 'change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+                 
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    } );
+                 
+                                column.data().unique().sort().each( function ( d, j ) {
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                } );
+                            } );
+                        }
+                    } );
+                }
+
+            })
+        })
+        
+    });
+    
+   
+
+    
 </script>
 {% endblock %}
 

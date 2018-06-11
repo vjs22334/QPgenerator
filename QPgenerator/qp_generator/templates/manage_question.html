@@ -11,9 +11,15 @@
             {% csrf_token %}
             {% include 'include/render_forms.html' with form=chapter_form %}
             {% include 'include/render_forms.html' with form=question_form %}
-            
+            <div id = "choices">
+                {{ choice_formset.as_p }}
+            </div>
+            <div id = "matches">
+                {{ match_formset.as_p }}
+            </div>
 
-            <button type=submit class="btn btn-primary">save</button>
+            <button type=submit class="btn btn-primary" name="save" value="save">save</button>
+            <button type=submit class="btn btn-primary" name="save_and_add_another" value="save_and_add_another">save and add another</button>
     </form>
 </div>
 
@@ -21,4 +27,27 @@
 {% block scripts %}
 {% load static %}
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
+<script>
+    $(function(){
+        if($("#id_question_type").val() != "Match"){
+            $("#matches").hide()
+        }
+        if($("#id_question_type").val() != "mcq" && $("#id_question_type").val() != "fb"){
+            $("#choices").hide()
+        }            
+        $("#id_question_type").change(function(){
+            if($(this).val() == 'mcq' || $(this).val() == 'fb'){
+                $("#choices").show()
+            }
+            else if($(this).val() == 'Match'){
+                $("#matches").show()
+            }
+            else{
+                $("#choices").hide()                
+                $("#matches").hide()            
+            }
+        });
+    });
+</script>
 {% endblock %}
+

@@ -52,7 +52,7 @@ def load_questions(request):
     chapter_id = request.GET.get('chapter')
     chapter = models.Chapter.objects.get(id=chapter_id)
     questions = models.Question.objects.filter(chapter=chapter)
-    #questions = questions.filter(school=request.user.profile.school)
+    questions = questions.filter(school=request.user.profile.school)
     return render(request,'ajax/list.html',{
         'questions' : questions
     })

@@ -63,12 +63,12 @@ class Question(models.Model):
         ("Tf","true or false"),
         ("Match","match the following")
     )
-    question_text = models.TextField(default="match the following",help_text="Enter the question")
+    question_type = models.CharField(max_length=50, choices=type_choices)
     difficulty = models.CharField(max_length=10, choices=difficulty_choices)
-    question_type = models.CharField(max_length=50, choices=type_choices,default="match the following")
+    question_text = models.TextField()
     chapter = models.ForeignKey(Chapter,on_delete = models.CASCADE)
     answer = models.TextField(null=True,blank = True)
-    image = models.ImageField(upload_to="question",null=True,blank=True)
+    image = models.ImageField(upload_to="question",null=True,blank=True,help_text="200*50 is recommended")
     created_date = models.DateTimeField("created date")
     school = models.ForeignKey(School,on_delete=models.CASCADE)
     def __str__(self):

@@ -113,7 +113,7 @@ def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chap
             "match_formset" : match_formset,
             "action" : action
     })
-
+"""
 @login_required_message
 @user_is_admin
 def manage_choices(request, question_id):
@@ -132,7 +132,7 @@ def manage_choices(request, question_id):
     return render(request,'manage_choices.html',{
             "formset" : formset
         })
-"""
+
 @login_required_message
 @user_is_admin
 def manage_matches(request, question_id):
@@ -147,7 +147,7 @@ def manage_matches(request, question_id):
         formset = MatchFormset(instance=question)
     return render(request,'manage_choices.html',{
             "formset" : formset
-        })
+        })"""
 
 @login_required_message
 def view_questions(request):
@@ -180,7 +180,7 @@ def manage_chapters(request,ch_id=None):
     return render(request,'manage_chapters.html',{
         'ch_form' : ch_form
     })
-"""
+    
 def generate_test(request):
     test_details_form = forms.TestForm()
     school = request.user.profile.school

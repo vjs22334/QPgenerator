@@ -52,9 +52,23 @@ def load_questions(request):
     chapter_id = request.GET.get('chapter')
     chapter = models.Chapter.objects.get(id=chapter_id)
     questions = models.Question.objects.filter(chapter=chapter)
-    #questions = questions.filter(school=request.user.profile.school)
+    questions = questions.filter(school=request.user.profile.school)
+<<<<<<< HEAD
+    new_questions=[]
+    for question in questions:
+        new_questions.append({
+            'question_id':question.id,
+            'question_text':question.question_text[0:100],
+            'question_diff':question.difficulty,
+            'question_type':question.question_type
+
+        })
+
+
+=======
+>>>>>>> e536dafe9e15597517ba75e3a5c76ff27e125213
     return render(request,'ajax/list.html',{
-        'questions' : questions
+        'questions' : new_questions
     })
 
 @login_required_message

@@ -13,8 +13,6 @@ urlpatterns=[
     path('menu/',views.menu,name="menu"),
     path('manage_questions/',views.manage_questions,name="manage_questions"),
     path('<int:grade_id>/<int:subject_id>/<int:chapter_id>/manage_questions/',views.manage_questions,name="manage_questions_autofill"),
-    path('<int:question_id>/manage_choices/', views.manage_choices, name='manage_choices'),
-    path('<int:question_id>/manage_matches/', views.manage_matches, name='manage_matches'),
     path('view_questions/', views.view_questions, name='view_questions'),
     path('load_subjects/', ajax_views.load_subjects, name='load_subjects'),
     path('load_chapters/', ajax_views.load_chapters, name='load_chapters'),
@@ -29,5 +27,4 @@ urlpatterns=[
     path('to_pdf/',ajax_views.to_pdf,name="to_pdf"),
     path('create_chapter/',ajax_views.create_chapter,name="create_chapter"),
     path('get_all_subjects/',ajax_views.get_grades_and_subjects,name="get_all_subjects"),
-
 ]

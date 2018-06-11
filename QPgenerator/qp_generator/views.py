@@ -46,6 +46,8 @@ def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chap
         q = get_object_or_404(models.Question,pk=question_id)  
     else:
         q = None
+    ChoiceFormset = inlineformset_factory(models.Question,models.Choice,fields=("choice_text",),max_num=4,extra=4)
+    MatchFormset = inlineformset_factory(models.Question,models.Match,fields=("question_text","answer_text","image",),max_num=4,extra=4)
     if request.method == 'POST':
         question_form = forms.QuestionForm(request.POST,request.FILES,instance=q)
         chapter_form = forms.QuestionListForm(request.POST)
@@ -54,15 +56,37 @@ def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chap
             question.school = request.user.profile.school
             chapter = chapter_form.cleaned_data.get('chapter').id
             question.chapter_id = chapter
-            question.save()
+
             if question.question_type == 'mcq' or question.question_type == 'fb':
-                return redirect('manage_choices',question_id=question.id)
+                choice_formset = ChoiceFormset(request.POST,request.FILES,instance=question)
+                if choice_formset.is_valid():
+                    question.save()
+                    choice_formset.save()
+                if 'save_and_add_another' in request.POST:
+                    return redirect('manage_questions_autofill',grade_id=question.chapter.grade_id,chapter_id=question.chapter_id,subject_id=question.chapter.subject_id)
+                else:
+                    return redirect('home')
+
             elif question.question_type == 'Match':
-                return redirect('manage_matches',question_id=question.id)
+                match_formset = MatchFormset(request.POST,request.FILES,instance=question)
+                if match_formset.is_valid():
+                    question.save()
+                    match_formset.save()
+                if 'save_and_add_another' in request.POST:
+                    return redirect('manage_questions_autofill',grade_id=question.chapter.grade_id,chapter_id=question.chapter_id,subject_id=question.chapter.subject_id)
+                else:
+                    return redirect('home')
+
             else:
-                return redirect('menu')
+                question.save()
+                if 'save_and_add_another' in request.POST:
+                    return redirect('manage_questions_autofill',grade_id=question.chapter.grade_id,chapter_id=question.chapter_id,subject_id=question.chapter.subject_id)
+                else:
+                    return redirect('home')
     else:
         question_form = forms.QuestionForm(instance=q)
+        choice_formset = ChoiceFormset(instance=q)
+        match_formset =MatchFormset(instance=q)
         if not q:
             if grade_id and chapter_id and subject_id:
                 chapter_form = forms.QuestionListForm({
@@ -85,9 +109,11 @@ def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chap
     return render(request,'manage_question.html',{
             "question_form" : question_form,
             "chapter_form" : chapter_form,
+            "choice_formset" : choice_formset,
+            "match_formset" : match_formset,
             "action" : action
     })
-
+"""
 @login_required_message
 @user_is_admin
 def manage_choices(request, question_id):
@@ -121,7 +147,7 @@ def manage_matches(request, question_id):
         formset = MatchFormset(instance=question)
     return render(request,'manage_choices.html',{
             "formset" : formset
-        })
+        })"""
 
 @login_required_message
 def view_questions(request):
@@ -154,7 +180,7 @@ def manage_chapters(request,ch_id=None):
     return render(request,'manage_chapters.html',{
         'ch_form' : ch_form
     })
-
+    
 def generate_test(request):
     test_details_form = forms.TestForm()
     school = request.user.profile.school

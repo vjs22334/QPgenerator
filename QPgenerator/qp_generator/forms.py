@@ -28,24 +28,24 @@ class QuestionForm(forms.ModelForm):
         exclude = ('created_date','school','chapter')
 
 class QuestionListForm(forms.Form):
-    grade=forms.ModelChoiceField(queryset=models.Grade.objects.all())
+    grade=forms.ModelChoiceField(queryset=models.Grade.objects.order_by("grade_name"))
     subject=forms.ModelChoiceField(queryset=models.Subject.objects.none())
     chapter=forms.ModelChoiceField(queryset=models.Chapter.objects.none())
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        self.fields.initial = ""
         if 'grade' in self.data:
             try:
                 grade_id = int(self.data.get('grade'))
-                self.fields['subject'].queryset = models.Subject.objects.filter(grade_id=grade_id)
+                self.fields['subject'].queryset = models.Subject.objects.filter(grade_id=grade_id).order_by("subject_name")
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         
         if 'subject' in self.data:
             try:
                 subject_id = int(self.data.get('subject'))
-                self.fields['chapter'].queryset = models.Chapter.objects.filter(subject_id=subject_id)
+                self.fields['chapter'].queryset = models.Chapter.objects.filter(subject_id=subject_id).order_by("ch_name")
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
 
@@ -59,15 +59,16 @@ class ChapterForm(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super(ChapterForm,self).__init__(*args,**kwargs)
+        self.fields["grade"].initial = ""
         self.fields['subject'].queryset = models.Subject.objects.none()
         if 'grade' in self.data:
             try:
                 grade_id = int(self.data.get('grade'))
-                self.fields['subject'].queryset = models.Subject.objects.filter(grade_id=grade_id)
+                self.fields['subject'].queryset = models.Subject.objects.filter(grade_id=grade_id).order_by("grade_name")
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
-            self.fields['subject'].queryset = self.instance.grade.subject_set.all()
+            self.fields['subject'].queryset = self.instance.grade.subject_set.order_by("subject_name")
             self.fields['subject'].initial = self.instance.subject.id
         
 class TestForm(forms.Form):

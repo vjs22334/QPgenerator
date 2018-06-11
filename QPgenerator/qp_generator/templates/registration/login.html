@@ -29,7 +29,7 @@
                     <form method="POST">
                         {% csrf_token %}
                         {% include 'include/render_forms.html' with form=form %}
-                        <button type="Submit" class="btn btn-outline-primary">Login</button>
+                        <button type="Submit" class="btn btn-outline-primary" id="login">Login</button>
                     </form>
                 </div>
             </div>

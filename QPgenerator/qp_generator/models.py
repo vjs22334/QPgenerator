@@ -63,7 +63,7 @@ class Question(models.Model):
         ("Tf","true or false"),
         ("Match","match the following")
     )
-    question_text = models.TextField(default="match the following")
+    question_text = models.TextField(default="match the following",help_text="Enter the question")
     difficulty = models.CharField(max_length=10, choices=difficulty_choices)
     question_type = models.CharField(max_length=50, choices=type_choices,default="match the following")
     chapter = models.ForeignKey(Chapter,on_delete = models.CASCADE)

@@ -2,11 +2,16 @@
 {% block title %}SIGNUP{% endblock %}
 {% block heading %}SIGNUP{% endblock %}
 {% block content %}
+<div class="container form_container ">
+       <div class="row ">
+           <div class="col-md-6 offset-md-3">
     <form method="POST">
         {% csrf_token %}
-        {{ user_form }}
-        {{ profile_form }}
+        {% include 'include/render_forms.html' with form=user_form %}
+        {% include 'include/render_forms.html' with form=profile_form %}
         <button type=submit>Sign up</button>
     </form>
-
+    </div>
+    </div>
+    </div>
 {% endblock %}

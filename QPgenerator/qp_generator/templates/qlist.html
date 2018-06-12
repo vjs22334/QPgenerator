@@ -71,9 +71,10 @@
         </div>
 
         <div class="d-flex flex-row-reverse">
-
+            {%if isadmin %}
+                <a type="button" href="{% url 'edit_chapters' %}" id="edit_chapter" class="btn btn-primary">Edit Chapters</a>
             <button type="button" id="add_chapters" class="btn btn-primary">Add Chapters</button>
-
+            {%endif%}
         </div>  
     </div>
 
@@ -141,6 +142,7 @@
     $(function(){
         $("#example").hide()
         $("#add_chapters").hide();
+        $("#edit_chapter").hide();
 
 
 function showChapter(){
@@ -176,11 +178,12 @@ function showChapter(){
             console.log($('#class-sel').val());
             showChapter();
             $("#add_chapters").show();
+            $("#edit_chapter").show();
         })
 
 
         //popover function
-        
+
         $("body").popover({
             html: true, 
             title : 'Enter Chapter Name<a href="#" class="close" data-dismiss="alert">&times;</a>',

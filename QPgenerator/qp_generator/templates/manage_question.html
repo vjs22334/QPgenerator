@@ -6,7 +6,10 @@
 {% endblock %}
 {% block content %}
 <div class = "container form_container">
-    <h2>Add Questions</h2>
+    <h2>Add/Edit Questions</h2>
+    {% if question %}
+    <button type="button" class="btn btn-danger delete" id="{{question.id}}" value="delete">delete this question</button>
+    {% endif %}
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'include/render_forms.html' with form=chapter_form %}
@@ -18,10 +21,11 @@
                 {{ match_formset.as_p }}
             </div>
 
-            <button type=submit class="btn btn-primary" name="save" value="save">save</button>
-            <button type=submit class="btn btn-primary" name="save_and_add_another" value="save_and_add_another">save and add another</button>
-    </form>
+            <button type="submit" class="btn btn-primary" name="save" value="save">save</button>
+            <button type="submit" class="btn btn-primary" name="save_and_add_another" value="save_and_add_another">save and add another</button>
+        </form>
 </div>
+
 
 {% endblock %}
 {% block scripts %}
@@ -47,7 +51,30 @@
                 $("#matches").hide()            
             }
         });
+   });
+</script>
+{% if question %}
+<script>
+    $(function(){
+        $(".delete").click(function(){
+            $.ajax({
+                url : "/app/delete_question",
+                data : {
+                    "q_id":$(this).attr('id'),
+                },
+                success:function(data){
+                    if(data.status_code==200){
+                        alert("deleted")
+                        window.location.replace("/app/view_questions")
+                    }
+                    else{
+                        alert("something went wrong")
+                    }
+                }
+            });
+        });
     });
 </script>
+{% endif %}
 {% endblock %}
 

@@ -18,70 +18,103 @@
             
 
     </head>
-    <body>
+    <body style="padding-top: 70px">
         <header>
          <!--Navbar-->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-            <!-- Navbar Container -->
-            <div class="container">
-        
-                <!-- Navbar Header [contains both toggle button and navbar brand] -->
-                <div class="navbar-header">
-                    <!-- Toggle Button [handles opening navbar components on mobile screens]-->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
-                        <i class="glyphicon glyphicon-align-center"></i>
+         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="container">
+                    <h1 class="pb-2 ml-md-0 ml-sm-3 ml-0 mr-3"><a href="#"><i class="fa fa-envelope-o fa-lg mt-3" aria-hidden="true"></i></a></h1>
+                    <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
-        
-                    <!-- Navbar Brand -->
-                    <a href="#" class="navbar-brand">
-                        Bootstrap Navbar
-                    </a>
+                    <div class="collapse navbar-collapse flex-column align-items-start ml-lg-2 ml-0" id="navbarCollapse">
+
+
+                        </ul>
+                        <ul class="navbar-nav  ml-auto">
+
+
+                            {%if user.is_authenticated %}
+
+                            <li clas="nav-item">
+                                <p class="navbar-text" style="margin-bottom: 0; ">Welcome {{ user.username }} </p>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Log out</a>
+                            </li>
+
+
+                            {%else%}
+                            
+                            <li clas="nav-item">
+                                    <p class="navbar-text">Not signed in </p>
+                                </li>
+
+
+                            <li class="nav-item">
+                                    <a class="nav-link" href="#">Sign in</a>
+                            </li>
+
+                            {%endif%}
+                            
+                            <li class="nav-item">
+                                    <a class="nav-link" href="#">Sign up</a>
+                                </li>
+                        </ul>
+
+
+
+
+                        <ul class="navbar-nav flex-row mb-md-1 mt-md-0 mb-3 mt-2 ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item active">
+                                    <a class="nav-link" href="#">About us</a>
+                                </li>
+                                <li class="nav-item dropdown active">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                          Chapters
+                                        </a>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="{% url 'edit_chapters'%}">View chapters</a>
+                                          <a class="dropdown-item" href="#">add chapters</a>
+                                        </div>
+                                      </li>
+
+                                      <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                              Questions
+                                            </a>
+                                            <div class="dropdown-menu">
+                                              <a class="dropdown-item" href="#">Add Questions</a>
+                                              <a class="dropdown-item" href="#">Edit Questions</a>
+                                            
+                                            </div>
+                                          </li>
+
+                                          <li class="nav-item dropdown active">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                                 Test Papers
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                  <a class="dropdown-item" href="#">Generate test paper</a>
+                                                  <a class="dropdown-item" href="#">View generated papers</a>
+                                                
+                                                </div>
+                                              </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Pricing</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Contact us</a>
+                            </li>
+                            
+                       
+                    </div>
                 </div>
-        
-        
-                <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
-                <div class="collapse navbar-collapse" id="exampleNavComponents">
-        
-                    <!-- Navbar Menu -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active">
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                        <!-- Navbar link with a dropdown menu -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- Navbar Button -->
-                    
-        
-                    <!-- Navbar Text -->
-                    {% if user.is_authenticated %}
-        <p class="navbar-text">welcome {{ user.username }}</p>
-        <a href = {% url 'logout' %}><button type="button" class="btn btn-default navbar-btn">Logout</button></a>
-    {% else %}
-        <p class = "navbar-text">not logged in</p>
-        <a href = {% url 'login' %}><button type="button" class="btn btn-default navbar-btn">Sign in</button></a>
-    {% endif %}
-        
-                </div>
-            </div>
-        </nav>
+            </nav>
+            
         
 </header>
         <h2>{% block heading %}

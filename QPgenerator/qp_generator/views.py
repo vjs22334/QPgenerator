@@ -153,8 +153,13 @@ def manage_matches(request, question_id):
 @login_required_message
 def view_questions(request):
     form = forms.QuestionListForm()
+    role = request.user.profile.role
+    if role == 'admin':
+        isadmin = True
+    else:
+        isadmin = False
     return render(request,'qlist.html',{
-        "form" : form 
+        "isadmin":isadmin
     })
 
 @login_required_message

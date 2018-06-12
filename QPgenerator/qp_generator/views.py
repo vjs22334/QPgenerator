@@ -191,3 +191,6 @@ def generate_test(request):
 
 def view_papers(request):
     return render(request,'view_papers.html')
+
+def edit_chapters(request):
+    return render(request,'edit_chapters.html')

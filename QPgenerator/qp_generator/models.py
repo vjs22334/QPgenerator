@@ -101,6 +101,7 @@ class Paper(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     file_path = models.CharField(max_length=200)
     file_name = models.CharField(max_length=200)
+    date = models.CharField(max_length=30)
 
 
     def __str__(self):

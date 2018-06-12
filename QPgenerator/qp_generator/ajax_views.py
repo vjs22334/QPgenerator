@@ -215,10 +215,11 @@ def to_pdf(request):
     subject = models.Subject.objects.get(id=subject_id)
     heading = request.GET.get('heading')
     school = request.user.profile.school
+    date = request.GET.get('date')
 
     fs = FileSystemStorage(path.join(MEDIA_ROOT,'tmp/'))
     with fs.open(filename) as pdf:
-        paper = models.Paper.objects.create(heading=heading,grade=grade,subject=subject,school=school,file_path=file_path,file_name=filename)
+        paper = models.Paper.objects.create(heading=heading,grade=grade,subject=subject,school=school,file_path=file_path,file_name=filename,date=date)
         if paper:
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
@@ -275,6 +276,7 @@ def get_grades_and_subjects(request):
         })
     return JsonResponse(data,safe=False)
 
+@login_required_message
 def get_papers(request):
     grade_id = request.GET.get("grade")
     subject_id = request.GET.get("subject")
@@ -293,13 +295,15 @@ def get_papers(request):
             resp_data.append({
                 "id" : paper.id,
                 "heading" : paper.heading,
-                "created_date" : newdate
+                "created_date" : newdate,
+                "date" : paper.date
             })
     else:
         resp_data = "404"
     
     return JsonResponse(resp_data,safe=False)
 
+@login_required_message
 def get_paper_pdf(request):
     paper_id = request.GET.get('id')
     paper = models.Paper.objects.get(id=paper_id)

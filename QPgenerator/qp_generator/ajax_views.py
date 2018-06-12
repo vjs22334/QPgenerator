@@ -224,7 +224,7 @@ def create_chapter(request):
     subject_id = request.GET.get("subject")
     grade_id = request.GET.get("grade")
     ch_name = request.GET.get("ch_name")
-    subject = models.Subject.get(id=subject_id)
+    subject = models.Subject.objects.get(id=subject_id)
     grade = models.Grade.objects.get(id=grade_id)
     if subject in grade.subject_set.all():
         chapter = models.Chapter.objects.create(ch_name=ch_name,school=request.user.profile.school,grade=grade,subject=subject)
@@ -240,7 +240,7 @@ def create_chapter(request):
             }
     else:
         data={
-            "sucess" : False,
+            "success" : False,
             "status_code" : 422,
         }
 

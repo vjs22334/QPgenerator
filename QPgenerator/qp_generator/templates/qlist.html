@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}search questions{% endblock %}
 {% block css %}
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css".3.0/j />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-    {% load static %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/qlist.css' %}"
+    
 {% endblock %}
 
 
 
 
 {% block content %}
+
+<!--Grade and Class select box-->
     <div class="container my-4">
 
         <div class="row justify-content-center my-4">
@@ -31,15 +36,16 @@
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                        <label class="input-group-text" for="inputGroupSelect01">Subject</label>
                     </div>
                     <select class="custom-select" id="subject-sel"></select>
                 </div> 
             </div>
 
             <div class="col-md-4">
-
+                    <div class="d-flex justify-content-center">
                 <button type="button" id="show_chapter" class="btn btn-primary">Show Chapters</button>
+                    </div>
             </div>
 
 
@@ -47,7 +53,11 @@
         </div>
     </div>
 
-    <div class="container">
+
+
+
+        <!--chapters list -->
+    <div class="container my-4">
         <div class="row justify-content-center">
             <div class="col-md-6">
                     <ul class="list-group list1 ">
@@ -60,9 +70,29 @@
 
             
         </div>
+
+        <div class="d-flex flex-row-reverse">
+
+            <button type="button" id="add_chapters" class="btn btn-primary">Add Chapters</button>
+
+        </div>  
     </div>
 
-    <div class="container" >
+
+    <!--popover content-->
+    <div class="d-none popover" data-trigger="focus"  id="popover_content">
+            <div class="input-group mb-3">
+                    <input type="text" class="form-control chapter_name" placeholder="Chapter Name">
+                    <button type="button" class="btn btn-primary" id="add_chapter" data-toggle="modal" data-target="#exampleModal">
+                            Add Chapter
+                    </button>
+            </div>
+
+    </div>
+    
+
+    <!--Display Questions-->
+    <div class="container my-5" >
             <table id="example" class="display">
                     <thead>
                     <tr>
@@ -71,6 +101,7 @@
                       <th>Difficulty</th>
                     </tr>
                     </thead>
+
                     <tbody id="tbody">
 
                     </tbody>
@@ -100,47 +131,92 @@
 
 
 {% block scripts %}
-{% load static %}
+
 
 <script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
 <script>
 
     var chapter_names
     var chapter_ids
-
+    var c_name
     $(function(){
         $("#example").hide()
+        $("#add_chapters").hide();
+
+
+function showChapter(){
+    $.ajax({
+        url: '/app/load_chapters_test',
+        data:{
+            'grade':$('#class-sel').val(),
+            'subject':$('#subject-sel').val(),
+            'type': "mcq",
+        },
+
+        success:function(data){
+            console.log(data);
+            chapter_names=data.names;
+            chapter_ids=data.ids
+            $('.list1').html('');
+            $('.list2').html('');
+            for(i=0;i<chapter_names.length;i++)
+            {
+                if(i%2==0)
+                $('.list1').append(`<a href="#questions" class='list-group-item list-group-item-primary list-group-item-action show_questions' id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
+                else
+                $('.list2').append(`<a href="#questions" class='list-group-item list-group-item-secondary list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
+
+            }
 
 
 
+        }
+    })
+}
         $("#show_chapter").click(function(){
             console.log($('#class-sel').val());
-            $.ajax({
-                url: '/app/load_chapters_test',
-                data:{
-                    'grade':$('#class-sel').val(),
-                    'subject':$('#subject-sel').val(),
-                    'type': "mcq",
+            showChapter();
+            $("#add_chapters").show();
+        })
+
+        $("body").popover({
+            html: true, 
+            title : 'Enter Chapter Name<a href="#" class="close" data-dismiss="alert">&times;</a>',
+            content: function() {
+                   
+                    return $('#popover_content').html();
                 },
+            selector: "#add_chapters"
+        });
+        $(document).on("click", ".popover .close" , function(){
+            $(this).parents(".popover").popover('hide');
+        });
 
-                success:function(data){
-                    console.log(data);
-                    chapter_names=data.names;
-                    chapter_ids=data.ids
-                    $('.list1').html('');
-                    $('.list2').html('');
-                    for(i=0;i<chapter_names.length;i++)
-                    {
-                        if(i%2==0)
-                        $('.list1').append(`<a href="#questions" class='list-group-item list-group-item-primary list-group-item-action show_questions' id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
-                        else
-                        $('.list2').append(`<a href="#questions" class='list-group-item list-group-item-secondary list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
-
-                    }
+        
 
 
+        $(document).on("click", "#add_chapter", function(event){
+            c_name=$(".popover-body").find(".chapter_name").val();
+            console.log(c_name);
+            $.ajax({
+              url: '/app/create_chapter',
+              data: {
+                  "ch_name":c_name,
+                  "subject":$('#subject-sel').val(),
+                  "grade":$('#class-sel').val()
 
-                }
+                
+              },
+              success:function(data){
+                  if(data.status_code==200)
+                  showChapter();
+                  else
+                  alert("Chapter not added properly");
+
+
+
+              }
+
             })
         })
 
@@ -155,10 +231,11 @@
                 success:function(data){
                     $("#example").show()
                     console.log(data);
-                    $("#tbody").html(data);
                     if ( $.fn.dataTable.isDataTable( '#example' ) ) {
                         $("#example").DataTable().destroy();
                     }
+                    $("#tbody").html('');
+                    $("#tbody").html(data);
                     $('#example').DataTable( {
                         initComplete: function () {
                             this.api().columns([1,2]).every( function () {

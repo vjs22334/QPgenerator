@@ -1,7 +1,7 @@
 import os
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Question,Subject,Grade,Chapter,Choice,Match,School,Profile
+from .models import Question,Subject,Grade,Chapter,Choice,Match,School,Profile,Paper
 from django.contrib.auth.models import User
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
@@ -47,6 +47,8 @@ admin.site.register(Choice)
 admin.site.register(Match)
 admin.site.register(School)
 admin.site.register(Profile)
+admin.site.register(Paper)
+
 
 
 # Register your models here.

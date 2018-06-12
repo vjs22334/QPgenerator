@@ -27,4 +27,7 @@ urlpatterns=[
     path('to_pdf/',ajax_views.to_pdf,name="to_pdf"),
     path('create_chapter/',ajax_views.create_chapter,name="create_chapter"),
     path('get_all_subjects/',ajax_views.get_grades_and_subjects,name="get_all_subjects"),
+    path('view_papers/',views.view_papers,name="view_papers"),
+    path('get_papers/',ajax_views.get_papers,name="get_papers"),
+    path('get_paper_pdf/',ajax_views.get_paper_pdf,name="get_paper_pdf"),
 ]

@@ -188,3 +188,6 @@ def generate_test(request):
         'test_details_form' : test_details_form,
         'school' : school,
     })
+
+def view_papers(request):
+    return render(request,'view_papers.html')

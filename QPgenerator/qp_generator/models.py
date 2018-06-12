@@ -95,11 +95,17 @@ class Match(models.Model):
 
 class Paper(models.Model):
     heading = models.CharField(max_length=100)
-    academic_year = models.CharField(max_length=100)
+    created_date = models.DateTimeField("created date")
     grade = models.ForeignKey(Grade,on_delete=models.CASCADE)
     school = models.ForeignKey(School,on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     file_path = models.CharField(max_length=200)
+    file_name = models.CharField(max_length=200)
+
 
     def __str__(self):
-        return self.heading+"\n"+self.academic_year
+        return self.heading
+    def save(self,*args,**kwargs):
+        if not self.id:
+            self.created_date = timezone.now()
+        return super(Paper,self).save(*args,**kwargs)

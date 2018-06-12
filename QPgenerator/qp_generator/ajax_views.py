@@ -206,17 +206,25 @@ def to_pdf(request):
     html_string = request.GET.get("html_data")
     html = HTML(string=html_string,base_url=request.build_absolute_uri())
     filename = 'Qpaper'+str(timezone.now())+'.pdf'
+    file_path = path.join(MEDIA_ROOT,'tmp/')
     absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
     html.write_pdf(target=absolute_path)
+    grade_id = request.GET.get("grade")
+    subject_id = request.GET.get("subject")
+    grade = models.Grade.objects.get(id=grade_id)
+    subject = models.Subject.objects.get(id=subject_id)
+    heading = request.GET.get('heading')
+    school = request.user.profile.school
 
     fs = FileSystemStorage(path.join(MEDIA_ROOT,'tmp/'))
     with fs.open(filename) as pdf:
-        #models.Paper.objects.create(heading=heading,year=year,academic_year=year,grade=grade,subject=subject,school=school,file_path=absolute_path)
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
-        return response
+        paper = models.Paper.objects.create(heading=heading,grade=grade,subject=subject,school=school,file_path=file_path,file_name=filename)
+        if paper:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+            return response
 
-    return response
+    return HttpResponse(status="500")
 
 @login_required_message
 @user_is_admin
@@ -266,3 +274,41 @@ def get_grades_and_subjects(request):
             "subjects" : subjects
         })
     return JsonResponse(data,safe=False)
+
+def get_papers(request):
+    grade_id = request.GET.get("grade")
+    subject_id = request.GET.get("subject")
+    grade = models.Grade.objects.get(id=grade_id)
+    subject = models.Subject.objects.get(id=subject_id)
+    school = request.user.profile.school
+    paper_list = models.Paper.objects.filter(school = school,grade=grade,subject=subject)
+    #import pdb; pdb.set_trace()
+    if paper_list: 
+        resp_data = []
+        for paper in paper_list:
+            date=str(paper.created_date)[0:10]
+            newdate=date[8:10]
+            newdate+=date[4:8]
+            newdate+=date[0:4]
+            resp_data.append({
+                "id" : paper.id,
+                "heading" : paper.heading,
+                "created_date" : newdate
+            })
+    else:
+        resp_data = "404"
+    
+    return JsonResponse(resp_data,safe=False)
+
+def get_paper_pdf(request):
+    paper_id = request.GET.get('id')
+    paper = models.Paper.objects.get(id=paper_id)
+    if paper:
+        fs = FileSystemStorage(paper.file_path)
+        with fs.open(paper.file_name) as pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+            return response
+    else:
+        return HttpResponse(status=404)
+

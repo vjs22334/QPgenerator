@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block title %}search questions{% endblock %}
+{% block css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css".3.0/j />
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    {% load static %}
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="container my-4">
+
+        <div class="row justify-content-center my-4">
+            <h2>Search Papers</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                    </div>
+                    <select class="custom-select" id="class-sel"></select>
+                </div> 
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                    </div>
+                    <select class="custom-select" id="subject-sel"></select>
+                </div> 
+            </div>
+
+            <div class="col-md-4">
+
+                <button type="button" id="show_papers" class="btn btn-primary">Show Papers</button>
+            </div>
+
+
+        
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>heading</th>
+                                <th>created date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="papers_tbody">
+
+                        </tbody>
+                    </table>    
+            </div>
+
+            
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% block scripts %}
+{% load static %}
+
+<script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
+<script src="{% static 'js/jquery-ajax-native.js' %}"></script>
+<script>
+
+    var papers;
+
+    $(function(){
+
+
+
+        $("#show_papers").click(function(){
+            $.ajax({
+                url: '/app/get_papers',
+                data:{
+                    'grade':$('#class-sel').val(),
+                    'subject':$('#subject-sel').val(),
+                },
+
+                success:function(data){
+                    console.log(data);
+                    if(data != 404)
+                    papers=data;
+                    $('#papers_tbody').html('');
+                    for(i=0;i<papers.length;i++)
+                    {
+                        $('#papers_tbody').append(`<tr>
+                        <td class = 'get_paper' id="${papers[i].id}"><a>${papers[i].heading}</a></td>
+                        <td class = 'get_paper' id="${papers[i].id}"><a>${papers[i].created_date}</a></td>
+                        </tr>`)
+
+                    }
+
+
+
+                }
+            })
+        })
+
+        $(document).on("click", ".get_paper", function(event){
+            console.log($(this).attr('id'));
+            $.ajax({
+                dataType: 'native',
+                url : "/app/get_paper_pdf",
+                data : {
+                    "id":$(this).attr('id'),
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(blob){
+                    console.log(blob.size);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    link.download="question_paper_" + new Date() + ".pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                }
+
+            
+        })
+        })
+        
+    });
+    
+   
+
+    
+</script>
+{% endblock %}

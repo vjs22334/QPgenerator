@@ -560,7 +560,12 @@ console.log(htmlString);
             $.ajax({
                 dataType: 'native',
                 url : "/app/to_pdf",
-                data : {"html_data" : htmlString},
+                data : {
+                    "html_data" : htmlString,
+                    "heading" : heading,
+                    "grade" : $("#class-sel option:selected").val(),
+                    "subject" : $("#subject-sel option:selected").val()
+                },
                 xhrFields: {
                     responseType: 'blob'
                 },

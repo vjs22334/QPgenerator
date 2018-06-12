@@ -111,7 +111,8 @@ def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chap
             "chapter_form" : chapter_form,
             "choice_formset" : choice_formset,
             "match_formset" : match_formset,
-            "action" : action
+            "action" : action,
+            "question" : q
     })
 """
 @login_required_message

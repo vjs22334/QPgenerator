@@ -30,4 +30,6 @@ urlpatterns=[
     path('view_papers/',views.view_papers,name="view_papers"),
     path('get_papers/',ajax_views.get_papers,name="get_papers"),
     path('get_paper_pdf/',ajax_views.get_paper_pdf,name="get_paper_pdf"),
+    path('delete_question/',ajax_views.delete_question,name="delete_question"),
+    path('delete_chapter/',ajax_views.delete_chapter,name="delete_chapter"),
 ]

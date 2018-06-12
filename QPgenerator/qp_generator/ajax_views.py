@@ -316,15 +316,15 @@ def get_paper_pdf(request):
 @user_is_admin
 def delete_chapter(request):
     chapter_id = request.GET.get('ch_id')
-    chapter = models.Chapter.get(id=chapter_id)
+    chapter = models.Chapter.objects.get(id=chapter_id)
     if chapter:
         chapter.delete()
         resp ={
-            "status_code" = 200
+            "status_code" : 200
         }
     else:
         resp = {
-            "status_code" = 404
+            "status_code" : 404
         }
     return JsonResponse(resp)
 
@@ -332,15 +332,15 @@ def delete_chapter(request):
 @user_is_admin
 def delete_question(request):
     question_id = request.GET.get('q_id')
-    question = models.Question.get(id=question_id)
+    question = models.Question.objects.get(id=question_id)
     if question:
         question.delete()
         resp ={
-            "status_code" = 200
+            "status_code" : 200
         }
     else:
         resp = {
-            "status_code" = 404
+            "status_code" : 404
         }
     return JsonResponse(resp)
     

@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Add chapters{% endblock %}
-{% block heading %}Add chapters{% endblock %}
 {% block content %}
+
+    <br>
+    <br>
+    <div class="container">
+    <div class="row justify-content-center my-5">
+        <h3>Update Question</h3>
+        
+    </div>
+    <div class="row justify-content-center">
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ ch_form.as_p}}
-        <button type=submit>save</button>
+        <button type=submit class="btn btn-primary">save</button>
     </form>
+    </div>
+    </div>
 
 {% endblock %}
 {% block scripts %}{% load static %}

@@ -13,6 +13,21 @@ body {
     background: #fff;
 }
 
+.dropdown-menu a:hover {
+    background-color: #dcce;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+.navbar a:hover, .dropdown:hover  {
+    background-color: red;
+}
+
+
+
+
+
 /* LINKS */
 
 a:link, a:visited {

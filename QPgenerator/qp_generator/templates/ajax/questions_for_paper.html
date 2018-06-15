@@ -58,7 +58,11 @@
             <h5>{{q.question_text}}</h5>
 
             {% if q.image %}
+<<<<<<< HEAD
                 <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{ q.image.url }}"/>
+=======
+                <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{q.image.url }}"/>
+>>>>>>> 6e38343a19f433754c5b1b97387067920798149f
             {% endif %}
 
             {% if q_type == "mcq" or q_type == "fb" %}

@@ -6,3 +6,4 @@ QPgenerator/.coverage
 # ignore media files
 **/media
 
+QPgenerator.zip

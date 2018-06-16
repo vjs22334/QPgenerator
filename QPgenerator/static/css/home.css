@@ -17,3 +17,9 @@
 .logo {
     font-size: 200px;
 }
+
+.carousel-item {
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+}

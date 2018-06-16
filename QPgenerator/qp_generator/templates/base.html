@@ -5,9 +5,11 @@
         {% endblock %}
     </title>
     <head>
+            {% load static %}
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="{% static 'css/bootstrap.css' %} " >
+            <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -22,6 +24,10 @@
         <header>
          <!--Navbar-->
          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="#">
+                        <img src="{% static 'images/logo_header.png'%}" alt="Logo" style="width:200px;">
+                      </a>
+                                   
                 <div class="container">
                     <h1 class="pb-2 ml-md-0 ml-sm-3 ml-0 mr-3"><a href="#"><i class="fa fa-envelope-o fa-lg mt-3" aria-hidden="true"></i></a></h1>
                     <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarCollapse">

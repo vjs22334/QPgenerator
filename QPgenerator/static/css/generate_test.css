@@ -1,14 +1,83 @@
+#heading{
+	font-family: 'Song Myung', serif;
+	font-size: 125%;
+	text-align: center;
+	font-weight: bold;
+}
+.section_heading{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	text-align:center;
+}
 
+.section_instruction{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	text-align:center;
+}
+
+#date_ex{
+
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+}
 select option {
     margin: 40px;
-    background: rgba(52, 194, 175, 0.3);
-    color: rgb(32, 29, 187);
-    text-shadow: 0 1px 0 rgba(39, 49, 82, 0.4);
+    background: rgb(27, 26, 26);
+    color: rgb(229, 227, 231);
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+
+#popover_content{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+
+
+}
+
+#table_heading{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+
+}
+#sexy{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+}
+
+#type_select{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+
+}
+#class-sel{
+
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+}
+#subject-sel{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
 }
 .school{
-	margin:3px;
-    min-height: 50px;
+	font-family: 'Song Myung', serif;
 	text-align:center;
+	color: black;
 }	
 .heading{
     background-color:teal;
@@ -17,30 +86,28 @@ select option {
 	text-align:center;
 }	
 
-.time{
-    margin:3px;
-    background-color:rosybrown;
+#time{
+	font-family: 'Song Myung', serif;
+   font-weight: bold;
+	text-align:center;
 
-	min-height: 30px;
-	text-align:center;
-}	
-.class{
-    background-color: blueviolet;
-	margin:3px;
-	min-height: 30px;
-	text-align:center;
-}	
-.date{
-    background-color: aqua;
-	margin:3px;
-	min-height: 30px;
-	text-align:center;
 }	
 
+#date{
+	
+	font-family: Georgia;
+	font-weight: bold;
+	 text-align:center;
 
-.instruction{
-    min-height: 100px;
-    background-color: aqua;
+}
+	
+	
+
+
+#instruction{
+	font-family: 'Song Myung', serif;
+   font-weight: bold;
+   text-align: center;
 }
 
 ::-webkit-input-placeholder {

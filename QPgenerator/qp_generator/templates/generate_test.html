@@ -7,12 +7,10 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/generate_test.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet">
 
 
     <style>
-    body{
-        background-image: url("{% static 'images/download.jpeg'%}") ;
-    }
     
     </style>
 {% endblock %}
@@ -25,7 +23,7 @@
 <div class="container_fluid form_container my-5 mx-lg-5 px-5 py-3 ">
 <!--School Name-->
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8 offset-md-2">
             <h3 style id="school_name"class="school" >{{school.school_name}}</h3>
         </div>
         <div class="col-md-2">
@@ -41,7 +39,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="input-group">                
-                <textarea class="form-control" id="heading" aria-label="With textarea" placeholder="Heading"></textarea>
+                <textarea class="form-control" id="heading" aria-label="With textarea" placeholder="Exam Heading"></textarea>
             </div>
     
         </div>
@@ -92,7 +90,7 @@
         <div class="col-md-4">
                 <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">date</span>
+                          <span class="input-group-text" id="basic-addon1">Date</span>
                         </div>
                         <input type="text" id="date_ex" class="form-control" placeholder="dd/mm/yyyy" aria-label="Username" aria-describedby="basic-addon1">
                       </div> 
@@ -105,17 +103,23 @@
         <div class="col-md-8">
                 <div class="input-group">
                     
-                        <textarea class="form-control" id="instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
+                        <textarea class="form-control" id="instruction" aria-label="With textarea" placeholder="Instructions"></textarea>
                       </div>
 
         </div>
 
     </div>
+
+    
+   
+
         
 
           
 
 </div>
+
+<hr style="display:block;border-width:5px;boder-style:inset;">
 
 
 
@@ -126,14 +130,14 @@
                     <label class="input-group-text" for="inputGroupSelect01">Type</label>
                 </div>
                 <select class="custom-select" id="type_select">
-                    <option value="mcq">Multiple choice questions</option>
+                    <option value="mcq" id="sexy">Multiple choice questions</option>
                     <option value="short">Short Answers</option>
                     <option value="long">Long</option>
                     <option value="Tf">True or False</option>
                     <option value="Match">Match the following</option>
                 </select>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" id="modal_trigger" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-info" id="modal_trigger" data-toggle="modal" data-target="#exampleModal">
                 Add
                 </button>
         
@@ -146,18 +150,18 @@
 <div class= "container-fluid section my-5 px-5 py-3" id="section1">
     <div class="row justify-content-start ">
 
-        <div class="col-md-1">
-            Section
+        <div  class="col-md-1">
+         <h5 id="Section1">Section_1</h5>
         </div>
 
         <div class="col-md-6 offset-md-2">
             <div class="input-group mb-3 ">
-                <input type="text" class="form-control section_heading" placeholder="Section-Heading">
+                <input type="text" class="form-control section_heading" placeholder="Section Heading">
             </div>
         </div>
 
         <div class="col-md-2 offset-md-1">
-                <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>   
+                <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>   
         </div>
 
     </div>
@@ -165,7 +169,7 @@
     <div class="row justify-content-center ">
         <div class="col-md-8">
             <div class="input-group">
-                <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
+                <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instructions"></textarea>
             </div>
         </div>
     </div>
@@ -173,7 +177,7 @@
             <div class="col-md-12">
                 <div class="questions border border-primary">
                 <br><br>
-                <h6 class="text-center">No Questions Added</h6>
+                <h4 class="text-center">No Questions Added</h4>
                 <br><br><br>
                 </div>
             </div>
@@ -181,22 +185,25 @@
 
 </div>
 
+<hr style="display:block;border-width:5px;boder-style:inset;">
+
+
       
 <div class= "container-fluid section  my-5 px-5 py-3">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-                Section
+              <h5 id="Section2">  Section_2 </h5>
             </div>
     
             <div class="col-md-6 offset-md-2">
                 <div class="input-group mb-3 ">
-                    <input type="text" class="form-control section_heading" placeholder="Section-Heading">
+                    <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
             <div class="col-md-2 offset-md-1">
-                    <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
+                    <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
     
@@ -211,7 +218,7 @@
                 <div class="col-md-12">
                     <div class="questions border border-primary">
                     <br><br>
-                    <h6 class="text-center">No Questions Added</h6>
+                    <h4 class="text-center">No Questions Added</h4>
                     <br><br><br>
                     </div>
                 </div>
@@ -219,21 +226,24 @@
     
 </div>
 
+<hr style="display:block;border-width:5px;boder-style:inset;">
+
+
 <div class= "container-fluid section my-5 px-5 py-3">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-                Section
+              <h5 id="Section3">  Section_3</h5>
             </div>
     
             <div class="col-md-6 offset-md-2">
                 <div class="input-group mb-3 ">
-                    <input type="text" class="form-control section_heading" placeholder="Section-Heading">
+                    <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
             <div class="col-md-2 offset-md-1">
-                    <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
+                    <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
     
@@ -248,13 +258,16 @@
                 <div class="col-md-12">
                     <div class="questions border border-primary">
                     <br><br>
-                    <h6 class="text-center">No Questions Added</h6>
+                    <h4 class="text-center">No Questions Added</h4>
                     <br><br><br>
                     </div>
                 </div>
             </div>
     
 </div>
+
+<hr style="display:block;border-width:5px;boder-style:inset;">
+
     
 
     
@@ -264,8 +277,8 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
 
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <div class="modal-header" style="background-color:rgb(138, 226, 219)";>
+                <h5 style="color:rgb(29, 29, 109) ; font-weight:bold;font-family:'Song Myung', serif;"class="modal-title" id="exampleModalLabel">Enter number of questions required in each chapter</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -284,7 +297,7 @@
                 </div>
 
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"id="add">Add</button>
+                <button type="button" class="btn btn-info"id="add">Add</button>
                 </div>
 
             </div>
@@ -300,7 +313,10 @@
 
 
 
-<button id="pdf">export to pdf</button>
+<button id="pdf" class="btn btn-info" style="float:right;">export to pdf</button>
+<br>
+<br>
+
 
 {% endblock %}
 
@@ -313,6 +329,9 @@
 <script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
 
 <script>
+
+
+ // variables   
  var newdata    
  var q_type
  var grades
@@ -326,15 +345,18 @@
  var heading1
  var subject
  var grade
+ var c=4
 
 
      
     $(function() {
       
-
+                // date-picker function
                   $( "#date_ex" ).datepicker({
                     dateFormat:"yy-mm-dd"
                   });
+
+                  //popover function
 
                   $("body").popover({
                     html: true, 
@@ -346,23 +368,25 @@
                     selector: ".add_popover"
                 });
 
+                //add section function
+
                 $("#add_section").click(function(){
                     $(".main").append(`
                     <div class= "container-fluid section my-5 px-5">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-                Section
+             <h5 id="Section${c}">   Section_${c} </h5> 
             </div>
     
             <div class="col-md-6 offset-md-2">
                 <div class="input-group mb-3 ">
-                    <input type="text" class="form-control section_heading" placeholder="Section-Heading">
+                    <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
             <div class="col-md-2 offset-md-1">
-                <a tabindex="0" role="button" class="btn btn-outline-secondary add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a> 
+                <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a> 
             </div>
     
         </div>
@@ -370,7 +394,7 @@
         <div class="row justify-content-center ">
             <div class="col-md-8">
                 <div class="input-group ">
-                    <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instruction"></textarea>
+                    <textarea class="form-control section_instruction" aria-label="With textarea" placeholder="Instructions"></textarea>
                 </div>
             </div>
         </div>
@@ -378,7 +402,7 @@
                 <div class="col-md-12">
                     <div class="questions border border-primary">
                     <br><br>
-                    <h6 class="text-center">No Questions Added</h6>
+                    <h4 class="text-center">No Questions Added</h4>
                     <br><br><br>
                     </div>
                 </div>
@@ -388,9 +412,17 @@
     
 </div>
 
+<hr style="display:block;border-width:5px;boder-style:inset;">
+
+
                     `)
 
+                    c++;
+
                 });
+
+
+                //hide answer function
 
                 $("#hide_ans").click(function(){
                     if($(this).is(':checked'))
@@ -406,12 +438,19 @@
 
 
 
+
         $(document).on("click", "#modal_trigger", function(event){
             q_type=$(".popover-body").find("select").val();
             console.log(q_type);
             fetch_chapters()
             $(this).parents(".popover").popover('hide');
             });
+
+
+
+
+
+
             function fetch_chapters(){
                 grade_id = $("#class-sel").val()
                 
@@ -430,24 +469,27 @@
                         console.log(data);
                         newdata=data
                         $("#modal-content").html(
-                            `<div class="container table-responsive">
-                            <table  id= "table1" class="table table-sm">
-                                    <tr >
-                                        <th>Chapter name</th>
-                                        <th>easy questions</th>
-                                        <th>medium questions</th>
-                                        <th>tough questions</th>
+                            `<div class="container table-responsive ">
+                            <table  id= "table1" class="table table-sm thead-dark">
+                                <thead class="thead-dark">
+                                    <tr id="table_heading"  >
+                                            <th scope="col">#</th>
+                                        <th align="center">Chapter</th>
+                                        <th align="center" >Easy Questions</th>
+                                        <th align="center">Medium Questions</th>
+                                        <th align="center">Tough Questions</th>
                                     </tr>
-                                
+                                </thead>
                                 </table> 
                             </div>
                             `
                         )
                         for (i = 0; i < data.ids.length; i++) {                        
-                            $("#table1").append(` <tr>
+                            $("#table1").append(` <tr align="center">
+                                    <th scope="col">${i+1}</th>
                                 <td>${data.names[i]}</td>
-                                <td>${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
-                                <td>${data.medium[i]} <input type="text" default=0 id="medium${i}"></td>
+                                <td >${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
+                                 <td style="float:left; clear:none" ><div>${data.medium[i]}</div> <div><input type="text" default=0 id="medium${i}"></div> </td>
                                 <td>${data.hard[i]} <input type="text" default=0 id="hard${i}"></td>
                                 </tr>`);
                             
@@ -459,7 +501,14 @@
                     }
                 });
                 
-        }
+             }
+
+
+
+
+
+
+
       
         $(document).on("click", "#add", function(event){
             var a=[];
@@ -515,6 +564,9 @@
                 }   
             });
         });
+
+
+
       
         $("#pdf").click(function(){
             console.log($("#mcq").html());
@@ -529,40 +581,50 @@
             instruction=$("#instruction").val()
             var htmlString=`
             <!DOCTYPE html>
-<html>
-<head>
-	<title>queation paper
-	</title>
-</head>
-<body>
-	<div style="border-style:solid;border-color:red;">
-	<h2 style="text-align:center;">${school_name}</h2>
-	<h4 style="text-align:center;">${heading}</h4>
-	<h4 style="text-align:center;">class-${grade} </h4>
-	<div style="text-align:center;">${subject} </div>
-		<div style="float:left;  "> Time-${time}hrs</div>
-		<div style="float:right; "> Date:${date}</div>
-		<br>
-		<br>
-    <p style="text-align: center;">${instruction} </p>
-    </div>
-<br>
-<br>
-<br>`
-$(".section").each(function(){
-questions=$(this).find(".questions").html();
-console.log($(this).find(".questions").find('.text-center').html());
-if($(this).find(".questions").find('.text-center').html()=="No Questions Added")
-{   console.log("returned");
-    return;
-}
-heading1=$(this).find(".section_heading").val();
-instruction1=$(this).find(".section_instruction").val()
-htmlString = htmlString+`
-<h3 style="text-align:center;">${heading1}</h3>
-		<p style="text-align: center;"> ${instruction1}</p>
-            ${questions}`;
-});
+            <html>
+            <head>
+	        <title>queation paper
+	        </title>
+            </head>
+            <body>
+                <div style="border-style:solid;border-color:red;">
+                <h2 style="text-align:center;">${school_name}</h2>
+                <h4 style="text-align:center;">${heading}</h4>
+                <h4 style="text-align:center;">class-${grade} </h4>
+                <div style="text-align:center;">${subject} </div>
+                    <div style="float:left;  "> Time-${time}hrs</div>
+                    <div style="float:right; "> Date:${date}</div>
+                    <br>
+                    <br>
+                <p style="text-align: center;">${instruction} </p>
+                </div>
+                <br>
+                <br>
+                <br>`
+
+
+
+
+
+
+
+            $(".section").each(function(){
+            questions=$(this).find(".questions").html();
+            console.log($(this).find(".questions").find('.text-center').html());
+            if($(this).find(".questions").find('.text-center').html()=="No Questions Added")
+            {   console.log("returned");
+                return;
+            }
+            heading1=$(this).find(".section_heading").val();
+            instruction1=$(this).find(".section_instruction").val()
+            htmlString = htmlString+`
+            <h3 style="text-align:center;">${heading1}</h3>
+                    <p style="text-align: center;"> ${instruction1}</p>
+                        ${questions}`;
+            });
+
+
+
 
 htmlString=htmlString+`</body>
 </html>`;

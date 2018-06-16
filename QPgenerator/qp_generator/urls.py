@@ -1,5 +1,5 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path,re_path
 from . import views,ajax_views
 from QPgenerator import settings
 
@@ -32,4 +32,8 @@ urlpatterns=[
     path('edit_chapters/',views.edit_chapters, name="edit_chapters"),
     path('delete_question/',ajax_views.delete_question,name="delete_question"),
     path('delete_chapter/',ajax_views.delete_chapter,name="delete_chapter"),
+    path('forgot_password/',views.forgot_password,name="forgot_password"),
+    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.activate,name='activate'),
+    re_path(r'^reset_password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.reset_password,name='reset_password'),
+
 ]

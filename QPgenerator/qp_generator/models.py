@@ -15,6 +15,7 @@ class Profile(models.Model):
         ("admin","admin"),
         ("teacher","teacher")
     )
+    email_confirmed = models.BooleanField(default = False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School,on_delete=models.CASCADE)
     role = models.CharField(max_length=50,choices=roles)

@@ -2,11 +2,21 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes
 from django.http import HttpResponse
+from django.utils.http import urlsafe_base64_encode
 from . import forms
 from . import models
+from .tokens import account_activation_token
 from .decorator import user_passes_test_message,login_required_message,user_is_admin
 from django.forms import modelformset_factory,inlineformset_factory
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
+from .tokens import account_activation_token,password_reset_token
+from django.template.loader import render_to_string
+from django.contrib.auth.models import User
+
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -15,15 +25,26 @@ def signup(request):
         user_form = forms.SignupForm(request.POST)
         profile_form = forms.ProfileForm(request.POST)
         if user_form.is_valid():
-            user = user_form.save()
+            user = user_form.save(commit=False)
+            user.is_active = False
+            user.save()
             user.refresh_from_db()
             profile_form = forms.ProfileForm(request.POST,instance=user.profile)
             profile_form.full_clean()
             profile_form.save()
-            username = user_form.cleaned_data.get('username')
+            """username = user_form.cleaned_data.get('username')
             raw_password = user_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            login(request, user)"""
+            current_site = get_current_site(request)
+            subject = 'Activate Your MySite Account'
+            message = render_to_string('email/account_activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
             return redirect('home')
     else:
         user_form = forms.SignupForm()
@@ -186,7 +207,8 @@ def manage_chapters(request,ch_id=None):
     return render(request,'manage_chapters.html',{
         'ch_form' : ch_form
     })
-    
+
+@login_required_message    
 def generate_test(request):
     test_details_form = forms.TestForm()
     school = request.user.profile.school
@@ -195,8 +217,81 @@ def generate_test(request):
         'school' : school,
     })
 
+@login_required_message
 def view_papers(request):
     return render(request,'view_papers.html')
 
+@login_required_message
+@user_is_admin
 def edit_chapters(request):
     return render(request,'edit_chapters.html')
+
+def activate(request,uidb64,token):
+    #import pdb; pdb.set_trace()
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(ValueError,TypeError,OverflowError,User.DoesNotExist):
+        user = None
+    
+    if user is not None and account_activation_token.check_token(user,token):
+        user.is_active = True
+        user.profile.email_confirmed = True
+        user.save()
+        login(request,user)      
+        return redirect('home')
+    else:
+        return HttpResponse('invalid token')  
+
+def forgot_password(request):
+    error_message = None
+    if request.method == "POST":
+        form = forms.PasswordResetUsernameForm(request.POST)
+        if form.is_valid():
+            try:
+                username = form.cleaned_data['username'] 
+                user = None
+                user = User.objects.get(username=username)
+                current_site = get_current_site(request)
+                subject = 'password reset for qp_gen account'
+                message = render_to_string('email/password_reset_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                    'token': password_reset_token.make_token(user),
+                })
+                user.email_user(subject, message)
+                return render(request,'registration/password_reset_email_sent.html')
+            except(ValueError,OverflowError,TypeError,User.DoesNotExist):
+                error_message = "username does not exist"
+    else:
+        form = forms.PasswordResetUsernameForm()
+    return render(request,'registration/forgot_password.html',{
+            'form' : form,
+            'error_message' : error_message
+    })
+
+
+def reset_password(request,uidb64,token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(ValueError,TypeError,OverflowError,user.DoesNotExist):
+        user = None
+    
+    if user is not None and password_reset_token.check_token(user,token):
+        if request.method == "POST":
+            password_reset_form = forms.PasswordResetForm(request.POST)
+            if password_reset_form.is_valid():
+                newPassword = password_reset_form.cleaned_data['new_password2']
+                user.set_password(newPassword)
+                user.save()
+                return render(request,'registration/password_reset_success.html')
+        else:
+            password_reset_form = forms.PasswordResetForm()
+        return render(request,'registration/reset_password.html',{
+            'form':password_reset_form
+        })
+    else:
+        return HttpResponse("invalid token")
+

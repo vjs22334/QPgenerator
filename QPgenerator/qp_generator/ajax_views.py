@@ -128,7 +128,7 @@ class MatchQuestion():
     def merge(self):
         self.q_and_a_list = []
         for i in range(len(self.q_list)):
-            self.q_and_a_list.append((self.q_list[i].question_text,self.a_list[i][0]))
+            self.q_and_a_list.append((self.q_list[i].question_text,self.a_list[i][0],self.q_list[i]))
 
 
 @login_required_message

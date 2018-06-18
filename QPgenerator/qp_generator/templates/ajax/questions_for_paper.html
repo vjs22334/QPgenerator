@@ -20,10 +20,15 @@
             
                     <ol type="a">
                     {% for m in match.q_and_a_list %}
-            
+                        {% if m.2.image %}
+                        <li>
+                            <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{m.2.image.url }}"/> --- {{m.1}}
+                        </li>
+                        {% else %}
                         <li>
                             {{m.0}}  ---  {{m.1}}
                         </li>
+                        {% endif %}
                     {% endfor %}
                     </ol>
                     

@@ -4,10 +4,7 @@
     height: 500px;
     padding: 100px 25px;
 }
-.vertical-align {
-    display: flex;
-    align-items: center;
-}
+
 .bg-grey{
     background-color: rgb(132, 139, 139)
 }
@@ -18,8 +15,8 @@
     font-size: 200px;
 }
 
-.carousel-item {
-    height: 100vh;
-    background-size: cover;
-    background-position: center center;
-}
+.carousel-caption {
+    position: absolute;
+    top:-40px
+ }
+

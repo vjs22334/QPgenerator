@@ -11,7 +11,7 @@
 
 
     <style>
-    
+           
     </style>
 {% endblock %}
 
@@ -485,9 +485,9 @@
                             `
                         )
                         for (i = 0; i < data.ids.length; i++) {                        
-                            $("#table1").append(` <tr align="center">
+                            $("#table1").append(` <tr align="center" id="chpt_name">
                                     <th scope="col">${i+1}</th>
-                                <td>${data.names[i]}</td>
+                                <td >${data.names[i]}</td>
                                 <td >${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
                                  <td style="float:left; clear:none" ><div>${data.medium[i]}</div> <div><input type="text" default=0 id="medium${i}"></div> </td>
                                 <td>${data.hard[i]} <input type="text" default=0 id="hard${i}"></td>

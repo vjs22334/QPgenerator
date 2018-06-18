@@ -5,7 +5,9 @@
 
     <style>
             body{
-                background-image: url("{% static 'images/signin1.jpg'%}");
+                background-image: url("{% static 'images/login8.jpg'%}");
+                background-repeat: no-repeat;
+                background-size:cover;
                 
             }
     </style>
@@ -29,14 +31,14 @@
         <div class="container form_container ">
              <div class="row px-2 my-4">
                  
-           <img src="{% static 'images/logo.jpeg'%} " class=" img-fluid mx-auto d-block" alt="Logo">
+           <img src="{% static 'images/logo_header.png'%} " class=" img-fluid mx-auto d-block" alt="Logo">
            </div>
             <div class="row ">
                 <div class="col-md-6 offset-md-3">    
                     <form method="POST">
                         {% csrf_token %}
                         {% include 'include/render_forms.html' with form=form %}
-                        <button type="Submit" class="btn btn-outline-primary" id="login">Login</button>
+                        <button type="Submit" class="btn btn-info" id="login">Login</button>
                     </form>
                 </div>
             </div>

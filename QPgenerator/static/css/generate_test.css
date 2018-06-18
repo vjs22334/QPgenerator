@@ -4,6 +4,8 @@
 	text-align: center;
 	font-weight: bold;
 }
+
+
 .section_heading{
 	font-family: 'Song Myung', serif;
 	font-weight: bold;
@@ -15,7 +17,12 @@
 	font-weight: bold;
 	text-align:center;
 }
+#chpt_name{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
 
+}
 #date_ex{
 
 	font-family: 'Song Myung', serif;

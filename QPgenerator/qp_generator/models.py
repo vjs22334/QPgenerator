@@ -7,7 +7,7 @@ class School(models.Model):
     school_name = models.CharField(max_length=200,unique=True)
     address = models.TextField()
     max_grade = models.IntegerField()
-
+    password = models.CharField(max_length = 100)
     def __str__(self):
         return self.school_name
 class Profile(models.Model):
@@ -18,7 +18,7 @@ class Profile(models.Model):
     email_confirmed = models.BooleanField(default = False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     school = models.ForeignKey(School,on_delete=models.CASCADE)
-    role = models.CharField(max_length=50,choices=roles)
+    role = models.CharField(max_length=50,choices=roles,default="teacher")
 
     def __str__(self):
         return self.user.username

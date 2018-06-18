@@ -9,18 +9,36 @@ class SignupForm(UserCreationForm):
     last_name = forms.CharField(max_length=30, required=False)
     email = forms.EmailField(max_length=254)
 
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['password1', 'password2']:
+            self.fields[fieldname].help_text = None
 
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
-        help_texts={
-            'password': None
-        }
+
 
 class ProfileForm(forms.ModelForm):
+    school_password = forms.CharField(max_length = 100, label = "School Password",widget = forms.PasswordInput)
+    
+    def clean_school_password(self):
+        #import pdb; pdb.set_trace()
+        password1 = self.cleaned_data.get('school_password')
+        school = self.cleaned_data.get('school')
+        password2 = school.password
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    ('wrong school or password'),
+                    code='password_mismatch',
+                    )
+        return password1
+
     class Meta:
         model = models.Profile
-        fields = ('school','role')
+        fields = ('school',)
 
 class QuestionForm(forms.ModelForm):
     class Meta:

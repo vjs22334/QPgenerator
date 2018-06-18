@@ -24,7 +24,7 @@ def signup(request):
     if request.method == 'POST':
         user_form = forms.SignupForm(request.POST)
         profile_form = forms.ProfileForm(request.POST)
-        if user_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.is_active = False
             user.save()

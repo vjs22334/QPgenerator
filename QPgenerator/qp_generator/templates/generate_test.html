@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/generate_test.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet">
 
 
     <style>
@@ -559,8 +558,11 @@
                     
                 success: function(data){
                     console.log(data);
-                    section_context.parents(".section").find(".questions").html(data)
-
+                    $question_section = section_context.parents(".section").find(".questions")
+                    $question_section.html(data)
+                    $('html, body').animate({
+                        scrollTop: $question_section.offset().top - 300
+                    }, 1000);
                 }   
             });
         });

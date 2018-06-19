@@ -81,7 +81,7 @@
 {% endblock %}
 
 {% block scripts %}
-     
+<script src="{% static 'js/ajax_setup.js' %}"></script>
 <script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
 
 <script>
@@ -90,7 +90,7 @@
  
 function showChapter(){
     $.ajax({
-        url: '/app/load_chapters_test',
+        url: '{% url "load_chapters_test" %}',
         data:{
             'grade':$('#class-sel').val(),
             'subject':$('#subject-sel').val(),
@@ -136,7 +136,8 @@ function showChapter(){
 
  $(document).on("click","#delete",function(event){
     $.ajax({
-        url:'/app/delete_chapter',
+        type:'POST',
+        url:'{% url "delete_chapter" %}',
         data:{
            'ch_id':chapter_id,
         },

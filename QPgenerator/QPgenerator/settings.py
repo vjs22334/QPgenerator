@@ -138,3 +138,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'vjs122334@gmail.com'
 EMAIL_HOST_PASSWORD = '!nfern@pe'
 EMAIL_PORT = 587
+

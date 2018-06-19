@@ -8,10 +8,12 @@ from .decorator import user_passes_test_message,login_required_message,user_is_a
 from random import randrange,shuffle
 import json
 from django.core.files.storage import FileSystemStorage
-from weasyprint import HTML
+from weasyprint import HTML,CSS
 from QPgenerator.settings import MEDIA_ROOT
 from os import path
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
+from django.conf import settings
 @login_required_message
 #@user_is_admin
 def load_subjects(request):
@@ -204,11 +206,12 @@ def randList(sample,k):
 @login_required_message
 def to_pdf(request):
     html_string = request.GET.get("html_data")
-    html = HTML(string=html_string,base_url=request.build_absolute_uri())
+    html = HTML(string=html_string,base_url=request.build_absolute_uri()
+    )
     filename = 'Qpaper'+str(timezone.now())+'.pdf'
     file_path = path.join(MEDIA_ROOT,'tmp/')
     absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
-    html.write_pdf(target=absolute_path)
+    html.write_pdf(target=absolute_path,stylesheets=[CSS(''),])
     grade_id = request.GET.get("grade")
     subject_id = request.GET.get("subject")
     grade = models.Grade.objects.get(id=grade_id)
@@ -229,10 +232,11 @@ def to_pdf(request):
 
 @login_required_message
 @user_is_admin
+@require_http_methods(['POST',])
 def create_chapter(request):
-    subject_id = request.GET.get("subject")
-    grade_id = request.GET.get("grade")
-    ch_name = request.GET.get("ch_name")
+    subject_id = request.POST.get("subject")
+    grade_id = request.POST.get("grade")
+    ch_name = request.POST.get("ch_name")
     subject = models.Subject.objects.get(id=subject_id)
     grade = models.Grade.objects.get(id=grade_id)
     if subject in grade.subject_set.all():
@@ -318,8 +322,9 @@ def get_paper_pdf(request):
 
 @login_required_message
 @user_is_admin
+@require_http_methods(["POST",])
 def delete_chapter(request):
-    chapter_id = request.GET.get('ch_id')
+    chapter_id = request.POST.get('ch_id')
     chapter = models.Chapter.objects.get(id=chapter_id)
     if chapter:
         chapter.delete()
@@ -334,8 +339,9 @@ def delete_chapter(request):
 
 @login_required_message
 @user_is_admin
+@require_http_methods(["POST",])
 def delete_question(request):
-    question_id = request.GET.get('q_id')
+    question_id = request.POST.get('q_id')
     question = models.Question.objects.get(id=question_id)
     if question:
         question.delete()

@@ -550,7 +550,7 @@
                 console.log(subject_id)
                 console.log(q_type)
                 $.ajax({
-                    url: "/app/load_chapters_test",
+                url: "{% url 'load_chapters_test' %}",
                     data: {
                         "grade" : grade_id,
                         "subject" : subject_id,
@@ -676,7 +676,7 @@
                     
                     $question_section = section_context.parents(".section").find(".questions")
                     $question_section.html(data)
-                    marks_string=""+totalquestions+"X"+mpq+"="+totalmarks
+                    marks_string=""+totalquestions+" x "+mpq+"="+totalmarks+" marks"
                     $question_section.find(".section_marks").html(marks_string)
                     $('html, body').animate({
                         scrollTop: $question_section.offset().top - 300
@@ -685,8 +685,8 @@
             });
         });
 
-
-
+        
+            var full_marks=0;
       
         $("#pdf").click(function(){
             console.log($("#mcq").html());
@@ -699,6 +699,9 @@
             time=$("#time").val()
             date=$("#date_ex").val()
             instruction=$("#instruction").val()
+            $(".section").each(function(){
+                full_marks= full_marks+parseInt($(this).attr("marks"));
+            })
             var htmlString=`
             <!DOCTYPE html>
             <html>
@@ -711,7 +714,8 @@
                 <h2 style="text-align:center;">${school_name}</h2>
                 <h4 style="text-align:center;">${heading}</h4>
                 <h4 style="text-align:center;">class-${grade} </h4>
-                <div style="text-align:center;">${subject} </div>
+                <h4 style="text-align:center;">${subject} </h4>
+                <div style="text-align:center;">${full_marks} marks </div>
                     <div style="float:left;  "> Time-${time}</div>
                     <div style="float:right; "> Date:${date}</div>
                     <br>
@@ -720,6 +724,7 @@
                  
                     <hr style="border-width:2px;">   
                 <p style="text-align: center;">${instruction} </p>
+                    <hr style="border-width:2px;">   
                
                 <br>
                 <br>
@@ -730,9 +735,9 @@
 
 
 
-                var full_marks=0;
+                
             $(".section").each(function(){
-                full_marks= full_marks+parseInt($(this).attr("marks"));
+                
             questions=$(this).find(".questions").html();
             console.log($(this).find(".questions").find('.text-center').html());
             if($(this).find(".questions").find('.text-center').html()=="No Questions Added")

@@ -15,7 +15,7 @@
 
 {% block content %}
 
-<!--Grade and Class select box-->
+<!-- Grade and Class select box -->
     <div class="container my-5">
 
         <div class="row justify-content-center my-4">
@@ -133,6 +133,7 @@
 {% block scripts %}
 
 
+<script src="{% static 'js/ajax_setup.js' %}"></script>
 <script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
 <script>
 
@@ -147,7 +148,7 @@
 
 function showChapter(){
     $.ajax({
-        url: '/app/load_chapters_test',
+        url: '{% url "load_chapters_test" %}',
         data:{
             'grade':$('#class-sel').val(),
             'subject':$('#subject-sel').val(),
@@ -204,7 +205,8 @@ function showChapter(){
             c_name=$(".popover-body").find(".chapter_name").val();
             console.log(c_name);
             $.ajax({
-              url: '/app/create_chapter',
+              type : 'POST',
+              url: '{% url "create_chapter" %}',
               data: {
                   "ch_name":c_name,
                   "subject":$('#subject-sel').val(),
@@ -229,7 +231,7 @@ function showChapter(){
             console.log($(this).attr('id'));
 
             $.ajax({
-                url:'/app/load_questions',
+                url:'{% url "load_questions" %}',
                 data:{
                     'chapter':$(this).attr('id')
                 },

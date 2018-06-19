@@ -15,7 +15,7 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">                      
             <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet">
-
+            <link rel="stylesheet" href="{% static 'css/base.css' %}">
             {% block css %}
             {% endblock %}
             
@@ -139,15 +139,22 @@
                 </div>
             </nav>
             
-        
-</header>
+           
+
+
+            </header>
         <h2>{% block heading %}
             {% endblock %}
         </h2>
         <main>
             {% block content %}
             {% endblock %}
-        </main>
+
+        
+            
+             
+               
+                </main>
             {% block scripts %}
             {% endblock %}
             <script>

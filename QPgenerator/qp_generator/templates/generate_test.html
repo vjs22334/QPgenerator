@@ -459,7 +459,7 @@
                 console.log(subject_id)
                 console.log(q_type)
                 $.ajax({
-                    url: "/app/load_chapters_test",
+                url: "{% url 'load_chapters_tests' %}",
                     data: {
                         "grade" : grade_id,
                         "subject" : subject_id,

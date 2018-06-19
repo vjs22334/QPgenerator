@@ -56,11 +56,13 @@
    });
 </script>
 {% if question %}
+<script src="{% static 'js/ajax_setup.js' %}"></script>
 <script>
     $(function(){
         $(".delete").click(function(){
             $.ajax({
-                url : "/app/delete_question",
+                type : "POST",
+                url : "{% url 'delete_question' %}",
                 data : {
                     "q_id":$(this).attr('id'),
                 },

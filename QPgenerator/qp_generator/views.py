@@ -196,7 +196,10 @@ def manage_chapters(request,ch_id=None):
             ch = ch_form.save(commit=False)
             ch.school = request.user.profile.school
             ch.save()
-            return redirect('menu')
+            if 'save_and_add_another' in request.POST:
+                return redirect('manage_chapters')
+            else:
+                return redirect('edit_chapters')
     else:
         if c:
             action = reverse('update_chapters',args=[ch_id])
@@ -205,7 +208,8 @@ def manage_chapters(request,ch_id=None):
         ch_form = forms.ChapterForm(instance=c)
         #import pdb; pdb.set_trace()
     return render(request,'manage_chapters.html',{
-        'ch_form' : ch_form
+        'ch_form' : ch_form,
+        'chapter' : c
     })
 
 @login_required_message    

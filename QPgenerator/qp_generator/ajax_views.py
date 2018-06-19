@@ -12,6 +12,7 @@ from weasyprint import HTML
 from QPgenerator.settings import MEDIA_ROOT
 from os import path
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
 @login_required_message
 #@user_is_admin
 def load_subjects(request):
@@ -229,10 +230,11 @@ def to_pdf(request):
 
 @login_required_message
 @user_is_admin
+@require_http_methods(['POST',])
 def create_chapter(request):
-    subject_id = request.GET.get("subject")
-    grade_id = request.GET.get("grade")
-    ch_name = request.GET.get("ch_name")
+    subject_id = request.POST.get("subject")
+    grade_id = request.POST.get("grade")
+    ch_name = request.POST.get("ch_name")
     subject = models.Subject.objects.get(id=subject_id)
     grade = models.Grade.objects.get(id=grade_id)
     if subject in grade.subject_set.all():
@@ -318,8 +320,9 @@ def get_paper_pdf(request):
 
 @login_required_message
 @user_is_admin
+@require_http_methods(["POST",])
 def delete_chapter(request):
-    chapter_id = request.GET.get('ch_id')
+    chapter_id = request.POST.get('ch_id')
     chapter = models.Chapter.objects.get(id=chapter_id)
     if chapter:
         chapter.delete()
@@ -334,8 +337,9 @@ def delete_chapter(request):
 
 @login_required_message
 @user_is_admin
+@require_http_methods(["POST",])
 def delete_question(request):
-    question_id = request.GET.get('q_id')
+    question_id = request.POST.get('q_id')
     question = models.Question.objects.get(id=question_id)
     if question:
         question.delete()

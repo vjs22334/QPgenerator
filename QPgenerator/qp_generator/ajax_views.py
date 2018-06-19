@@ -8,11 +8,12 @@ from .decorator import user_passes_test_message,login_required_message,user_is_a
 from random import randrange,shuffle
 import json
 from django.core.files.storage import FileSystemStorage
-from weasyprint import HTML
+from weasyprint import HTML,CSS
 from QPgenerator.settings import MEDIA_ROOT
 from os import path
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods
+from django.conf import settings
 @login_required_message
 #@user_is_admin
 def load_subjects(request):
@@ -205,11 +206,12 @@ def randList(sample,k):
 @login_required_message
 def to_pdf(request):
     html_string = request.GET.get("html_data")
-    html = HTML(string=html_string,base_url=request.build_absolute_uri())
+    html = HTML(string=html_string,base_url=request.build_absolute_uri()
+    )
     filename = 'Qpaper'+str(timezone.now())+'.pdf'
     file_path = path.join(MEDIA_ROOT,'tmp/')
     absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
-    html.write_pdf(target=absolute_path)
+    html.write_pdf(target=absolute_path,stylesheets=[CSS(''),])
     grade_id = request.GET.get("grade")
     subject_id = request.GET.get("subject")
     grade = models.Grade.objects.get(id=grade_id)

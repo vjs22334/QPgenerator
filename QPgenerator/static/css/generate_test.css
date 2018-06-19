@@ -5,6 +5,13 @@
 	font-weight: bold;
 }
 
+#show_sections{
+	position: -webkit-sticky; /* Safari */
+    position: fixed;
+	top: 230px;
+	
+	
+}
 .section_heading{
 	font-family: 'Song Myung', serif;
 	font-weight: bold;

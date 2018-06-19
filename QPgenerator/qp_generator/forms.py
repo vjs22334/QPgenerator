@@ -12,7 +12,7 @@ class SignupForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
 
-        for fieldname in ['password1', 'password2']:
+        for fieldname in ['password1', 'password2' , 'username']:
             self.fields[fieldname].help_text = None
 
     class Meta:

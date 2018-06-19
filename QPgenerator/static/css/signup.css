@@ -16,3 +16,7 @@ div.form-group input{
     font-weight: bold !important;
     color: rgb(15, 9, 92) !important;
 }
+
+.form-text{
+     color:rgb(15, 14, 3) !important; 
+}

@@ -16,13 +16,16 @@
 
 
 {% block content %}
-
+<br>
 
 <div class="main">
 <div class="container_fluid form_container my-5 mx-lg-5 px-5 py-3 ">
 <!--School Name-->
     <div class="row justify-content-center">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-2">
+                
+        </div>
+        <div class="col-md-8 ">
             <h3 style id="school_name"class="school" >{{school.school_name}}</h3>
         </div>
         <div class="col-md-2">
@@ -143,23 +146,33 @@
         </div> 
 </div>
 
+
+<div class="dropdown d-none d-sm-block"  id="show_sections">
+        <button class="btn btn-primary dropdown-toggle btn-sm" id="sections" type="button" data-toggle="dropdown">All Sections
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="dropdown_menu">
+          <li><a href="#Section1">Section 1</a></li>
+          <li><a href="#Section2">Section 2 </a></li>
+          <li><a href="#Section3">Section 3</a></li>
+        </ul>
+      </div>
+
+
 <!--All Sections-->
-
-
-<div class= "container-fluid section my-5 px-5 py-3" id="section1">
+<div class= "container-fluid section my-5 px-5 py-3" id="Section1">
     <div class="row justify-content-start ">
 
-        <div  class="col-md-1">
-         <h5 id="Section1">Section_1</h5>
+        <div  class="col-md-3">
+         <h5 class="section_no" >Section_1</h5>
         </div>
 
-        <div class="col-md-6 offset-md-2">
-            <div class="input-group mb-3 ">
+        <div class="col-md-6 order-md-2 order-lg-2  order-xl-2 order-sm-2 order-3" >
+            <div class="input-group mb-3  ">
                 <input type="text" class="form-control section_heading" placeholder="Section Heading">
             </div>
         </div>
 
-        <div class="col-md-2 offset-md-1">
+        <div class="col-md-2 offset-md-1 order-md-3 order-lg-3 order-xl-3 order-sm-3 order-2">
                 <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>   
         </div>
 
@@ -172,8 +185,13 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-end px-4">
+
+    <div class="d-flex flex-row-reverse px-4">
+       <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
+    </div></div>
     <div class="row justify-content-center ">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="questions border border-primary">
                 <br><br>
                 <h4 class="text-center">No Questions Added</h4>
@@ -182,26 +200,27 @@
             </div>
         </div>
 
+
 </div>
 
 <hr style="display:block;border-width:5px;boder-style:inset;">
 
 
       
-<div class= "container-fluid section  my-5 px-5 py-3">
+<div class= "container-fluid section  my-5 px-5 py-3" id="Section2">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-              <h5 id="Section2">  Section_2 </h5>
+              <h5 class="section_no">  Section_2 </h5>
             </div>
     
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-6 offset-md-2order-md-2 order-lg-2  order-xl-2 order-sm-2 order-3 ">
                 <div class="input-group mb-3 ">
                     <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
-            <div class="col-md-2 offset-md-1">
+            <div class="col-md-2 offset-md-1 order-md-3 order-lg-3 order-xl-3 order-sm-3 order-2">
                     <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
@@ -213,8 +232,13 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-end px-4">
+
+        <div class="d-flex flex-row-reverse px-4">
+                <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
+        </div></div>
         <div class="row justify-content-center ">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <div class="questions border border-primary">
                     <br><br>
                     <h4 class="text-center">No Questions Added</h4>
@@ -228,20 +252,20 @@
 <hr style="display:block;border-width:5px;boder-style:inset;">
 
 
-<div class= "container-fluid section my-5 px-5 py-3">
+<div class= "container-fluid section my-5 px-5 py-3" id="Section3">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-              <h5 id="Section3">  Section_3</h5>
+              <h5 class="section_no">  Section_3</h5>
             </div>
     
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-6 offset-md-2 order-md-2 order-lg-2  order-xl-2 order-sm-2 order-3">
                 <div class="input-group mb-3 ">
                     <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
-            <div class="col-md-2 offset-md-1">
+            <div class="col-md-2 offset-md-1 order-md-3 order-lg-3 order-xl-3 order-sm-3 order-2">
                     <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
@@ -253,8 +277,12 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-end px-4">
+        <div class="d-flex flex-row-reverse px-4">
+                <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
+        </div></div>
         <div class="row justify-content-center ">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <div class="questions border border-primary">
                     <br><br>
                     <h4 class="text-center">No Questions Added</h4>
@@ -305,16 +333,13 @@
 </div>
 
 <button type="button" class = "btn btn-primary" id="add_section">Add Section</button>
-
-
-
-
-
-
-
 <button id="pdf" class="btn btn-info" style="float:right;">export to pdf</button>
+
+
 <br>
 <br>
+
+
 
 
 {% endblock %}
@@ -371,11 +396,11 @@
 
                 $("#add_section").click(function(){
                     $(".main").append(`
-                    <div class= "container-fluid section my-5 px-5">
+        <div class= "container-fluid section my-5 px-5" id="Section${c}">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-             <h5 id="Section${c}">   Section_${c} </h5> 
+             <h5 class="section_no">   Section_${c} </h5> 
             </div>
     
             <div class="col-md-6 offset-md-2">
@@ -397,6 +422,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="d-flex flex-row-reverse">
+                <button class="btn btn-danger delete_section">Delete Section</button>
+        </div>
+
         <div class="row justify-content-center ">
                 <div class="col-md-12">
                     <div class="questions border border-primary">
@@ -405,7 +435,7 @@
                     <br><br><br>
                     </div>
                 </div>
-            </div>
+        </div>
     
 
     
@@ -416,10 +446,28 @@
 
                     `)
 
+                    $("#dropdown_menu").append(` 
+                    <li><a href="#Section${c}">Section ${c}</a></li>`)
+
                     c++;
 
                 });
 
+
+                //delete section function
+
+                $(document).on("click", ".delete_section", function(event){
+                    console.log($(this).parents('.section'))
+                    $(this).parents('.section').remove();
+                    c=1;
+                    $('.section').each(function(){
+                       $(this).attr("id",c);
+                        $(this).find(".section_no").html(`Section_${c}`);
+                        console.log(c);
+                        c++;
+                    })
+
+                })
 
                 //hide answer function
 
@@ -433,6 +481,12 @@
                         $(".answer").show()
                     }
                 })
+
+                $('#show_sections').hover(function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(10).fadeIn(500);
+                  }, function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(10).fadeOut(500);
+                  });
                 
 
 
@@ -624,6 +678,8 @@
                     <p style="text-align: center;"> ${instruction1}</p>
                         ${questions}`;
             });
+
+            
 
 
 

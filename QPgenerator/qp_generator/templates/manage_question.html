@@ -5,9 +5,11 @@
 <link rel="stylesheet" href="{% static 'css/manage_questions.css' %}">
 {% endblock %}
 {% block content %}
+<br>
 <div class = "container my-5">
     <div class="row justify-content-center  my-4">
-    <h2>Add/Edit Questions</h2>
+    <h2 style="font-family:'Song Myung', serif;
+	font-weight: bold;">Question Form</h2>
     </div>
     {% if question %}
     <button type="button" class="btn btn-danger delete" id="{{question.id}}" value="delete">delete this question</button>
@@ -23,8 +25,8 @@
                 {{ match_formset.as_p }}
             </div>
 
-            <button type="submit" class="btn btn-primary" name="save" value="save">save</button>
-            <button type="submit" class="btn btn-primary" name="save_and_add_another" value="save_and_add_another">save and add another</button>
+            <button type="submit" class="btn btn-info" name="save" value="save">save</button>
+            <button type="submit" class="btn btn-info" name="save_and_add_another" value="save_and_add_another">save and add another</button>
         </form>
 </div>
 <footer class="bg-dark text-white mt-4 ">

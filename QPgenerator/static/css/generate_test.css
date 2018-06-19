@@ -87,6 +87,10 @@ select option {
 	 text-align:center;
 	 font-size: 18px;
 }
+.selector{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
 .school{
 	font-family: 'Song Myung', serif;
 	text-align:center;

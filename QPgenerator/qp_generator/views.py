@@ -179,7 +179,7 @@ def view_questions(request):
         isadmin = True
     else:
         isadmin = False
-    return render(request,'qlist.html',{
+    return render(request,'view_questions.html',{
         "isadmin":isadmin
     })
 

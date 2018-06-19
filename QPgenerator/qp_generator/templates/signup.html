@@ -1,19 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}SIGNUP{% endblock %}
-{% block heading %}SIGNUP{% endblock %}
+
+{% block css%}
+{%load static%}
+<style>
+        body{
+            background-image: url("{% static 'images/login8.jpg'%}");
+            background-repeat: no-repeat;
+            background-size:cover;
+            
+        }
+</style>
+
+<link rel="stylesheet" href="{% static 'css/signup.css'%}">
+{% endblock %}
 {% block content %}
 <br>
 <br>
-<div class="container form_container ">
+<br>
 
-       <div class="row justify-content-center"> <h2>Sign up </h2></div>
+<div class="container form_container my-4 ">
+
+       <div class="row justify-content-center"> <h1 id="sign_up">Sign up </h1></div>
        <div class="row ">
            <div class="col-md-6 offset-md-3">
     <form method="POST">
         {% csrf_token %}
         {% include 'include/render_forms.html' with form=user_form %}
         {% include 'include/render_forms.html' with form=profile_form %}
-        <button class="btn btn-primary"type=submit>Sign up</button>
+        <button class="btn btn-info my-2 btn-lg"type=submit>Sign up</button>
+        <br>
+        <br>
     </form>
     </div>
     </div>

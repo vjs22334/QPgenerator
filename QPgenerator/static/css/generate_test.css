@@ -4,6 +4,14 @@
 	text-align: center;
 	font-weight: bold;
 }
+
+#show_sections{
+	position: -webkit-sticky; /* Safari */
+    position: fixed;
+	top: 230px;
+	
+	
+}
 .section_heading{
 	font-family: 'Song Myung', serif;
 	font-weight: bold;
@@ -15,7 +23,12 @@
 	font-weight: bold;
 	text-align:center;
 }
+#chpt_name{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
 
+}
 #date_ex{
 
 	font-family: 'Song Myung', serif;
@@ -103,7 +116,11 @@ select option {
 	
 	
 
+#basic-addon1{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
 
+}
 #instruction{
 	font-family: 'Song Myung', serif;
    font-weight: bold;

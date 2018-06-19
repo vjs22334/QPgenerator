@@ -14,7 +14,8 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">                      
-
+            <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet">
+            <link rel="stylesheet" href="{% static 'css/base.css' %}">
             {% block css %}
             {% endblock %}
             
@@ -24,11 +25,12 @@
         <header>
          <!--Navbar-->
          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">
-                        <img src="{% static 'images/logo_header.png'%}" alt="Logo" style="width:200px;">
-                      </a>
+               
                                    
                 <div class="container">
+                        <a class="navbar-brand" href="#">
+                                <img src="{% static 'images/logo_header.png'%}" alt="Logo" style="width:200px;">
+                              </a>
                     <h1 class="pb-2 ml-md-0 ml-sm-3 ml-0 mr-3"><a href="#"><i class="fa fa-envelope-o fa-lg mt-3" aria-hidden="true"></i></a></h1>
                     <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
@@ -137,28 +139,33 @@
                 </div>
             </nav>
             
-        
-</header>
+           
+
+
+            </header>
         <h2>{% block heading %}
             {% endblock %}
         </h2>
         <main>
             {% block content %}
             {% endblock %}
-        </main>
+
+        
+            
+             
+               
+                </main>
             {% block scripts %}
-
-
+            {% endblock %}
             <script>
 
-            $('ul.navbar-nav li.dropdown').hover(function() {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-              }, function() {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-              });
-
-            </script>
-
-            {% endblock %}
+                    $('ul.navbar-nav li.dropdown').hover(function() {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(10).fadeIn(500);
+                      }, function() {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(10).fadeOut(500);
+                      });
+        
+                    </script>
+        
     </body>
 </html>

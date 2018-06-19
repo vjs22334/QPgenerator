@@ -5,40 +5,50 @@
 
     <style>
             body{
-                background-image: url("{% static 'images/signin1.jpg'%}");
+                background-image: url("{% static 'images/login8.jpg'%}");
+                background-repeat: no-repeat;
+                background-size:cover;
                 
             }
     </style>
     <link rel="stylesheet" href="{% static 'css/login.css'%}">
     {%endblock%}
     {% block content %}
-    {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info">
-             <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}
-                 </span>
-            </div>
-            {% endfor %}
+    
 
-        {% endif %}
-        <br>
-        <br>
+      
         <br>
         <br>
         <br>
         <div class="container form_container ">
+             
+                {% if messages %}
+                {% for message in messages %}
+                <div class="row justify-content-center">
+                <div class="d-inline-flex p-2 ">
+                <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>{{ message }}</strong>
+                </div>
+               </div>
+               </div>
+                {% endfor %}
+    
+            {% endif %}
              <div class="row px-2 my-4">
                  
-           <img src="{% static 'images/logo.jpeg'%} " class=" img-fluid mx-auto d-block" alt="Logo">
+           <img src="{% static 'images/logo_header.png'%} " class=" img-fluid mx-auto d-block" alt="Logo">
            </div>
             <div class="row ">
                 <div class="col-md-6 offset-md-3">    
                     <form method="POST">
                         {% csrf_token %}
                         {% include 'include/render_forms.html' with form=form %}
-                        <button type="Submit" class="btn btn-outline-primary" id="login">Login</button>
+                        <button type="Submit" class="btn btn-info" id="login">Login</button>
                     </form>
                 </div>
             </div>
         </div>
+
+        
     {% endblock %}

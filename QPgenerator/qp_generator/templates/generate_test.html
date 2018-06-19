@@ -7,23 +7,25 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/generate_test.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Song+Myung" rel="stylesheet">
 
 
     <style>
-    
+           
     </style>
 {% endblock %}
 
 
 {% block content %}
-
+<br>
 
 <div class="main">
 <div class="container_fluid form_container my-5 mx-lg-5 px-5 py-3 ">
 <!--School Name-->
     <div class="row justify-content-center">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-2">
+                
+        </div>
+        <div class="col-md-8 ">
             <h3 style id="school_name"class="school" >{{school.school_name}}</h3>
         </div>
         <div class="col-md-2">
@@ -144,23 +146,34 @@
         </div> 
 </div>
 
+
+<div class="dropdown d-none d-sm-block"  id="show_sections">
+        <button class="btn btn-primary dropdown-toggle btn-sm" id="sections" type="button" data-toggle="dropdown">All Sections
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" id="dropdown_menu">
+          <li><a href="#Section1">Section 1</a></li>
+          <li><a href="#Section2">Section 2 </a></li>
+          <li><a href="#Section3">Section 3</a></li>
+        </ul>
+      </div>
+
+
 <!--All Sections-->
-
-
-<div class= "container-fluid section my-5 px-5 py-3" id="section1">
+<div class= "container-fluid section my-5 px-5 py-3" marks="0" id="Section1">
     <div class="row justify-content-start ">
 
-        <div  class="col-md-1">
-         <h5 id="Section1">Section_1</h5>
+        <div  class="col-md-3">
+         <h5 class="section_no" >Section_1</h5>
         </div>
 
-        <div class="col-md-6 offset-md-2">
-            <div class="input-group mb-3 ">
+
+        <div class="col-md-6 order-md-2 order-lg-2  order-xl-2 order-sm-2 order-3" >
+            <div class="input-group mb-3  ">
                 <input type="text" class="form-control section_heading" placeholder="Section Heading">
             </div>
         </div>
 
-        <div class="col-md-2 offset-md-1">
+        <div class="col-md-2 offset-md-1 order-md-3 order-lg-3 order-xl-3 order-sm-3 order-2">
                 <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>   
         </div>
 
@@ -173,8 +186,13 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-end px-4">
+
+    <div class="d-flex flex-row-reverse px-4">
+       <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
+    </div></div>
     <div class="row justify-content-center ">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="questions border border-primary">
                 <br><br>
                 <h4 class="text-center">No Questions Added</h4>
@@ -183,26 +201,27 @@
             </div>
         </div>
 
+
 </div>
 
 <hr style="display:block;border-width:5px;boder-style:inset;">
 
 
       
-<div class= "container-fluid section  my-5 px-5 py-3">
+<div class= "container-fluid section  my-5 px-5 py-3" marks="0" id="Section2">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-              <h5 id="Section2">  Section_2 </h5>
+              <h5 class="section_no">  Section_2 </h5>
             </div>
     
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-6 offset-md-2 order-md-2 order-lg-2  order-xl-2 order-sm-2 order-3 ">
                 <div class="input-group mb-3 ">
                     <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
-            <div class="col-md-2 offset-md-1">
+            <div class="col-md-2 offset-md-1 order-md-3 order-lg-3 order-xl-3 order-sm-3 order-2">
                     <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
@@ -214,8 +233,13 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-end px-4">
+
+        <div class="d-flex flex-row-reverse px-4">
+                <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
+        </div></div>
         <div class="row justify-content-center ">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <div class="questions border border-primary">
                     <br><br>
                     <h4 class="text-center">No Questions Added</h4>
@@ -229,20 +253,20 @@
 <hr style="display:block;border-width:5px;boder-style:inset;">
 
 
-<div class= "container-fluid section my-5 px-5 py-3">
+<div class= "container-fluid section my-5 px-5 py-3" marks="0" id="Section3">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-              <h5 id="Section3">  Section_3</h5>
+              <h5 class="section_no">  Section_3</h5>
             </div>
     
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-6 offset-md-2 order-md-2 order-lg-2  order-xl-2 order-sm-2 order-3">
                 <div class="input-group mb-3 ">
                     <input type="text" class="form-control section_heading" placeholder="Section Heading">
                 </div>
             </div>
     
-            <div class="col-md-2 offset-md-1">
+            <div class="col-md-2 offset-md-1 order-md-3 order-lg-3 order-xl-3 order-sm-3 order-2">
                     <a tabindex="0" role="button" class="btn btn-info add_popover" data-placement="bottom" data-trigger="focus" data-toggle="popover" data-container="body" data-placement="left" data-html="true">Add Questions</a>            </div>
     
         </div>
@@ -254,8 +278,12 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-end px-4">
+        <div class="d-flex flex-row-reverse px-4 my-2">
+                <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
+        </div></div>
         <div class="row justify-content-center ">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <div class="questions border border-primary">
                     <br><br>
                     <h4 class="text-center">No Questions Added</h4>
@@ -297,7 +325,19 @@
                 </div>
 
                 <div class="modal-footer">
-                <button type="button" class="btn btn-info"id="add">Add</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 offset-md-5">
+                                <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Marks per question</span>
+                                </div>
+                                <input type="number" id="mpq" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" >
+                              </div> </div>
+                              <div class="col-md-3">
+                <button type="button" class="btn btn-info"id="add">Add</button></div>
+                </div>
+                </div>
                 </div>
 
             </div>
@@ -305,17 +345,32 @@
     </div>
 </div>
 
-<button type="button" class = "btn btn-primary" id="add_section">Add Section</button>
+<button type="button" class = "btn btn-primary btn-lg" id="add_section">Add Section</button>
+<button id="pdf" class="btn btn-info btn-lg" style="float:right;">export to pdf</button>
 
 
-
-
-
-
-
-<button id="pdf" class="btn btn-info" style="float:right;">export to pdf</button>
 <br>
 <br>
+<footer class="bg-dark text-white mt-4 ">
+        <div class="container-fluid py-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Contact info.</h5>           
+                <ul>
+                    <li>Jeya Surya-8451279365</li>
+                    <li>Raj-8547622311</li>
+                    <li>Happy-445151561</li>
+                </ul>
+                </div>
+                 
+                <div class="col-md-3 offset-md-6">
+                    <h5>About us</h5>
+                    <p>To create engaging products and services using interactive & digital platforms and establish a global presence.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 
 
 {% endblock %}
@@ -346,7 +401,9 @@
  var subject
  var grade
  var c=4
-
+ var totalmarks=0
+ var totalquestions=0
+ var section_marks=[];
 
      
     $(function() {
@@ -372,11 +429,11 @@
 
                 $("#add_section").click(function(){
                     $(".main").append(`
-                    <div class= "container-fluid section my-5 px-5">
+        <div class= "container-fluid section my-5 px-5"marks="0" id="Section${c}">
         <div class="row justify-content-start ">
     
             <div class="col-md-1">
-             <h5 id="Section${c}">   Section_${c} </h5> 
+             <h5 class="section_no">   Section_${c} </h5> 
             </div>
     
             <div class="col-md-6 offset-md-2">
@@ -398,6 +455,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="d-flex flex-row-reverse">
+                <button class="btn btn-danger delete_section">Delete Section</button>
+        </div>
+
         <div class="row justify-content-center ">
                 <div class="col-md-12">
                     <div class="questions border border-primary">
@@ -406,7 +468,7 @@
                     <br><br><br>
                     </div>
                 </div>
-            </div>
+        </div>
     
 
     
@@ -417,10 +479,30 @@
 
                     `)
 
+                    $("#dropdown_menu").append(` 
+                    <li><a href="#Section${c}">Section ${c}</a></li>`)
+
                     c++;
 
                 });
 
+
+                //delete section function
+
+                $(document).on("click", ".delete_section", function(event){
+                    console.log($(this).parents('.section'))
+
+                    $(this).parents('.section').next('hr').remove();
+                    $(this).parents('.section').remove();
+                    c=1;
+                    $('.section').each(function(){
+                       $(this).attr("id",c);
+                        $(this).find(".section_no").html(`Section_${c}`);
+                        console.log(c);
+                        c++;
+                    })
+
+                })
 
                 //hide answer function
 
@@ -434,6 +516,12 @@
                         $(".answer").show()
                     }
                 })
+
+                $('#show_sections').hover(function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(10).fadeIn(500);
+                  }, function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(10).fadeOut(500);
+                  });
                 
 
 
@@ -485,15 +573,17 @@
                             `
                         )
                         for (i = 0; i < data.ids.length; i++) {                        
-                            $("#table1").append(` <tr align="center">
+                            $("#table1").append(` <tr align="center" id="chpt_name">
                                     <th scope="col">${i+1}</th>
-                                <td>${data.names[i]}</td>
-                                <td >${data.easy[i]} <input type="text" default=0 id="easy${i}"></td>
-                                 <td style="float:left; clear:none" ><div>${data.medium[i]}</div> <div><input type="text" default=0 id="medium${i}"></div> </td>
-                                <td>${data.hard[i]} <input type="text" default=0 id="hard${i}"></td>
-                                </tr>`);
+                                <td >${data.names[i]}</td>
                             
-                        }                        
+                                <td >${data.easy[i]} <input type="number" class="mx-1" style="width: 60px;text-align:center; " id="easy${i}"></td>
+                                <td>${data.medium[i]} <input type="number" class="mx-1" style="width: 60px;text-align:center; "  id="medium${i}"> </td>
+                                <td>${data.hard[i]} <input type="number" class="mx-1" style="width: 60px;text-align:center; "  id="hard${i}"></td>
+                                </tr>`);
+                           
+                        }  
+                                            
     
 
 
@@ -512,17 +602,27 @@
       
         $(document).on("click", "#add", function(event){
             var a=[];
+            var mpq=$("#mpq").val();
             for (j=0;j<newdata.ids.length;j++){
                 var easy = $("#easy"+j).val();
                 var medium = $("#medium"+j).val();
                 var hard = $("#hard"+j).val();
+                
 
-                if (easy==null || easy=="" || medium==null || medium==""|| hard==null || hard=="")
+                if (easy==null || easy=="")
                 {
-                    alert("Please Fill All Required Field");
-                    return;
+                    easy=0;
+                    
                 }
-
+                if( medium==null || medium=="")
+                {
+                    medium=0;
+                    
+                }
+                if(hard==null || hard=="")
+                {
+                    hard=0;
+                }
                 if(easy%1!=0 ||  easy<0 || easy>newdata.easy[j])
                 {
                 alert("Enter proper data in 1");
@@ -540,6 +640,8 @@
                 alert("Enter proper data in 3");
                 return;
                 }
+                totalquestions=totalquestions + parseInt(easy)+ parseInt(medium)+ parseInt(hard);
+                
 
                 var obj={
                     "id":newdata.ids[j],
@@ -550,6 +652,16 @@
                 a.push(JSON.stringify(obj));
 
             }
+
+            if( mpq == null || mpq<=0 || mpq==""){
+                alert("Enter proper data in marks per question field");
+                return;
+            }
+
+            totalmarks=totalquestions*parseInt(mpq);
+            section_context.parents(".section").attr("marks",totalmarks);
+
+            console.log(totalquestions);
             $('#exampleModal').modal('hide');
             $.ajax({
                 url: "/app/random_questions",
@@ -558,9 +670,14 @@
                     "type":q_type},
                     
                 success: function(data){
-                    console.log(data);
-                    section_context.parents(".section").find(".questions").html(data)
-
+                    
+                    $question_section = section_context.parents(".section").find(".questions")
+                    $question_section.html(data)
+                    marks_string=""+totalquestions+"X"+mpq+"="+totalmarks
+                    $question_section.find(".section_marks").html(marks_string)
+                    $('html, body').animate({
+                        scrollTop: $question_section.offset().top - 300
+                    }, 1000);
                 }   
             });
         });
@@ -587,17 +704,20 @@
 	        </title>
             </head>
             <body>
-                <div style="border-style:solid;border-color:red;">
+               
                 <h2 style="text-align:center;">${school_name}</h2>
                 <h4 style="text-align:center;">${heading}</h4>
                 <h4 style="text-align:center;">class-${grade} </h4>
                 <div style="text-align:center;">${subject} </div>
-                    <div style="float:left;  "> Time-${time}hrs</div>
+                    <div style="float:left;  "> Time-${time}</div>
                     <div style="float:right; "> Date:${date}</div>
                     <br>
                     <br>
+
+                 
+                    <hr style="border-width:2px;">   
                 <p style="text-align: center;">${instruction} </p>
-                </div>
+               
                 <br>
                 <br>
                 <br>`
@@ -607,8 +727,9 @@
 
 
 
-
+                var full_marks=0;
             $(".section").each(function(){
+                full_marks= full_marks+parseInt($(this).attr("marks"));
             questions=$(this).find(".questions").html();
             console.log($(this).find(".questions").find('.text-center').html());
             if($(this).find(".questions").find('.text-center').html()=="No Questions Added")
@@ -622,6 +743,8 @@
                     <p style="text-align: center;"> ${instruction1}</p>
                         ${questions}`;
             });
+
+            
 
 
 

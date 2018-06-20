@@ -87,6 +87,29 @@
     </div>
 </div>
 </div>
+
+<!--Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Question Paper</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to Delete this Question Paper?
+            </div>
+            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" id ="delete" class="btn btn-danger delete" data-dismiss="modal">Delete Paper</button>
+            </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}
 
 
@@ -99,13 +122,19 @@
 
 
 {% block scripts %}
-{% load static %}
+
+
+
+
+
 
 <script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
 <script src="{% static 'js/jquery-ajax-native.js' %}"></script>
+<script src="{% static 'js/ajax_setup.js' %}"></script>
 <script>
 
     var papers;
+    var paper_id
 
     $(function(){
         //Hide Function
@@ -138,7 +167,7 @@
                         <td class = 'get_paper py-2' width="50%" style="  text-align:center ;font-weight:bold"id="${papers[i].id}"><a>${papers[i].heading}</a></td>
                         <td class = 'get_paper py-2' width="20%" style="  text-align:center;" id="${papers[i].id}"><a>${papers[i].date}</a></td>
                         <td class = 'get_paper py-2' width="20%" style="  text-align:center;" id="${papers[i].id}"><a>${papers[i].created_date}</a></td>
-                        <td class = 'get_paper py-2' width="10%" > <button class="btn btn-danger btn-sm delete" id="${papers[i].id} > Delete Paper </button> </td>     
+                        <td class = 'py-2' width="10%" > <button class="btn btn-danger btn-sm Delete" id="${papers[i].id}" data-toggle="modal" data-target="#exampleModal" > Delete Paper </button> </td>     
                     </tr>`)
 
                     }
@@ -153,7 +182,11 @@
                 }
             })
         }
+        $(document).on("click",".Delete",function(event){
 
+            paper_id=$(this).attr('id');
+        })
+       
         $("#show_papers").click(function(){
             
             showpapers();
@@ -162,12 +195,12 @@
         $(document).on("click",".delete",function(event){
             $.ajax({
                 type:'POST',
-                url:"{% url 'delete_paper'% }",
-                data : { "p_id":$(this).attr(id)
+                url:"{% url 'delete_paper' %}",
+                data : { "p_id":paper_id
                 },
 
-                success:function(){   
-                    if(status_code == '200')
+                success:function(data){   
+                    if(data.status_code == '200')
                     {
                         showpapers();
                     }

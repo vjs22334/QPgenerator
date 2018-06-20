@@ -698,7 +698,7 @@
             subject=$("#subject-sel option:selected").text()
             time=$("#time").val()
             date=$("#date_ex").val()
-            instruction=$("#instruction").val()
+            instruction=$("#instruction").val().replace(/\n/g,'<br>')
             $(".section").each(function(){
                 full_marks= full_marks+parseInt($(this).attr("marks"));
             })
@@ -745,7 +745,7 @@
                 return;
             }
             heading1=$(this).find(".section_heading").val();
-            instruction1=$(this).find(".section_instruction").val()
+            instruction1=$(this).find(".section_instruction").val().replace(/\n/g,'<br>')
             htmlString = htmlString+`
             <h3 style="text-align:center;">${heading1}</h3>
                     <p style="text-align: center;"> ${instruction1}</p>

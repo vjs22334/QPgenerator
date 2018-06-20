@@ -14,6 +14,8 @@ from os import path
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
+import os
+
 @login_required_message
 #@user_is_admin
 def load_subjects(request):

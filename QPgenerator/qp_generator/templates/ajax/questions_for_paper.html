@@ -1,49 +1,38 @@
 
 
 {% if q_type == "Match" %}
-<div class="container">
-    <div class="row justify-content-center">
-<<<<<<< HEAD
-        <div class="col-md-6 offset-md-4">
-            <h2>{{type_name}}</h2>
-        </div>
-        <div class="col-md-2 section_marks">
-=======
-        <div class="col-md-6 offset-md-4" ><h2 style="font-family: 'Song Myung', serif; font-weight: bold;">{{type_name}}
-        </h2></div>
-        <div class="col-md-3 section_marks" style="font-family: 'Song Myung', serif; font-weight: bold; font-size:125%;"></div>
->>>>>>> 2313586776dbe07b3bb7cb5aa7665acd95cf4ba3
-    </div>
 
-<div class="row justify-content-start">
-    <div class="col-md-8">
+    <h2 style="text-align:center;  font-family: Times New Roman, Times, serif; color:black">{{type_name}}</h2>
+    <div class="section_marks" style="position: absolute;
+    right: 0px;width: 20%; font-weight:bold;font-size:20px;"></div>
+
         <ol>
                {% for match in match_list %}
                 <li style="margin:10px 0;">
     
-                <h5>{{match.question.question_text}}</h5>
+                <h5 style="color:black;font-weight:bold ; font-family: Arial, Helvetica, sans-serif;">{{match.question.question_text}}</h5>
 
                 {% if match.question.image %}
                 <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{ match.question.image.url }}"/>
                 {% endif %}
             
             
-                    <ol type="a">
+                    <ol type="a" style="list-style-position: outside;">
                     {% for m in match.q_and_a_list %}
                         {% if m.2.image %}
                         <li>
                             <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{m.2.image.url }}"/> --- {{m.1}}
                         </li>
                         {% else %}
-                        <li>
-                            {{m.0}}  ---  {{m.1}}
+                        <li style="font-size:20px;">
+                            {{m.0}}  --- p  ji     i     k  {{m.1}}
                         </li>
                         {% endif %}
                     {% endfor %}
                     </ol>
                     
                     <br>
-                    <p class="answer">ans:
+                    <p class="answer">Ans:
                         {% for k in match.key_list %}
                         {{k.0}} - {{k.1}},
                         {% endfor %}
@@ -54,51 +43,43 @@
 
 
         </ol>
-    </div>
-</div></div>
+
 
 {% else %}
 
-<div class="container">
-        <div class="row justify-content-center">
-                <div class="col-md-6 offset-md-4">
-                    <h2>{{type_name}}</h2>
-                </div>
-                <div class="col-md-2 section_marks">
-            </div>
-            </div>
-<div class="row justify-content-start">
-    <div class="col-md-8">
-        <ol>
+
+        <h2 style="text-align:center; font-family: Times New Roman, Times, serif; color:black">{{type_name}}</h2>
+        <div class="section_marks" style="position: absolute;
+        right: 0px;width: 20%; font-weight:bold;font-size:20px;"></div>
+        <br>
+
+
+        <ol >
 
             {% for q in list %}
             <li style="margin:10px 0">
-            <h5>{{q.question_text}}</h5>
+            <h5 style="color:black;font-weight:bold">{{q.question_text}}</h5>
 
             {% if q.image %}
                 <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{q.image.url }}"/>
             {% endif %}
 
             {% if q_type == "mcq" or q_type == "fb" %}
-            <ol type="a">
+            <ol type="a" style="list-style-position: outside;">
                 {% for c in q.choice_set.all %}
-                    <li>
+                    <li style="font-size:20px;">
                         {{c.choice_text}}
                     </li>
                 {% endfor %}
             </ol>
             {% endif %}
             <br>
-            <p class="answer">ans:
+            <p class="answer">Ans:
                 {{q.answer}}
             </p>
 
         </li>
         {% endfor %}
     </ol>
-    </div>
-</div>
-   
-
-</div>
+ 
 {% endif %}

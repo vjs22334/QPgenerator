@@ -676,7 +676,7 @@
                     
                     $question_section = section_context.parents(".section").find(".questions")
                     $question_section.html(data)
-                    marks_string=""+totalquestions+" x "+mpq+"="+totalmarks+" marks"
+                    marks_string=""+totalquestions+" x "+mpq+" = "+totalmarks+" marks"
                     $question_section.find(".section_marks").html(marks_string)
                     $('html, body').animate({
                         scrollTop: $question_section.offset().top - 300
@@ -711,23 +711,29 @@
             </head>
             <body>
                
-                <h2 style="text-align:center;">${school_name}</h2>
-                <h4 style="text-align:center;">${heading}</h4>
-                <h4 style="text-align:center;">class-${grade} </h4>
-                <h4 style="text-align:center;">${subject} </h4>
-                <div style="text-align:center;">${full_marks} marks </div>
-                    <div style="float:left;  "> Time-${time}</div>
-                    <div style="float:right; "> Date:${date}</div>
+                <h2 style="text-align:center; font-family: Times New Roman, Times, serif; color:black">${school_name}</h2>
+                <div style="width:100%; text-align:center; margin-bottom:5px;">
+               <div style="  float:left; width:250px;   font-size:22px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Date:${date}</div>  
+               <div style=" display: inline-block;margin:0 auto; width:400px;font-size:25px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;">  ${heading}</div>
+               <div style="  float:right; width:250px; font-size:22px ;font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Time:${time}</div>
+                </div>
+                
+                <div style="width:100%; text-align:center;">
+                        <div style="  float:left; width:250px;   font-size:22px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Subject:${subject}</div>  
+                        <div style=" display: inline-block;margin:0 auto; width:400px;font-size:25px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Class- ${grade}</div>
+                        <div style="  float:right; width:250px; font-size:22px ;font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> ${full_marks} marks</div>
+                         </div>
+                    
                     <br>
-                    <br>
+                    
 
                  
                     <hr style="border-width:2px;">   
-                <p style="text-align: center;">${instruction} </p>
+                    <h5 style="font-weight:bold ;text-align:center; color:black;"> General Instructions:</h5>
+                <p style="text-align: center; font:italic">${instruction} </p>
                     <hr style="border-width:2px;">   
                
-                <br>
-                <br>
+               
                 <br>`
 
 
@@ -747,9 +753,10 @@
             heading1=$(this).find(".section_heading").val();
             instruction1=$(this).find(".section_instruction").val().replace(/\n/g,'<br>')
             htmlString = htmlString+`
-            <h3 style="text-align:center;">${heading1}</h3>
-                    <p style="text-align: center;"> ${instruction1}</p>
-                        ${questions}`;
+            <h3 style="text-align:center; font-weight:bold;margin-bottom:5px; color:black;">${heading1}</h3>
+                    <p style="text-align: center; margin-bottom:5px;"> ${instruction1}</p>
+                        ${questions}
+                        <hr style="border-width:2px;">  `;
             });
 
             

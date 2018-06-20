@@ -356,7 +356,7 @@ def delete_question(request):
 @user_is_admin
 @require_http_methods(["POST",])
 def delete_paper(request):
-    paper_id = request.POST.get('p_id')
+    paper_id = request.POST.get(id = 'p_id')
     paper = models.Paper.objects.get(id=paper_id)
     if paper:
         if os.path.isfile(paper.file_path+paper.file_name):

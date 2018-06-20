@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
+import os
 class School(models.Model):
     school_name = models.CharField(max_length=200,unique=True)
     address = models.TextField()
@@ -78,12 +79,50 @@ class Question(models.Model):
     image = models.ImageField(upload_to="question",null=True,blank=True,help_text="200*50 is recommended")
     created_date = models.DateTimeField("created date")
     school = models.ForeignKey(School,on_delete=models.CASCADE)
+    
+    
     def __str__(self):
         return self.question_text
+    
+    
     def save(self,*args,**kwargs):
         if not self.id:
             self.created_date = timezone.now()
         return super(Question,self).save(*args, **kwargs)
+
+@receiver(models.signals.post_delete, sender=Question)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `Question` object is deleted.
+    """
+    #import pdb; pdb.set_trace()
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
+
+@receiver(models.signals.pre_save, sender=Question)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `Question` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = Question.objects.get(pk=instance.pk).image
+    except(Question.DoesNotExist):
+        return False
+    if not old_file:
+        return False
+    new_file = instance.image
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
+
+    
 
 class Choice(models.Model):
     choice_text = models.CharField(max_length = 100)
@@ -98,7 +137,40 @@ class Match(models.Model):
     image = models.ImageField(upload_to="match",null=True,blank=True)
 
     def __str__(self):
-        return self.question_text    
+        return self.question_text
+
+@receiver(models.signals.post_delete, sender=Match)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `Match` object is deleted.
+    """
+    #import pdb; pdb.set_trace()
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
+
+@receiver(models.signals.pre_save, sender=Match)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `Match` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = Match.objects.get(pk=instance.pk).image
+    except(Match.DoesNotExist):
+        return False
+    if not old_file:
+        return False
+    new_file = instance.image
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
+    
 
 class Paper(models.Model):
     heading = models.CharField(max_length=100)

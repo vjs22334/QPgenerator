@@ -164,9 +164,7 @@ def random_questions(request):
         #import pdb; pdb.set_trace()
         for q in q_set:
             final_q_list.extend(q.match_set.all())
-        #shuffle(final_q_list)
-        for i in range(int(len(final_q_list)/4)):
-            match_question = MatchQuestion(final_q_list[i*4:(i+1)*4],q_set[i])
+            match_question = MatchQuestion(list(q.match_set.all()),q)
             match_question.shuffle_ans()
             match_question.generate_key()
             match_question.merge()

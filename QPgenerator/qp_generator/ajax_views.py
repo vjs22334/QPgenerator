@@ -164,9 +164,7 @@ def random_questions(request):
         #import pdb; pdb.set_trace()
         for q in q_set:
             final_q_list.extend(q.match_set.all())
-        #shuffle(final_q_list)
-        for i in range(int(len(final_q_list)/4)):
-            match_question = MatchQuestion(final_q_list[i*4:(i+1)*4],q_set[i])
+            match_question = MatchQuestion(list(q.match_set.all()),q)
             match_question.shuffle_ans()
             match_question.generate_key()
             match_question.merge()
@@ -211,7 +209,7 @@ def to_pdf(request):
     filename = 'Qpaper'+str(timezone.now())+'.pdf'
     file_path = path.join(MEDIA_ROOT,'tmp/')
     absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
-    html.write_pdf(target=absolute_path,stylesheets=[CSS('/home/raj007/djangogirls/myvenv/bangalore/QPgenerator/QPgenerator/static/css/bootstrap.min.css'),CSS('/home/raj007/djangogirls/myvenv/bangalore/QPgenerator/QPgenerator/static/css/bootstrap.css')])
+    html.write_pdf(target=absolute_path)
     grade_id = request.GET.get("grade")
     subject_id = request.GET.get("subject")
     grade = models.Grade.objects.get(id=grade_id)

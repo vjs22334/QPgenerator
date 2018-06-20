@@ -226,7 +226,6 @@ def view_papers(request):
     return render(request,'view_papers.html')
 
 @login_required_message
-@user_is_admin
 def edit_chapters(request):
     return render(request,'edit_chapters.html')
 

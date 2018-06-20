@@ -22,6 +22,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def is_admin(self):
+        if self.role=="admin":
+            return True
+        else:
+            return False
 @receiver(post_save,sender=User)
 def update_user_profile(sender,instance,created,**kwargs):
     if created:

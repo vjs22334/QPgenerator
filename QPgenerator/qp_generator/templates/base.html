@@ -89,8 +89,10 @@
                                 </a>
                                         <div class="dropdown-menu">
                                           <a class="dropdown-item" href="{% url 'edit_chapters'%}">View chapters</a>
+                                          {% if user.profile.is_admin %}
                                           <div class="dropdown-divider"></div>
                                           <a class="dropdown-item" href="{% url 'manage_chapters'%}">add chapters</a>
+                                          {% endif %}
                                         </div>
                             </li>
 
@@ -101,9 +103,10 @@
                                 </a>
               
                                 <div class="dropdown-menu">
-              
+                                    {% if user.profile.is_admin %}
                                     <a class="dropdown-item" href="{% url 'manage_questions'%}">Add Questions</a>
                                     <div class="dropdown-divider"></div>
+                                    {% endif %}
                                     <a class="dropdown-item" href="{% url 'view_questions'%}">View Questions</a>
                                       
                                 </div>
@@ -128,8 +131,6 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{% url 'edit_chapters'%}">Pricing</a>
                             </li>
-                            
-                            
                             
                             <li class="nav-item active">
                                 <a class="nav-link" href="{% url 'edit_chapters'%}">Contact us</a>

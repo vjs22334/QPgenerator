@@ -11,9 +11,15 @@
     <h2 style="font-family:'Song Myung', serif;
 	font-weight: bold;">Question Form</h2>
     </div>
-    {% if question %}
-    <button type="button" class="btn btn-danger delete" id="{{question.id}}" value="delete">delete this question</button>
-    {% endif %}
+
+    <div class="row justify-content-end">
+        <div class="col-md-4">
+                {% if question %}
+                <button type="button" class="btn btn-danger delete" id="{{question.id}}" value="delete">Delete this Question</button>
+                {% endif %}
+        </div>
+    </div>
+   
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'include/render_forms.html' with form=chapter_form %}

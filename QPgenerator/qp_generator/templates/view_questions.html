@@ -5,7 +5,7 @@
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/qlist.css' %}"
+  <link rel="stylesheet" href="{% static 'css/view_questions.css' %}"
     
     
 {% endblock %}
@@ -16,34 +16,40 @@
 {% block content %}
 
 <!-- Grade and Class select box -->
+<br>
     <div class="container my-5">
 
         <div class="row justify-content-center my-4">
-            <h2>Search Questions</h2>
+            <h2 style="	font-family: 'Song Myung', serif;
+            font-weight: bold;">Search Questions</h2>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-4">
+            <div class="col-md-3 offset-md-1">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                        <label class="input-group-text" style="	font-family: 'Song Myung', serif;
+                        font-weight: bold;"for="inputGroupSelect01">Grade</label>
                     </div>
-                    <select class="custom-select" id="class-sel"></select>
+                    <select class="custom-select" id="class-sel" style="	font-family: 'Song Myung', serif;
+                    font-weight: bold;"></select>
                 </div> 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Subject</label>
+                        <label class="input-group-text" style="	font-family: 'Song Myung', serif;
+                        font-weight: bold;"for="inputGroupSelect01">Subject</label>
                     </div>
-                    <select class="custom-select" id="subject-sel"></select>
+                    <select class="custom-select" style="	font-family: 'Song Myung', serif;
+                    font-weight: bold;" id="subject-sel"></select>
                 </div> 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                     <div class="d-flex justify-content-center">
-                <button type="button" id="show_chapter" class="btn btn-primary">Show Chapters</button>
+                <button type="button" id="show_chapter" class="btn btn-info">Show Chapters</button>
                     </div>
             </div>
 
@@ -58,11 +64,11 @@
         <!--chapters list -->
     <div class="container my-4">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-5">
                     <ul class="list-group list1 ">
                     </ul>     
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                     <ul class="list-group list2">
                     </ul>
             </div>
@@ -164,9 +170,9 @@ function showChapter(){
             for(i=0;i<chapter_names.length;i++)
             {
                 if(i%2==0)
-                $('.list1').append(`<a href="#questions" class='list-group-item list-group-item-primary list-group-item-action show_questions' id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
+                $('.list1').append(`<a  class='list-group-item list-group-item-danger  list-group-item-action show_questions'  style="" id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
                 else
-                $('.list2').append(`<a href="#questions" class='list-group-item list-group-item-secondary list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
+                $('.list2').append(`<a  style="  "class='list-group-item list-group-item-warning list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
 
             }
 
@@ -265,12 +271,19 @@ function showChapter(){
                             } );
                         }
                     } );
+
+                    $('html, body').animate({
+                        scrollTop: $("#example").offset().top - 300
+                    }, 1000);
                 }
 
             })
         })
         
     });
+
+
+   
     
    
 

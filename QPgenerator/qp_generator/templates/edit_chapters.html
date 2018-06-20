@@ -2,6 +2,7 @@
 {% block title %}Edit Chapters{% endblock %}
 {% block css %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/edit_chapters.css' %}"
 
 {% endblock %}
 
@@ -11,32 +12,33 @@
 
 <div class="container my-5">
         <div class="row justify-content-center my-3">
-            <h2>Edit Chapters</h2>
+            <h2>Chapters</h2>
         </div>
-
         <div class="row justify-content-center">
-                <div class="col-md-4">
+        <div class="col-md-3 offset-md-1">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text selector" style=" "for="inputGroupSelect01">Grade</label>
+                    </div>
+                    <select class="custom-select" id="class-sel" style=""></select>
+                </div> 
+            </div>
+
+
+            <div class="col-md-3">
+
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                            <label class="input-group-text selector" style=""for="inputGroupSelect01">Subject</label>
                         </div>
-                        <select class="custom-select" id="class-sel"></select>
-                    </div> 
-                </div>
-    
-                <div class="col-md-4">
-    
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Subject</label>
-                        </div>
-                        <select class="custom-select" id="subject-sel"></select>
+                        <select class="custom-select" style="" id="subject-sel"></select>
                     </div> 
                 </div>
 
-                <div class="col-md-4">
+
+                <div class="col-md-3">
                         <div class="d-flex justify-content-center">
-                    <button type="button" id="show_chapter" class="btn btn-primary">Show Chapters</button>
+                    <button type="button" id="show_chapter" class="btn btn-info">Show Chapters</button>
                         </div>
                 </div>
     

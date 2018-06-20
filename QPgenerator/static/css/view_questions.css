@@ -1,0 +1,11 @@
+.popover{
+    max-width: 100%;
+}
+
+.show_questions{
+    font-family: 'Song Myung', serif;
+     font-weight: bold;
+     font-size: 20px;
+     background-color: rgb(159, 226, 198) !important;
+     color: rgb(7, 7, 87);
+}

@@ -134,7 +134,7 @@
                 <select class="custom-select" id="type_select">
                     <option value="mcq" id="sexy">Multiple choice questions</option>
                     <option value="short">Short Answers</option>
-                    <option value="long">Long</option>
+                    <option value="long">Long Answers</option>
                     <option value="Tf">True or False</option>
                     <option value="Match">Match the following</option>
                 </select>
@@ -578,11 +578,11 @@
                         for (i = 0; i < data.ids.length; i++) {                        
                             $("#table1").append(` <tr align="center" id="chpt_name">
                                     <th scope="col">${i+1}</th>
-                                <td >${data.names[i]}</td>
+                                <td width="40%" >${data.names[i]}</td>
                             
-                                <td >${data.easy[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; " id="easy${i}"></td>
-                                <td>${data.medium[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; "  id="medium${i}"> </td>
-                                <td>${data.hard[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; "  id="hard${i}"></td>
+                                <td  width="20%" >${data.easy[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; " id="easy${i}"></td>
+                                <td  width="20%">${data.medium[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; "  id="medium${i}"> </td>
+                                <td  width="20%">${data.hard[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; "  id="hard${i}"></td>
                                 </tr>`);
                            
                         }  

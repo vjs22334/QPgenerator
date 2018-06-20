@@ -15,7 +15,7 @@
             <h2>Chapters</h2>
         </div>
         <div class="row justify-content-center">
-        <div class="col-md-3 offset-md-1">
+        <div class="col-md-3 ">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text selector" style=" "for="inputGroupSelect01">Grade</label>
@@ -25,7 +25,7 @@
             </div>
 
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -71,7 +71,7 @@
             </div>
             <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" id ="delete" class="btn btn-primary" data-dismiss="modal">Delete Chapter</button>
+                            <button type="button" id ="delete" class="btn btn-danger" data-dismiss="modal">Delete Chapter</button>
             </div>
               
             </div>
@@ -111,8 +111,8 @@ function showChapter(){
                 $('.list1').append(`<li class='list-group-item  list-group-item-primary list-group-item-action show_questions' id="${chapter_ids[i]}"><div class="d-inline-flex p-2" style="font-size:20px;">${chapter_names[i]}</div>`+
                     {% if user.profile.is_admin %}
                         `<div class="btn-group" style="float:right; role="group" aria-label="Basic example">
-                        <button type="button"   class="btn btn-primary Delete" data-toggle="modal" data-target="#exampleModal" >Delete</button>
-                        <button type="button" class="btn btn-primary  Edit" >Edit</button>
+                        <button type="button"   class="btn btn-danger Delete" data-toggle="modal" data-target="#exampleModal" >Delete</button>
+                        <button type="button" class="btn btn-warning  Edit" >Edit</button>
                         </div>`+
                     {% endif %}
                 `</li> `)

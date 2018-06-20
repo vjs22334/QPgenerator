@@ -15,7 +15,7 @@
 {% block content %}
 
 <br>
-    <div class="container my-4">
+    <div class="container my-5">
 
         <div class="row justify-content-center my-4">
             <h2>Search Papers</h2>
@@ -51,16 +51,17 @@
         </div>
     </div>
 
-    <div class="container table-respnsive">
+    <div class="container table-responsive">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                    <table class="table table-sm thead-dark">
+            <div class="col-md-10">
+                    <table class="table table-sm thead-dark" style="width:100%;">
                         <thead class="thead-dark" style="text-align:center">
                             <tr>
                                 <th scope="col">#</th>
                                 <th >Exam Heading</th>
                                 <th >Exam Date</th>
                                 <th >Created Date</th>
+                                <th>Delete </th>
                             </tr>
                         </thead>
                         <tbody id="papers_tbody">
@@ -111,10 +112,9 @@
 
         $(".table").hide();
         $("#no_papers").hide();
-
-
-        $("#show_papers").click(function(){
-            
+        
+    function showpapers()
+         { 
             $.ajax({
                 url: '{% url "get_papers" %}',
                 data:{
@@ -135,10 +135,11 @@
                     {
                         $('#papers_tbody').append(`<tr>
                         <th scope="col">${i+1}</th>    
-                        <td class = 'get_paper' style="text-align:center ;font-weight:bold"id="${papers[i].id}"><a>${papers[i].heading}</a></td>
-                        <td class = 'get_paper' style="text-align:center;" id="${papers[i].id}"><a>${papers[i].date}</a></td>
-                        <td class = 'get_paper' style="text-align:center;" id="${papers[i].id}"><a>${papers[i].created_date}</a></td>
-                        </tr>`)
+                        <td class = 'get_paper py-2' width="50%" style="  text-align:center ;font-weight:bold"id="${papers[i].id}"><a>${papers[i].heading}</a></td>
+                        <td class = 'get_paper py-2' width="20%" style="  text-align:center;" id="${papers[i].id}"><a>${papers[i].date}</a></td>
+                        <td class = 'get_paper py-2' width="20%" style="  text-align:center;" id="${papers[i].id}"><a>${papers[i].created_date}</a></td>
+                        <td class = 'get_paper py-2' width="10%" > <button class="btn btn-danger btn-sm delete" id="${papers[i].id} > Delete Paper </button> </td>     
+                    </tr>`)
 
                     }
                 }
@@ -151,7 +152,34 @@
 
                 }
             })
+        }
+
+        $("#show_papers").click(function(){
+            
+            showpapers();
         })
+
+        $(document).on("click",".delete",function(event){
+            $.ajax({
+                type:'POST',
+                url:"{% url 'delete_paper'% }",
+                data : { "p_id":$(this).attr(id)
+                },
+
+                success:function(){   
+                    if(status_code == '200')
+                    {
+                        showpapers();
+                    }
+                    else{
+                        alert("Something went wrong! Call support")
+                    }
+
+                }
+
+          })
+        })
+
 
         $(document).on("click", ".get_paper", function(event){
             console.log($(this).attr('id'));

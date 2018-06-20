@@ -54,7 +54,7 @@
             <div class="class">  
                 <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Grade</label>
+                            <label class="input-group-text selector" for="inputGroupSelect01">Grade</label>
                         </div>
                         <select class="custom-select" id="class-sel"></select>
                 </div> 
@@ -82,7 +82,7 @@
         <div class="col-md-4">
                 <div class="input-group mb-3 ">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="subject-sel">Subject</label>
+                                <label class="input-group-text selector" for="subject-sel">Subject</label>
                             </div>
                             <select class="custom-select" id="subject-sel"></select>
                     </div> 
@@ -147,15 +147,18 @@
 </div>
 
 
-<div class="dropdown d-none d-sm-block"  id="show_sections">
-        <button class="btn btn-primary dropdown-toggle btn-sm" id="sections" type="button" data-toggle="dropdown">All Sections
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu" id="dropdown_menu">
-          <li><a href="#Section1">Section 1</a></li>
-          <li><a href="#Section2">Section 2 </a></li>
-          <li><a href="#Section3">Section 3</a></li>
-        </ul>
-      </div>
+
+      
+<div class="dropdown d-none d-sm-block" id="show_sections">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="sections" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    All Sections
+  </button>
+  <div class="dropdown-menu" id="dropdown_menu1" aria-labelledby="dropdown_menu">
+   <a href="#Section1"> <button class="dropdown-item" type="button">Section 1 </button></a>
+    <a href="#Section2"><button class="dropdown-item" type="button">Section 2</button></a>
+    <a href="#Section3"><button class="dropdown-item" type="button">Section 3</button></a>
+  </div>
+</div>
 
 
 <!--All Sections-->
@@ -326,15 +329,15 @@
 
                 <div class="modal-footer">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-md-4 offset-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 offset-md-6">
                                 <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1">Marks per question</span>
                                 </div>
                                 <input type="number" id="mpq" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" >
                               </div> </div>
-                              <div class="col-md-3">
+                              <div class="col-md-2">
                 <button type="button" class="btn btn-info"id="add">Add</button></div>
                 </div>
                 </div>
@@ -479,8 +482,8 @@
 
                     `)
 
-                    $("#dropdown_menu").append(` 
-                    <li><a href="#Section${c}">Section ${c}</a></li>`)
+                    $("#dropdown_menu1").append(` 
+                    <a href="#Section${c}"> <button class="dropdown-item" type="button">Section ${c} </button></a>`)
 
                     c++;
 
@@ -577,9 +580,9 @@
                                     <th scope="col">${i+1}</th>
                                 <td >${data.names[i]}</td>
                             
-                                <td >${data.easy[i]} <input type="number" class="mx-1" style="width: 60px;text-align:center; " id="easy${i}"></td>
-                                <td>${data.medium[i]} <input type="number" class="mx-1" style="width: 60px;text-align:center; "  id="medium${i}"> </td>
-                                <td>${data.hard[i]} <input type="number" class="mx-1" style="width: 60px;text-align:center; "  id="hard${i}"></td>
+                                <td >${data.easy[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; " id="easy${i}"></td>
+                                <td>${data.medium[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; "  id="medium${i}"> </td>
+                                <td>${data.hard[i]} <input type="number" class="mx-1" style="width: 55px;text-align:center; "  id="hard${i}"></td>
                                 </tr>`);
                            
                         }  

@@ -7,3 +7,17 @@ select{
 #id_image{
     height: auto !important;
 }
+
+label{
+    font-family: 'Song Myung', serif;
+    font-weight: bold;
+    font-size: 20px;
+
+    
+}
+.custom-select{
+    font-family: 'Crete Round', serif;
+    font-weight: bold;
+   
+  
+}

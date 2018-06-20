@@ -74,7 +74,7 @@
 
 
 
-                        <ul class=" nav navbar-nav flex-row mb-md-1 mt-md-0 mb-3 mt-2 ml-auto">
+                        <ul class=" nav navbar-nav flex-row d-none d-md-flex mb-md-1 mt-md-0 mb-3 mt-2 ml-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="{% url 'home'%}">Home</a>
                             </li>
@@ -134,7 +134,69 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="{% url 'edit_chapters'%}">Contact us</a>
                             </li>
-                        </ul>     
+                        </ul>
+                        
+                        <ul class=" nav navbar-nav flex-column d-md-none mb-md-1 mt-md-0 mb-3 mt-2 ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'home'%}">Home</a>
+                            </li>
+
+                            <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'home'%}">About us</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Chapters <b class="caret"></b>
+                                </a>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="{% url 'edit_chapters'%}">View chapters</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item" href="{% url 'manage_chapters'%}">add chapters</a>
+                                        </div>
+                            </li>
+
+                            <li class="nav-item dropdown active">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Questions
+                                </a>
+              
+                                <div class="dropdown-menu">
+              
+                                    <a class="dropdown-item" href="{% url 'manage_questions'%}">Add Questions</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'view_questions'%}">View Questions</a>
+                                      
+                                </div>
+                            </li>
+
+
+
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Test Papers
+                                </a>
+
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{% url 'generate_test'%}">Generate test paper</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'view_papers'%}">View generated papers</a>
+                                                    
+                                </div>
+                            </li>
+                            
+                            
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'edit_chapters'%}">Pricing</a>
+                            </li>
+                            
+                            
+                            
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'edit_chapters'%}">Contact us</a>
+                            </li>
+                        </ul>
                        
                     </div>
                 </div>

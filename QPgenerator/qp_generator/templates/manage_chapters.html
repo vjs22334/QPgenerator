@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Add chapters{% endblock %}
+
+{% block css%}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/manage_chapters.css' %}"
+{% endblock %}
 {% block content %}
 
     <br>
@@ -9,20 +15,24 @@
         <h3>Add/Update chapters</h3>
         
     </div>
-    {% if chapter %}
-    <button type="button" class="btn btn-danger delete" id="{{chapter.id}}" value="delete">delete this chapter</button>
-    {% endif %}
+
+   
     <div class="row justify-content-center">
     <form method="POST" action="{{ action }}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ ch_form.as_p}}
-        <button type="submit" class="btn btn-primary" name="save" value="save">save</button>
-        <button type="submit" class="btn btn-primary" name="save_and_add_another" value="save_and_add_another">save and add another</button>    </form>
+        <button type="submit" class="btn btn-info" name="save" value="save">Save</button>
+        <button type="submit" class="btn btn-info" name="save_and_add_another" value="save_and_add_another">Save and Add Another</button>  
+        {% if chapter %}
+    
+                    <button type="button" class="btn btn-danger delete" id="{{chapter.id}}" value="delete">Delete this Chapter</button>
+                    {% endif %}
+    </form>
     </div>
     </div>
 
 {% endblock %}
-{% block scripts %}{% load static %}
+{% block scripts %}
 <script src="{% static 'js/chained_dropdown.js' %}"></script>
 {% if chapter %}
 <script src="{% static 'js/ajax_setup.js' %}"></script>

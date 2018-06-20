@@ -74,7 +74,9 @@ class ChapterForm(forms.ModelForm):
     class Meta:
         model = models.Chapter
         exclude = ('school',)
-
+        labels={
+            "ch_name":"Chapter_Name"
+        }
     def __init__(self,*args,**kwargs):
         super(ChapterForm,self).__init__(*args,**kwargs)
         self.fields["grade"].initial = ""

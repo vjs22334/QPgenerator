@@ -45,8 +45,8 @@
 
                             {%if user.is_authenticated %}
 
-                            <li clas="nav-item">
-                                <p class="navbar-text" style="margin-bottom: 0; ">Welcome {{ user.username }} </p>
+                            <li class="nav-item px-2">
+                                <p class="navbar-text" style="margin-bottom: 0; ">Welcome <strong style="color:rgb(14, 209, 216)">{{ user.username }}</strong> </p>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout'%}">Log out</a>
@@ -82,20 +82,29 @@
                             <li class="nav-item active">
                                     <a class="nav-link" href="{% url 'home'%}">About us</a>
                             </li>
-                            
+                            {% if user.profile.is_admin %}
                             <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                     Chapters <b class="caret"></b>
                                 </a>
                                         <div class="dropdown-menu">
                                           <a class="dropdown-item" href="{% url 'edit_chapters'%}">View chapters</a>
-                                          {% if user.profile.is_admin %}
+                                          
                                           <div class="dropdown-divider"></div>
                                           <a class="dropdown-item" href="{% url 'manage_chapters'%}">add chapters</a>
-                                          {% endif %}
+                                       
                                         </div>
                             </li>
+                            
 
+                            {% else %}
+                            <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'edit_chapters'%}">View Chapters</a>
+                            </li>
+                            {% endif %}
+
+
+                            {% if user.profile.is_admin %}
                             <li class="nav-item dropdown active">
 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -103,16 +112,20 @@
                                 </a>
               
                                 <div class="dropdown-menu">
-                                    {% if user.profile.is_admin %}
+                                  
                                     <a class="dropdown-item" href="{% url 'manage_questions'%}">Add Questions</a>
                                     <div class="dropdown-divider"></div>
-                                    {% endif %}
+                                    
                                     <a class="dropdown-item" href="{% url 'view_questions'%}">View Questions</a>
                                       
                                 </div>
                             </li>
 
-
+                            {% else %}
+                            <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'view_questions'%}">View Questions</a>
+                            </li>
+                            {% endif %}
 
                             <li class="nav-item dropdown active">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

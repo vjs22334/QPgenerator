@@ -15,7 +15,7 @@
 {% block content %}
 
 <br>
-    <div class="container my-4">
+    <div class="container my-5">
 
         <div class="row justify-content-center my-4">
             <h2>Search Papers</h2>
@@ -51,16 +51,17 @@
         </div>
     </div>
 
-    <div class="container table-respnsive">
+    <div class="container table-responsive">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                    <table class="table table-sm thead-dark">
+            <div class="col-md-10">
+                    <table class="table table-sm thead-dark" style="width:100%;">
                         <thead class="thead-dark" style="text-align:center">
                             <tr>
                                 <th scope="col">#</th>
                                 <th >Exam Heading</th>
                                 <th >Exam Date</th>
                                 <th >Created Date</th>
+                                <th>Delete </th>
                             </tr>
                         </thead>
                         <tbody id="papers_tbody">
@@ -86,6 +87,29 @@
     </div>
 </div>
 </div>
+
+<!--Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Question Paper</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to Delete this Question Paper?
+            </div>
+            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" id ="delete" class="btn btn-danger delete" data-dismiss="modal">Delete Paper</button>
+            </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}
 
 
@@ -98,23 +122,28 @@
 
 
 {% block scripts %}
-{% load static %}
+
+
+
+
+
 
 <script src="{% static 'js/get_grades_and_subjects.js' %}"></script>
 <script src="{% static 'js/jquery-ajax-native.js' %}"></script>
+<script src="{% static 'js/ajax_setup.js' %}"></script>
 <script>
 
     var papers;
+    var paper_id
 
     $(function(){
         //Hide Function
 
         $(".table").hide();
         $("#no_papers").hide();
-
-
-        $("#show_papers").click(function(){
-            
+        
+    function showpapers()
+         { 
             $.ajax({
                 url: '{% url "get_papers" %}',
                 data:{
@@ -135,10 +164,11 @@
                     {
                         $('#papers_tbody').append(`<tr>
                         <th scope="col">${i+1}</th>    
-                        <td class = 'get_paper' style="text-align:center ;font-weight:bold"id="${papers[i].id}"><a>${papers[i].heading}</a></td>
-                        <td class = 'get_paper' style="text-align:center;" id="${papers[i].id}"><a>${papers[i].date}</a></td>
-                        <td class = 'get_paper' style="text-align:center;" id="${papers[i].id}"><a>${papers[i].created_date}</a></td>
-                        </tr>`)
+                        <td class = 'get_paper py-2' width="50%" style="  text-align:center ;font-weight:bold"id="${papers[i].id}"><a>${papers[i].heading}</a></td>
+                        <td class = 'get_paper py-2' width="20%" style="  text-align:center;" id="${papers[i].id}"><a>${papers[i].date}</a></td>
+                        <td class = 'get_paper py-2' width="20%" style="  text-align:center;" id="${papers[i].id}"><a>${papers[i].created_date}</a></td>
+                        <td class = 'py-2' width="10%" > <button class="btn btn-danger btn-sm Delete" id="${papers[i].id}" data-toggle="modal" data-target="#exampleModal" > Delete Paper </button> </td>     
+                    </tr>`)
 
                     }
                 }
@@ -151,7 +181,38 @@
 
                 }
             })
+        }
+        $(document).on("click",".Delete",function(event){
+
+            paper_id=$(this).attr('id');
         })
+       
+        $("#show_papers").click(function(){
+            
+            showpapers();
+        })
+
+        $(document).on("click",".delete",function(event){
+            $.ajax({
+                type:'POST',
+                url:"{% url 'delete_paper' %}",
+                data : { "p_id":paper_id
+                },
+
+                success:function(data){   
+                    if(data.status_code == '200')
+                    {
+                        showpapers();
+                    }
+                    else{
+                        alert("Something went wrong! Call support")
+                    }
+
+                }
+
+          })
+        })
+
 
         $(document).on("click", ".get_paper", function(event){
             console.log($(this).attr('id'));

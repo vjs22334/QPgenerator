@@ -85,6 +85,9 @@
 <script src="{% static 'js/ajax_setup.js' %}"></script>
 <script>
     $(function(){
+        var href=$("div.form-group a").attr("href");
+        href="/"+href
+        $("div.form-group a").attr("href",href)
         $(".delete").click(function(){
             $.ajax({
                 type : "POST",

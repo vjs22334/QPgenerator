@@ -93,7 +93,7 @@
 
         $("#show_papers").click(function(){
             $.ajax({
-                url: '/app/get_papers',
+                url: '{% url "get_papers" %}',
                 data:{
                     'grade':$('#class-sel').val(),
                     'subject':$('#subject-sel').val(),
@@ -124,7 +124,7 @@
             console.log($(this).attr('id'));
             $.ajax({
                 dataType: 'native',
-                url : "/app/get_paper_pdf",
+                url : "{% url 'get_paper_pdf' %}",
                 data : {
                     "id":$(this).attr('id'),
                 },

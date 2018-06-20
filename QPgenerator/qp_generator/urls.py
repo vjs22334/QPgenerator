@@ -33,6 +33,7 @@ urlpatterns=[
     path('delete_question/',ajax_views.delete_question,name="delete_question"),
     path('delete_chapter/',ajax_views.delete_chapter,name="delete_chapter"),
     path('forgot_password/',views.forgot_password,name="forgot_password"),
+    path('delete_paper/',ajax_views.delete_paper,name="delete_paper"),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.activate,name='activate'),
     re_path(r'^reset_password/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',views.reset_password,name='reset_password'),
 

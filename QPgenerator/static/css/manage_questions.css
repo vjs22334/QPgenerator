@@ -16,8 +16,29 @@ label{
     
 }
 .custom-select{
-    font-family: 'Crete Round', serif;
+    font-family: 'Bree Serif', serif;
     font-weight: bold;
+    font-size: 19px;
+    width:40% !important;
    
   
+}
+#id_image{
+    width:40%;
+}
+#id_grade{
+    width:20% !important;
+}
+
+#id_difficulty{
+    width: 25% !important;
+}
+#id_question_text{
+    font-size: 20px !important;
+    max-height: 150px;
+}
+
+#id_answer{
+    font-size: 20px !important;
+    max-height: 150px;
 }

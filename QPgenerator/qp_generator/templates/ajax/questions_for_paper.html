@@ -13,15 +13,17 @@
                 <h5 style="color:black;font-weight:bold ; font-family: Arial, Helvetica, sans-serif;">{{match.question.question_text}}</h5>
 
                 {% if match.question.image %}
-                <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{ match.question.image.url }}"/>
+                <img class="img-fluid" style="object-fit:contain; width:350px; height:240px;" src="/{{ match.question.image.url }}"/>
                 {% endif %}
-            
             
                     <ol type="a" style="list-style-position: outside;">
                     {% for m in match.q_and_a_list %}
                         {% if m.2.image %}
-                        <li style="font-size:20px;">
-                            <p><img class="img-fluid" style="object-fit:contain; width:260px; height:200px;" src="/{{m.2.image.url }}"/>      ---      {{m.1}}</p>
+                        <li >
+                                <div style="min-height:100px;"><span style="  float:left;"><img class="img-fluid" style="object-fit:contain; width:130px; height:100px;" src="/{{m.2.image.url }}"/>
+                                </span> 
+                                    <span style=" display: inline-block;margin:0 auto; width:400px; text-align:center ;font-size:20px;">{{m.1}}</span></div>
+   
                         </li>
                         {% else %}
                         <li style="font-size:20px;">
@@ -57,12 +59,12 @@
 
         <ol >
 
-            {% for q in list %}
+        {% for q in list %}
             <li style="margin:10px 0">
             <h5 style="color:black;font-weight:bold">{{q.question_text}}</h5>
 
             {% if q.image %}
-                <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{q.image.url }}"/>
+                <img class="img-fluid" style="object-fit:contain; width:350px; height:240px;" src="/{{q.image.url }}"/>
             {% endif %}
 
             {% if q_type == "mcq" or q_type == "fb" %}

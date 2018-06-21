@@ -10,6 +10,7 @@ label{
     font-weight: bold;
     font-size:20px;
     text-align: center;
+    width:300px;
 }
 
 #id_grade {
@@ -17,6 +18,8 @@ label{
     font-family: 'Song Myung', serif;
     font-weight: bold;
     font-size:20px;
+    width:100px;
+    text-align: center;
 }
 
 
@@ -25,5 +28,7 @@ label{
     font-family: 'Song Myung', serif;
     font-weight: bold;
     font-size:20px;
+    width:150px;
+    text-align: center;
 }
 

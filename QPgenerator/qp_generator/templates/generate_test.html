@@ -129,7 +129,7 @@
 <div class="d-none popover" id="popover_content">
         <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Type</label>
+                    <label class="input-group-text" id="popover_label" for="inputGroupSelect01">Type</label>
                 </div>
                 <select class="custom-select" id="type_select">
                     <option value="mcq" id="sexy">Multiple choice questions</option>
@@ -191,7 +191,7 @@
     </div>
     <div class="row justify-content-end px-4">
 
-    <div class="d-flex flex-row-reverse px-4">
+    <div class="d-flex flex-row-reverse px-4 my-2">
        <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
     </div></div>
     <div class="row justify-content-center ">
@@ -238,7 +238,7 @@
         </div>
         <div class="row justify-content-end px-4">
 
-        <div class="d-flex flex-row-reverse px-4">
+        <div class="d-flex flex-row-reverse px-4 my-2">
                 <button class="btn btn-danger delete_section" style="float: right;" >Delete Section</button>
         </div></div>
         <div class="row justify-content-center ">
@@ -599,14 +599,19 @@
 
 
 
-
-
+        function Alertbox(p)
+        {
+            p.addClass('border');
+            p.addClass('border-danger');
+        }
 
       
         $(document).on("click", "#add", function(event){
             var a=[];
             totalquestions=0
             var mpq=$("#mpq").val();
+            $(".modal-content").find(".border-danger").removeClass('border border-danger')
+
             for (j=0;j<newdata.ids.length;j++){
                 var easy = $("#easy"+j).val();
                 var medium = $("#medium"+j).val();
@@ -629,21 +634,32 @@
                 }
                 if(easy%1!=0 ||  easy<0 || easy>newdata.easy[j])
                 {
-                alert("Enter proper data in 1");
+               
+                Alertbox($("#easy"+j));
+                alert("Enter proper data");
                 return;
                 }
 
+              
+
                 if(medium%1!=0|| medium<0 || medium>newdata.medium[j])
                 {
-                alert("Enter proper data in 2");
+               
+                Alertbox($("#medium"+j));
+                alert("Enter proper data ");
                 return;
                 }
+
                 
                 if(hard%1!=0 || hard<0 || hard>newdata.hard[j])
                 {
-                alert("Enter proper data in 3");
+              
+                Alertbox($("#hard"+j));
+                alert("Enter proper data ");
                 return;
                 }
+
+              
                 totalquestions=totalquestions + parseInt(easy)+ parseInt(medium)+ parseInt(hard);
                 
 
@@ -714,15 +730,15 @@
                
                 <h2 style="text-align:center; font-family: Times New Roman, Times, serif; color:black">${school_name}</h2>
                 <div style="width:100%; text-align:center; margin-bottom:5px;">
-               <div style="  float:left; width:250px;   font-size:22px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Date:${date}</div>  
+               <div style="  float:left; width:250px;   font-size:17px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Date:${date}</div>  
                <div style=" display: inline-block;margin:0 auto; width:400px;font-size:25px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;">  ${heading}</div>
-               <div style="  float:right; width:250px; font-size:22px ;font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Time:${time}</div>
+               <div style="  float:right; width:250px; font-size:17px ;font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Time:${time}</div>
                 </div>
                 
                 <div style="width:100%; text-align:center;">
-                        <div style="  float:left; width:250px;   font-size:22px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Subject:${subject}</div>  
+                        <div style="  float:left; width:250px;   font-size:17px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Subject:${subject}</div>  
                         <div style=" display: inline-block;margin:0 auto; width:400px;font-size:25px; font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> Class- ${grade}</div>
-                        <div style="  float:right; width:250px; font-size:22px ;font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> ${full_marks} marks</div>
+                        <div style="  float:right; width:250px; font-size:17px ;font-family: Times New Roman, Times, serif;color:black;font-weight:bold;"> ${full_marks} marks</div>
                          </div>
                     
                     <br>

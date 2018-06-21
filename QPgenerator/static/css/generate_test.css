@@ -16,12 +16,14 @@
 	font-family: 'Song Myung', serif;
 	font-weight: bold;
 	text-align:center;
+	font-size: 130%;
 }
 
 .section_instruction{
 	font-family: 'Song Myung', serif;
 	font-weight: bold;
 	text-align:center;
+	font-size: 130%;
 }
 #chpt_name{
 	font-family: 'Song Myung', serif;
@@ -92,6 +94,11 @@ select option {
 	font-family: 'Song Myung', serif;
 	font-weight: bold;
 }
+
+#popover_label{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
 .school{
 	font-family: 'Song Myung', serif;
 	text-align:center;
@@ -130,6 +137,7 @@ select option {
 	font-family: 'Song Myung', serif;
    font-weight: bold;
    text-align: center;
+   font-size: 140%
 }
 
 ::-webkit-input-placeholder {

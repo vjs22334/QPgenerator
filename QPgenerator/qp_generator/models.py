@@ -75,7 +75,7 @@ class Question(models.Model):
     question_text = models.TextField()
     chapter = models.ForeignKey(Chapter,on_delete = models.CASCADE)
     answer = models.TextField(null=True,blank = True)
-    image = models.ImageField(upload_to="question",null=True,blank=True,help_text="200*50 is recommended")
+    image = models.ImageField(upload_to="question",null=True,blank=True,help_text="width:350px height:240px is recommended")
     created_date = models.DateTimeField("created date")
     school = models.ForeignKey(School,on_delete=models.CASCADE)
     def __str__(self):
@@ -95,7 +95,7 @@ class Match(models.Model):
     question_text = models.CharField(max_length=100)
     answer_text = models.CharField(max_length=100)
     question = models.ForeignKey(Question,on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="match",null=True,blank=True)
+    image = models.ImageField(upload_to="match",null=True,blank=True,help_text="width:260px height:200px is recom ")
 
     def __str__(self):
         return self.question_text    

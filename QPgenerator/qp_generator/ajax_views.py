@@ -204,21 +204,28 @@ def randList(sample,k):
     return result
 
 @login_required_message
+@require_http_methods(['POST',])
 def to_pdf(request):
-    html_string = request.GET.get("html_data")
+    html_string = request.POST.get("html_data")
     html = HTML(string=html_string,base_url=request.build_absolute_uri()
     )
     filename = 'Qpaper'+str(timezone.now())+'.pdf'
     file_path = path.join(MEDIA_ROOT,'tmp/')
     absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
+<<<<<<< HEAD
     html.write_pdf(target=absolute_path,stylesheets=[CSS('/home/raj007/djangogirls/myvenv/bangalore/QPgenerator/QPgenerator/static/css/bootstrap.min.css')])
     grade_id = request.GET.get("grade")
     subject_id = request.GET.get("subject")
+=======
+    html.write_pdf(target=absolute_path)
+    grade_id = request.POST.get("grade")
+    subject_id = request.POST.get("subject")
+>>>>>>> f8aeb889018e9753b2fc6549ea9bce1352867402
     grade = models.Grade.objects.get(id=grade_id)
     subject = models.Subject.objects.get(id=subject_id)
-    heading = request.GET.get('heading')
+    heading = request.POST.get('heading')
     school = request.user.profile.school
-    date = request.GET.get('date')
+    date = request.POST.get('date')
 
     fs = FileSystemStorage(path.join(MEDIA_ROOT,'tmp/'))
     with fs.open(filename) as pdf:

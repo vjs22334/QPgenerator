@@ -13,7 +13,7 @@
                 <h5 style="color:black;font-weight:bold ; font-family: Arial, Helvetica, sans-serif;">{{match.question.question_text}}</h5>
 
                 {% if match.question.image %}
-                <img class="img-fluid" style="object-fit:contain; width:520px; height:400px;" src="/{{ match.question.image.url }}"/>
+                <img class="img-fluid" style="object-fit:contain; width:310px; height:250px;" src="/{{ match.question.image.url }}"/>
                 {% endif %}
             
             
@@ -21,7 +21,7 @@
                     {% for m in match.q_and_a_list %}
                         {% if m.2.image %}
                         <li style="font-size:20px;">
-                            <p><img class="img-fluid" style="object-fit:contain; width:260px; height:200px;" src="/{{m.2.image.url }}"/>      ---      {{m.1}}</p>
+                            <p><img class="img-fluid" style="object-fit:contain; width:210px; height:150px;" src="/{{m.2.image.url }}"/>      ---      {{m.1}}</p>
                         </li>
                         {% else %}
                         <li style="font-size:20px;">

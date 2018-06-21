@@ -212,9 +212,9 @@ def to_pdf(request):
     filename = 'Qpaper'+str(timezone.now())+'.pdf'
     file_path = path.join(MEDIA_ROOT,'tmp/')
     absolute_path = path.join(MEDIA_ROOT,'tmp/'+filename)
-    html.write_pdf(target=absolute_path)
-    grade_id = request.POST.get("grade")
-    subject_id = request.POST.get("subject")
+    html.write_pdf(target=absolute_path,stylesheets=[CSS('/home/raj007/djangogirls/myvenv/bangalore/QPgenerator/QPgenerator/static/css/bootstrap.min.css')])
+    grade_id = request.GET.get("grade")
+    subject_id = request.GET.get("subject")
     grade = models.Grade.objects.get(id=grade_id)
     subject = models.Subject.objects.get(id=subject_id)
     heading = request.POST.get('heading')

@@ -20,3 +20,7 @@ div.form-group input{
 .form-text{
      color:rgb(15, 14, 3) !important; 
 }
+
+.form-control{
+    font-size: 10px;
+}

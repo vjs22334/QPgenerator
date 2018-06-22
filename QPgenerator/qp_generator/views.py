@@ -68,7 +68,7 @@ def manage_questions(request,question_id=None,grade_id=None,subject_id=None,chap
     else:
         q = None
     ChoiceFormset = inlineformset_factory(models.Question,models.Choice,fields=("choice_text",),max_num=4,extra=4)
-    MatchFormset = inlineformset_factory(models.Question,models.Match,fields=("question_text","answer_text","image",),max_num=4,extra=4)
+    MatchFormset = inlineformset_factory(models.Question,models.Match,fields=("question_text","answer_text","image",),max_num=6,extra=6)
     if request.method == 'POST':
         question_form = forms.QuestionForm(request.POST,request.FILES,instance=q)
         chapter_form = forms.QuestionListForm(request.POST)

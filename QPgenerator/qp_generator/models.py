@@ -50,9 +50,9 @@ class Subject(models.Model):
         return self.subject_name 
 
 class Chapter(models.Model):
-    ch_name = models.CharField(max_length=500)
-    subject = models.ForeignKey(Subject,on_delete = models.CASCADE)
     grade = models.ForeignKey(Grade,on_delete = models.CASCADE)
+    subject = models.ForeignKey(Subject,on_delete = models.CASCADE)
+    ch_name = models.CharField(max_length=500)
     school = models.ForeignKey(School,on_delete=models.CASCADE)
     def __str__(self):
         return self.ch_name

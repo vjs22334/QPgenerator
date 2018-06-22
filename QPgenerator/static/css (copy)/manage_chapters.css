@@ -1,0 +1,44 @@
+label{
+    font-family: 'Song Myung', serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#id_ch_name{
+
+    font-family: 'Song Myung', serif;
+    font-weight: bold;
+    font-size:20px;
+    text-align: center;
+    width:300px;
+}
+
+#id_grade {
+
+    font-family: 'Song Myung', serif;
+    font-weight: bold;
+    font-size:20px;
+    width:100px;
+    text-align: center;
+}
+
+
+#id_subject{
+
+    font-family: 'Song Myung', serif;
+    font-weight: bold;
+    font-size:20px;
+    width:150px;
+    text-align: center;
+}
+
+select option {
+    margin: 40px;
+    background: rgb(27, 26, 26);
+	color: rgb(229, 227, 231);
+	
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}

@@ -1,0 +1,209 @@
+#heading{
+	font-family: 'Song Myung', serif;
+	font-size: 125%;
+	text-align: center;
+	font-weight: bold;
+}
+
+#show_sections{
+	position: -webkit-sticky; /* Safari */
+    position: fixed;
+	top: 230px;
+	
+	
+}
+.section_heading{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	text-align:center;
+	font-size: 130%;
+}
+
+.section_instruction{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	text-align:center;
+	font-size: 130%;
+}
+#chpt_name{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+
+}
+#date_ex{
+
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+}
+select option {
+    margin: 40px;
+    background: rgb(27, 26, 26);
+    color: rgb(229, 227, 231);
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+
+#popover_content{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+
+
+}
+
+#table_heading{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+
+}
+#sexy{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+}
+
+#type_select{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+
+}
+#class-sel{
+
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+}
+#subject-sel{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+	 
+}
+.selector{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+
+#popover_label{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+.school{
+	font-family: 'Song Myung', serif;
+	text-align:center;
+	color: black;
+}	
+.heading{
+    background-color:teal;
+	margin:3px;
+	min-height: 50px;
+	text-align:center;
+}	
+
+#time{
+	font-family: 'Song Myung', serif;
+   font-weight: bold;
+	text-align:center;
+
+}	
+
+#date{
+	
+	font-family: Georgia;
+	font-weight: bold;
+	 text-align:center;
+
+}
+	
+	
+
+#basic-addon1{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+
+}
+#instruction{
+	font-family: 'Song Myung', serif;
+   font-weight: bold;
+   text-align: center;
+   font-size: 140%
+}
+
+::-webkit-input-placeholder {
+
+   text-align: center;
+
+}
+
+::-moz-placeholder { /* Firefox 18- */
+
+   text-align: center;
+
+}
+
+::-mozplaceholder {  /* Firefox 19+ */
+
+   text-align: center;
+
+}
+
+::-ms-input-placeholder {  
+
+   text-align: center;
+
+}
+.popover{
+    max-width: 100%;
+}
+
+
+.ui-datepicker {
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+    background:#2F99B4;  
+}
+.ui-datepicker .ui-datepicker-title {
+	margin: 0 2.3em;
+	line-height: 1.8em;
+	text-align: center;
+    color:#FFFFFF;
+    background:#2F99B4;  
+}
+.ui-datepicker table {
+	width: 100%;
+	font-size: .7em;
+	border-collapse: collapse;
+    font-family:verdana;
+	margin: 0 0 .4em;
+    color:#000000;
+    background:#9EEFEE;    
+}
+/*This is date TD */
+.ui-datepicker td {
+
+	border: 0;
+	padding: 1px;
+
+    
+}
+.ui-datepicker td span,
+.ui-datepicker td a {
+	display: block;
+	padding: .8em;
+	text-align: right;
+	text-decoration: underline;
+}
+
+  

@@ -9,3 +9,14 @@
      background-color: rgb(218, 149, 208) !important;
      color: rgb(7, 7, 87);
 }
+
+select option {
+    margin: 40px;
+    background: rgb(27, 26, 26);
+	color: rgb(229, 227, 231);
+	
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}

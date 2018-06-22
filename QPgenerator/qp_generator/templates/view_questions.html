@@ -19,7 +19,7 @@
 <br>
     <div class="container my-5">
 
-        <div class="row justify-content-center my-4">
+        <div class="row justify-content-center my-3">
             <h1 style="	font-family: 'Bree Serif', serif;">Search Questions</h1>
         </div>
         <div class="row justify-content-center">
@@ -34,7 +34,7 @@
                 </div> 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -62,7 +62,7 @@
 
         <!--chapters list -->
     <div class="container my-4">
-        <div class="row justify-content-center py-3" style="border-style:groove;">
+        <div class="row justify-content-center py-3">
             <div class="col-md-5">
                     <ul class="list-group list1 ">
                     </ul>     
@@ -85,10 +85,10 @@
 
 
     <!--popover content-->
-    <div class="d-none popover" data-trigger="focus"  id="popover_content">
+    <div class="d-none popover" style="font-size:250px;" data-trigger="focus"  id="popover_content">
             <div class="input-group mb-3">
                     <input type="text" class="form-control chapter_name" placeholder="Chapter Name">
-                    <button type="button" class="btn btn-primary" id="add_chapter" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-success" id="add_chapter" data-toggle="modal" data-target="#exampleModal">
                             Add Chapter
                     </button>
             </div>
@@ -169,9 +169,11 @@ function showChapter(){
             for(i=0;i<chapter_names.length;i++)
             {
                 if(i%2==0)
-                $('.list1').append(`<a  class='list-group-item list-group-item-danger  list-group-item-action show_questions'  style="" id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
+                $('.list1').append(`<a  class='list-group-item list-group-item-primary list-group-item-action show_questions'  style="font-family: 'Song Myung', serif;
+                font-weight: bold; font-size:20px; color:rgb(2,2,73)" id="${chapter_ids[i]}">${chapter_names[i]}</a>`)
                 else
-                $('.list2').append(`<a  style="  "class='list-group-item list-group-item-warning list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
+                $('.list2').append(`<a  style="font-family: 'Song Myung', serif;
+                font-weight: bold; font-size:20px;  color:rgb(2,2,73) " class='list-group-item list-group-item-primary list-group-item-action show_questions' id="${chapter_ids[i]}" >${chapter_names[i]}</a>`)
 
             }
 

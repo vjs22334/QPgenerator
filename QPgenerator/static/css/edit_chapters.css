@@ -12,6 +12,21 @@
 	 font-size: 18px;
 	 
 }
+.modal-title{
+	color:rgb(2, 2, 73);
+	font-weight: bold;
+}
+.show_questions{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+
+}
+
+
+.modal-header{
+	background-color: rgb(138, 226, 214);
+	
+}
 .selector{
 	font-family: 'Song Myung', serif;
 	font-weight: bold;

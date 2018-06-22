@@ -9,9 +9,11 @@
         <ol>
                {% for match in match_list %}
                 <li style="margin:10px 0;">
-    
+                    {% if match.question %}
                 <h5 style="color:black;font-weight:bold ; font-family: Arial, Helvetica, sans-serif;">{{match.question.question_text}}</h5>
-
+                    {% else %}
+                    <h5 style="color:black;font-weight:bold ; font-family: Arial, Helvetica, sans-serif;">Match the following</h5>
+                   {%  endif %}     
                 {% if match.question.image %}
                 <img class="img-fluid" style="object-fit:contain; width:310px; height:250px;" src="/{{ match.question.image.url }}"/>
                 {% endif %}
@@ -20,9 +22,9 @@
                     {% for m in match.q_and_a_list %}
                         {% if m.2.image %}
                         <li >
-                                <div style="min-height:100px;"><span style="  float:left;"><img class="img-fluid" style="object-fit:contain; width:130px; height:100px;" src="/{{m.2.image.url }}"/>
+                                <div style="min-height:100px;"><span style="  float:left; width:250px;"><img class="img-fluid" style="object-fit:contain; width:130px; height:100px;" src="/{{m.2.image.url }}"/>
                                 </span> 
-                                    <span style=" display: inline-block;margin:0 auto; width:400px; text-align:center ;font-size:20px;">{{m.1}}</span></div>
+                                    <span style=" display: inline-block;margin:0 auto; width:400px; font-size:20px;">{{m.1}}</span></div>
                                 <br>
                         </li>
                         {% else %}

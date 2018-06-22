@@ -167,7 +167,7 @@ def random_questions(request):
         final_q_list=[]
         q_set=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("match_set")
         #import pdb; pdb.set_trace()
-        if not mix_matches:
+        if not mix_matches == "true":
             for q in q_set:
                 match_question = MatchQuestion(list(q.match_set.all()),q)
                 match_question.shuffle_ans()

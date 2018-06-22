@@ -23,6 +23,17 @@ label{
    
   
 }
+select option {
+    margin: 40px;
+    background: rgb(27, 26, 26);
+	color: rgb(229, 227, 231);
+	
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+
 #id_image{
     width:40%;
 }

@@ -1,0 +1,26 @@
+label{
+    font-family: 'Song Myung', serif !important;
+    font-weight: bold !important;
+    color: rgb(83, 236, 224) !important;
+    font-size: 20px;
+}
+div.form-group input{
+
+    font-family: 'Song Myung', serif !important;
+    font-weight: bold !important;
+    font-size: 20px;
+}
+
+#sign_up{
+    font-family: 'Song Myung', serif !important;
+    font-weight: bold !important;
+    color: rgb(15, 9, 92) !important;
+}
+
+.form-text{
+     color:rgb(15, 14, 3) !important; 
+}
+
+.form-control{
+    font-size: 10px;
+}

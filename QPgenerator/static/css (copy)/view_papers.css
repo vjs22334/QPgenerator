@@ -1,0 +1,29 @@
+#class-sel{
+
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+}
+#subject-sel{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+	 
+}
+.selector{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+
+select option {
+    margin: 40px;
+    background: rgb(27, 26, 26);
+	color: rgb(229, 227, 231);
+	
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}

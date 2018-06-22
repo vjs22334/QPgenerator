@@ -1,0 +1,47 @@
+#class-sel{
+
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+}
+#subject-sel{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+	 text-align:center;
+	 font-size: 18px;
+	 
+}
+.modal-title{
+	color:rgb(2, 2, 73);
+	font-weight: bold;
+}
+.show_questions{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+
+}
+
+
+.modal-header{
+	background-color: rgb(138, 226, 214);
+	
+}
+.selector{
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}
+.Edit{
+    background-color: rgb(194, 41, 41);
+}
+
+select option {
+    margin: 40px;
+    background: rgb(27, 26, 26);
+	color: rgb(229, 227, 231);
+	
+	
+	text-align: center;
+	font-family: 'Song Myung', serif;
+	font-weight: bold;
+}

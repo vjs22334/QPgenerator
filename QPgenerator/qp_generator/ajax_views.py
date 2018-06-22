@@ -103,7 +103,7 @@ def load_chapters_test(request):
     return JsonResponse(data)
 
 class MatchQuestion():
-    def __init__(self,list,question):
+    def __init__(self,list,question=None):
         self.question=question
         self.a_list = []
         self.key_list = []
@@ -142,10 +142,12 @@ def random_questions(request):
     c_list = [json.loads(q) for q in c_list]
     id_list = [c["id"] for c in c_list]
     q_type = request.GET.get("type")
+    mix_matches = request.GET.get('mix')
     school = request.user.profile.school
     chapters = models.Chapter.objects.filter(id__in = id_list).prefetch_related("question_set")
     chapters = dict([(obj.id, obj) for obj in chapters])
     rand_q_list = []
+    total_questions = 0
     for c in c_list:
         chapter = chapters[c['id']]
         q_list = {}
@@ -156,6 +158,7 @@ def random_questions(request):
         rand_q_list.extend(randList(q_list["easy"],c['easy']))
         rand_q_list.extend(randList(q_list["medium"],c['medium']))
         rand_q_list.extend(randList(q_list["hard"],c['hard']))
+        total_questions += int(c['easy'])+int(c['medium'])+int(c['hard'])
     shuffle(rand_q_list)
     match_list = []
     if q_type == "mcq" or q_type == "fb":
@@ -164,13 +167,25 @@ def random_questions(request):
         final_q_list=[]
         q_set=models.Question.objects.filter(id__in = rand_q_list).prefetch_related("match_set")
         #import pdb; pdb.set_trace()
-        for q in q_set:
-            final_q_list.extend(q.match_set.all())
-            match_question = MatchQuestion(list(q.match_set.all()),q)
-            match_question.shuffle_ans()
-            match_question.generate_key()
-            match_question.merge()
-            match_list.append(match_question)                
+        if not mix_matches:
+            for q in q_set:
+                match_question = MatchQuestion(list(q.match_set.all()),q)
+                match_question.shuffle_ans()
+                match_question.generate_key()
+                match_question.merge()
+                match_list.append(match_question)
+        else:
+            for q in q_set:
+                final_q_list.extend(q.match_set.all())
+            shuffle(final_q_list)
+            matches_per_ques = int(len(final_q_list)/total_questions)
+            for i in range(0,len(final_q_list),matches_per_ques):
+                match_question = MatchQuestion(final_q_list[i:i+matches_per_ques])
+                match_question.shuffle_ans()
+                match_question.generate_key()
+                match_question.merge()
+                match_list.append(match_question)
+                
     else:
         final_q_list=models.Question.objects.filter(id__in = rand_q_list)
     

@@ -137,7 +137,7 @@ select option {
 	font-family: 'Song Myung', serif;
    font-weight: bold;
    text-align: center;
-   font-size: 140%
+   font-size: 120%;
 }
 
 ::-webkit-input-placeholder {

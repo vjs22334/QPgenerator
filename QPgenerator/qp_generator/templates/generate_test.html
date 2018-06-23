@@ -310,6 +310,7 @@
 
                 <div class="modal-header" style="background-color:rgb(138, 226, 219)";>
                 <h5 style="color:rgb(29, 29, 109) ; font-weight:bold;font-family:'Song Myung', serif;"class="modal-title" id="exampleModalLabel">Enter number of questions required in each chapter</h5>
+                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -330,7 +331,14 @@
                 <div class="modal-footer">
                     <div class="container">
                         <div class="row justify-content-center">
-                            <div class="col-md-4 offset-md-6">
+                            <div class="col-md-6">
+                                    <div class="form-check">
+                                            <label id="mix_match_label" class="form-check-label">
+                                              <input type="checkbox" id="mix_match" class="form-check-input" value="">Mix matches across chapters/questions
+                                            </label>
+                                          </div>
+                            </div>
+                            <div class="col-md-4 ">
                                 <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1">Marks per question</span>
@@ -412,6 +420,10 @@
      
     $(function() {
       
+
+                  
+
+                  
                 // date-picker function
                   $( "#date_ex" ).datepicker({
                     format:"dd/mm/yyyy"
@@ -534,6 +546,14 @@
         $(document).on("click", "#modal_trigger", function(event){
             q_type=$(".popover-body").find("select").val();
             console.log(q_type);
+            if(q_type=="Match"){
+            $("#mix_match_label").show();
+            console.log($("#mix_match").prop("checked"))
+        }else{
+            $("#mix_match_label").hide();
+            console.log($("#mix_match").prop("checked"))
+
+        }
             fetch_chapters()
             $(this).parents(".popover").popover('hide');
             });
@@ -679,9 +699,11 @@
                 return;
             }
 
+            var boolean1=$("#mix_match").prop("checked");
+
             totalmarks=totalquestions*parseInt(mpq);
             section_context.parents(".section").attr("marks",totalmarks);
-
+            console.log(("#mix_match").checked)
             console.log(totalquestions);
             $('#exampleModal').modal('hide');
             $.ajax({
@@ -689,7 +711,7 @@
                 data: {
                     "chapters_list":a,
                     "type":q_type,
-                    "mix":true,},
+                    "mix":boolean1,},
                     
                 success: function(data){
                     

@@ -334,7 +334,7 @@
                             <div class="col-md-6">
                                     <div class="form-check">
                                             <label id="mix_match_label" class="form-check-label">
-                                              <input type="checkbox" id="mix_match" class="form-check-input" value="">Mix matches across chapters/questions
+                                              <input type="checkbox" id="mix_match" class="form-check-input" value="">Mix options across chapters/questions
                                             </label>
                                           </div>
                             </div>
@@ -346,6 +346,7 @@
                                 <input type="number" id="mpq" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" >
                               </div> </div>
                               <div class="col-md-2">
+
                 <button type="button" class="btn btn-info"id="add">Add</button></div>
                 </div>
                 </div>
@@ -357,7 +358,7 @@
 </div>
 
 <button type="button" class = "btn btn-primary btn-lg" id="add_section">Add Section</button>
-<button id="pdf" class="btn btn-info btn-lg" style="float:right;">export to pdf</button>
+<button id="pdf" class="btn btn-info btn-lg" style="float:right;" data-toggle="modal" data-target="#pdfModal" >export to pdf</button>
 
 
 <br>
@@ -382,6 +383,39 @@
         </div>
     </footer>
 
+    <!--Modal before pdf-->
+    <div class="container" id="pdf_modal">
+        <div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+    
+                    <div class="modal-header" style="background-color:rgb(138, 226, 219);">
+                    <h5 style="color:rgb(29, 29, 109) ; font-weight:bold;font-family:'Song Myung', serif;"class="modal-title" id="exampleModalLabel">Generating the PDF....</h5>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+    
+                    <div class="modal-body container" id="modal-content">
+                        <div class="row justify-content-center">
+                            <div class="fa-3x">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <i class="fas fa-circle-notch fa-spin"></i>
+                                <i class="fas fa-sync fa-spin"></i>
+                                <i class="fas fa-cog fa-spin"></i>
+                                <i class="fas fa-spinner fa-pulse"></i>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer">
+                        
+                    </div>
+            </div>
+        </div>
+    </div>  
+</div>
 
 
 {% endblock %}
@@ -732,6 +766,10 @@
         $("#pdf").click(function(){
             console.log($("#mcq").html());
             console.log($("#paper").html());
+
+            
+
+
             var questions;
             school_name=$("#school_name").html()
             heading=$("#heading").val()
@@ -825,6 +863,7 @@ console.log(htmlString);
                     responseType: 'blob'
                 },
                 success: function(blob){
+                    $("#pdfModal .close").click()
                     console.log(blob.size);
                     var link=document.createElement('a');
                     link.href=window.URL.createObjectURL(blob);

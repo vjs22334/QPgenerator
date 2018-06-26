@@ -15,7 +15,29 @@
     font-size: 200px;
 }
 
-.carousel-caption {
-    position: absolute;
-    top:-40px
+
+.abc:hover{
+     opacity:1 !important;
  }
+
+ .brightness {
+    background-color: white;
+    display: inline-block;
+
+}
+.brightness img:hover {
+    opacity: .5;
+}
+
+#img1{
+    position: absolute !important;
+    top:150px !important;
+   
+}
+
+
+#img2{
+    position: absolute !important;
+    top:150px !important;
+    
+}

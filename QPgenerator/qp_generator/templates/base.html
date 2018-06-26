@@ -50,13 +50,19 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'logout'%}">Log out</a>
+                            
                             </li>
+
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'forgot_password'%}">Reset Password</a>
+                                
+                                </li>
 
 
                             {%else%}
                             
                             <li clas="nav-item">
-                                    <p class="navbar-text">Not signed in </p>
+                                    <p class="navbar-text mx-3">Not Logged in </p>
                                 </li>
 
 
@@ -80,7 +86,7 @@
                             </li>
 
                             <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'home'%}">About us</a>
+                                    <a class="nav-link" href="{% url 'home'%}#footer">About us</a>
                             </li>
                             {% if user.profile.is_admin %}
                             <li class="nav-item dropdown active">
@@ -141,9 +147,7 @@
                             </li>
                             
                             
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'edit_chapters'%}">Pricing</a>
-                            </li>
+                            
                             
                             <li class="nav-item active">
                                 <a class="nav-link" href="{% url 'home'%}#footer">Contact us</a>
@@ -156,7 +160,7 @@
                             </li>
 
                             <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'home'%}">About us</a>
+                                    <a class="nav-link" href="{% url 'home'%}#footer">About us</a>
                             </li>
                             
                             <li class="nav-item dropdown active">
@@ -208,7 +212,7 @@
                             
                             
                             <li class="nav-item active">
-                                <a class="nav-link" href="{% url 'edit_chapters'%}">Contact us</a>
+                                <a class="nav-link" href="{% url 'home'%}#footer">Contact us</a>
                             </li>
                         </ul>
                        

@@ -37,7 +37,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)"""
             current_site = get_current_site(request)
-            subject = 'Activate Your MySite Account'
+            subject = 'Activate Your QP_Gen Account'
             message = render_to_string('email/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,

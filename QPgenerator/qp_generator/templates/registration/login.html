@@ -4,10 +4,14 @@
     {% block css %}
 
     <style>
+        html{
+            height: 100%;
+        }
             body{
                 background-image: url("{% static 'images/login8.jpg'%}") ;
                 height: 100%;
-                background-size:cover;
+                
+                background-size:100% 100vh;
                 background-repeat: no-repeat;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
@@ -48,7 +52,7 @@
                         {% csrf_token %}
                         {% include 'include/render_forms.html' with form=form %}
                         <button type="Submit" class="btn btn-info btn-lg" id="login">Login</button>
-                        <span class="mx-2" style="float:right;"><a style=" font-size: 20px ;color:rgb(8, 8, 51)"> Forgot Password?</a></span>
+                        <span class="mx-2" style="float:right;"><a href=" {% url 'forgot_password' %} "style=" font-size: 20px ;color:rgb(8, 8, 51)"> Forgot Password?</a></span>
                     </form>
                 </div>
             </div>

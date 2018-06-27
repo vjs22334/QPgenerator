@@ -1,6 +1,17 @@
 # QPgenerator
 generates a random question paper from a database of questions
 
+project requirements:
+
+1 python3 , django 2.0
+2 python mysql client
+3 django-widget-tweaks
+4 weasyprint
+5 python-decouple
+
+
+
+
 Project Structure:
 
 QPgenerator

@@ -91,4 +91,4 @@ Permissions:
 changing permissions for views:
 access control to the views is specified using the decorators @login_required, @user_is_admin on top of the view functions in views.py and ajax_views.py they can be changed by adding or removing the decorators as necessary
 
-
+# This is just for the hacktoberfest 2018, don't accept it #
